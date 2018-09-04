@@ -58,5 +58,12 @@ namespace Calculator.Test.Unit
             Assert.AreEqual(256, uut.Power(2, 8));
 
         }
+
+        [Test]
+        public void Power_Integers2_Test()
+        {
+            Assert.AreEqual(16, uut.Power(2, 4));
+
+        }
     }
 }
