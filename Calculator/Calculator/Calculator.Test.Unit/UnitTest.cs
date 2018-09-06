@@ -107,5 +107,13 @@ namespace Calculator.Test.Unit
             Assert.AreEqual(1, uut.LogBase10(10));
 
         }
+
+
+        [Test]
+        public void log_Integers3_Test()
+        {
+            Assert.AreEqual(1.02, Math.Round(uut.LogBase10(10.5),2));
+
+        }
     }
 }
