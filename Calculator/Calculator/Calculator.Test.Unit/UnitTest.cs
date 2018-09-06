@@ -46,7 +46,7 @@ namespace Calculator.Test.Unit
         }
 
         [Test]
-        public void Multiply_deci_Test()
+        public void Multiply_Decimal_Test()
         {
             Assert.AreEqual(10.5, uut.Multiply(3.5, 3));
 
@@ -109,14 +109,14 @@ namespace Calculator.Test.Unit
         }
 
         [Test]
-        public void log_deci3_Test()
+        public void log_Decimal_Test()
         {
             Assert.AreEqual(1.02, Math.Round(uut.LogBase10(10.5),2));
 
         }
 
         [Test]
-        public void log_negative3_Test()
+        public void log_Negative_Test()
         {
             Assert.AreEqual(Double.NaN, uut.LogBase10(-2));
 
