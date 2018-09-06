@@ -73,11 +73,17 @@ namespace Calculator.Test.Unit
 
         }
 
-
         [Test]
-        public void log_Integers3_Test()
+        public void log_deci3_Test()
         {
             Assert.AreEqual(1.02, Math.Round(uut.LogBase10(10.5),2));
+
+        }
+
+        [Test]
+        public void log_negative3_Test()
+        {
+            Assert.AreEqual(Double.NaN, uut.LogBase10(-2));
 
         }
     }
