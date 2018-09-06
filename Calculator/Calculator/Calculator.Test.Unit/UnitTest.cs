@@ -25,9 +25,16 @@ namespace Calculator.Test.Unit
         }
 
         [Test]
-        public void Add_Deci_Test()
+        public void Add_Decimal_Test()
         {
             Assert.AreEqual(10, uut.Add(5.5, 4.5));
+
+        }
+
+        [Test]
+        public void Add_Negative_Test()
+        {
+            Assert.AreEqual(-10, uut.Add(-5, -5));
 
         }
 
@@ -46,9 +53,30 @@ namespace Calculator.Test.Unit
         }
 
         [Test]
+        public void Multiply_Negative_Test()
+        {
+            Assert.AreEqual(4, uut.Multiply(-2, -2));
+
+        }
+
+        [Test]
         public void Subtract_Integers_Test()
         {
             Assert.AreEqual(23, uut.Subtract(40, 17));
+
+        }
+
+        [Test]
+        public void Subtract_Decimal_Test()
+        {
+            Assert.AreEqual(23, uut.Subtract(40.5, 17.5));
+
+        }
+
+        [Test]
+        public void Subtract_Negative_Test()
+        {
+            Assert.AreEqual(0, uut.Subtract(-20, -20));
 
         }
 
@@ -60,9 +88,16 @@ namespace Calculator.Test.Unit
         }
 
         [Test]
-        public void Power_Integers2_Test()
+        public void Power_Decimal_Test()
         {
-            Assert.AreEqual(16, uut.Power(2, 4));
+            Assert.AreEqual(39.06, Math.Round(uut.Power(2.5, 4),2));
+
+        }
+
+        [Test]
+        public void Power_Negative_Test()
+        {
+            Assert.AreEqual(0.06, Math.Round(uut.Power(-4, -2), 2));
 
         }
 
