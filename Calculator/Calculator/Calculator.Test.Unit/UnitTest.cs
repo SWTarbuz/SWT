@@ -121,5 +121,26 @@ namespace Calculator.Test.Unit
             Assert.AreEqual(Double.NaN, uut.LogBase10(-2));
 
         }
+
+        [Test]
+        public void Divide_Integer_Test()
+        {
+            Assert.AreEqual(10,uut.Divide(100,10));
+
+        }
+
+        [Test]
+        public void Divide_Decimal_Test()
+        {
+            Assert.AreEqual(10.3, uut.Divide(20.6,2));
+
+        }
+
+        [Test]
+        public void Divide_Negative_Test()
+        {
+            Assert.AreEqual(-2, uut.Divide(-10, 5));
+
+        }
     }
 }

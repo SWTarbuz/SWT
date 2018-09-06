@@ -32,5 +32,10 @@ namespace Calculator
         {
             return Math.Log10(x);
         }
+
+        public double Divide(double x,double y)
+        {
+            return x/y;
+        }
     }
 }
