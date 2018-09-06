@@ -27,5 +27,10 @@ namespace Calculator
         {
             return Math.Pow(x, exp);
         }
+
+        public double LogBase10(double x)
+        {
+            return Math.Log10(x);
+        }
     }
 }

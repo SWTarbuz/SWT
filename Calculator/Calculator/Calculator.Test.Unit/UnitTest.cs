@@ -65,5 +65,12 @@ namespace Calculator.Test.Unit
             Assert.AreEqual(16, uut.Power(2, 4));
 
         }
+
+        [Test]
+        public void log_Integers_Test()
+        {
+            Assert.AreEqual(1, uut.LogBase10(10));
+
+        }
     }
 }
