@@ -140,7 +140,6 @@ namespace Calculator.Test.Unit
         public void Divide_Negative_Test()
         {
             Assert.AreEqual(-2, uut.Divide(-10, 5));
-
         }
     }
 }
