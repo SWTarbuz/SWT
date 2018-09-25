@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace TransponderReceiver
 {
     public class RawTransponderDataEventArgs : EventArgs
@@ -12,7 +13,7 @@ namespace TransponderReceiver
         {
             TransponderData = transponderData;
         }
-        public List<string> TransponderData { get; }
+        public List<string> TransponderData { get; set; }
     }
     public interface ITransponderReceiver
     {
@@ -21,6 +22,6 @@ namespace TransponderReceiver
 
     public class TransponderReceiverFactory
     {
-        public static ITransponderReceiver CreateTransponderDataReceiver { get; }
+        public static ITransponderReceiver CreateTransponderDataReceiver { get; set; }
     }
 }
