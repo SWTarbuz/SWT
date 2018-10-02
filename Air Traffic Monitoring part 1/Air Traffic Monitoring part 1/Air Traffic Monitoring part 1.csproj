@@ -52,6 +52,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAirspace.cs" />
+    <Compile Include="ISeperationEvent.cs" />
+    <Compile Include="ISeperationEventDetector.cs" />
+    <Compile Include="ISeperationEventList.cs" />
+    <Compile Include="TransponderRecieverClient.cs" />
+    <Compile Include="ITrackFormatter.cs" />
+    <Compile Include="ITrack.cs" />
+    <Compile Include="ITrackList.cs" />
+    <Compile Include="ITrackRenderer.cs" />
     <Compile Include="TransponderReceiver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
