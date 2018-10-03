@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Air_Traffic_Monitoring_part_1
 {
-    interface ITrackList
+    interface ITrackManager
     {
         IList<ITrack> tracks { get; }
-
-        void AddTrack(ITrack track);
-        void RemoveTrack(ITrack track);
+        
+        void HandleTrack(ITrack track);
     }
 }

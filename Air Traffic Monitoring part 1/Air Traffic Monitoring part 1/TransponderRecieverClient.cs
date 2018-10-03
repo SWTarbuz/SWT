@@ -10,11 +10,16 @@ namespace Air_Traffic_Monitoring_part_1
     class TransponderRecieverClient
     {
         private ITransponderReceiver _receiver;
+        private ITrackFormatter _formatter;
+        private ITrackManager _manager;
 
-        public Reciever(ITransponderReceiver receiver)
+        public Reciever(ITransponderReceiver receiver, ITrackFormatter formatter, ITrackManager manager)
         {
             // This will store the real or the fake transponder data receiver
             this._receiver = receiver;
+
+            _formatter = formatter;
+            _manager = manager;
 
             // Attach to the event of the real or the fake TDR
             this._receiver.TransponderDataReady += ReceiverOnTransponderDataReady;
@@ -22,10 +27,11 @@ namespace Air_Traffic_Monitoring_part_1
 
         private void ReceiverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
-            // Just display data
+            // saves and updates for each recieved track/dataset
             foreach (var data in e.TransponderData)
             {
-                System.Console.WriteLine($"Transponderdata {data}");
+                var track = _formatter.RecieveTrack(data);
+                _manager.HandleTrack(track);
             }
         }
     }
