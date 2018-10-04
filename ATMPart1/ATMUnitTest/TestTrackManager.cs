@@ -19,10 +19,36 @@ namespace ATMUnitTest
         }
 
         [Test]
+        public void testHandleTrack_TrackEntersAirspace_AddsTrack()
+        {
+            var time = DateTime.Now;
+            var airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 20000);
+            var trak = Substitute.For<Track>("tag", 20000, 20000, 550f, time);
+            var tm = Substitute.For<ITrackManager>();
+
+            tm.HandleTrack(trak,airspace);           
+
+            Assert.That(tm.Tracks.ElementAt(0).altitude, Is.EqualTo(trak.altitude));
+        }
+
+        [Test]
+        public void testHandleTrack2_TrackEntersAirspace_AddsTrack()
+        {
+            var time = DateTime.Now;
+            var airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 20000);
+            var trak = Substitute.For<Track>("tag", 20000, 20000, 550, time);
+            var tm = Substitute.For<ITrackManager>();
+
+            tm.HandleTrack(trak, airspace);
+
+            Assert.That(tm.Tracks.Count, Is.EqualTo(1));
+        }
+
+        [Test]
         public void testHandleTrack_TrackLeavesAirspace_RemovesTrack()
         {
             var time = DateTime.Now;
-            var airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 2000);
+            var airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 20000);
             var trak = Substitute.For<Track>("tag", 20000, 20000, 550, time);
             var trak2 = Substitute.For<Track>("tag", 20000, 20000, 400, time);
             var tm = Substitute.For<ITrackManager>();

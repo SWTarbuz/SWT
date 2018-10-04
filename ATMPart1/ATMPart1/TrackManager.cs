@@ -10,7 +10,7 @@ namespace ATMPart1
     class TrackManager : ITrackManager
     {
 
-        private IList<ITrack> tracks;
+        private IList<ITrack> tracks = new List<ITrack>();
 
         public IList<ITrack> Tracks
         {
@@ -21,15 +21,15 @@ namespace ATMPart1
         }
         public void HandleTrack(ITrack Track,IAirspace airspace)
         {
-            bool check = true;
+            bool check = true; //bool to make a check after list loop
 
-            if (airspace.IsWithinBounds(Track))
+            if (airspace.IsWithinBounds(Track)) // check if within bounds
             {
-                foreach (var t in tracks)
+                foreach (var t in tracks) //loop through list
                 {
-                    if (t.tag == Track.tag)
+                    if (t.tag == Track.tag) //compare new track tag to tracks already known
                     {
-                        t.ChangePosition(Track.xPos,Track.yPos,Track.altitude,Track.timestamp);
+                        t.ChangePosition(Track.xPos,Track.yPos,Track.altitude,Track.timestamp); //same tag, change position
 
                         check = false;
                     }
@@ -37,20 +37,20 @@ namespace ATMPart1
                 }
                 if (check)
                 {
-                    tracks.Add(Track);
+                    tracks.Add(Track); //new tag just add it
                 }
                 
             }
-            else
+            else // remember to compare tag with tags already in our list, so we can remove old tracks
             {
                 foreach (var t in tracks)
                 {
                     if (t.tag == Track.tag)
                     {
-                        if (airspace.IsWithinBounds(t))
-                        {
-                            tracks.Remove(t);
-                        }
+                        
+                        tracks.Remove(t);
+                        return;
+                        
                     }
                 }
             }
