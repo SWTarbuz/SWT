@@ -14,5 +14,7 @@ namespace Air_Traffic_Monitoring_part_1
         float altitude { get; }
         float velocity { get; }
         int compassCourse { get; }
+
+        DateTime timestamp { get; }
     }
 }

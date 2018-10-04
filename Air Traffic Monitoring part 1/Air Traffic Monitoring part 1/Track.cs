@@ -14,24 +14,26 @@ namespace Air_Traffic_Monitoring_part_1
         public float altitude { get; private set; }
         public float velocity { get; private set; }
         public int compassCourse { get; private set; }
+        public DateTime timestamp { get; private set; }
 
-        public Track(string tag, float x, float y, float altitude, float velocity, int course)
+        public Track(string tag, float x, float y, float altitude, DateTime time)
         {
             this.tag = tag;
             xPos = x;
             yPos = y;
             this.altitude = altitude;
-            this.velocity = velocity;
-            this.compassCourse = course;
+            timestamp = time;
+
         }
 
-        void ChangePosition(float x, float y, float altitude, float velocity, int course)
+        void ChangePosition(float x, float y, float altitude, DateTime time)
         {
+            //calculate velocity and course based on changes in x and y, and then set new values
+
             xPos = x;
             yPos = y;
             this.altitude = altitude;
-            this.velocity = velocity;
-            this.compassCourse = course;
+            timestamp = time;
         }
     }
 }

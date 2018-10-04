@@ -20,7 +20,8 @@ namespace Air_Traffic_Monitoring_part_1
 
             tokens = data.Split(separators, 6, StringSplitOptions.None);
 
-            var track = new Track(tokens[0], float.Parse(tokens[1]), float.Parse(tokens[2]), float.Parse(tokens[3]), float.Parse(tokens[4]), (int)float.Parse(tokens[5]));
+            //time is a placeholder, should read this from data
+            var track = new Track(tokens[0], float.Parse(tokens[1]), float.Parse(tokens[2]), float.Parse(tokens[3]), DateTime.Now);
             return track;
         }
     }
