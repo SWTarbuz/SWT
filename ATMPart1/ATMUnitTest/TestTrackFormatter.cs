@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Globalization;
-using Air_Traffic_Monitoring_part_1;
+using ATMPart1;
 using Castle.DynamicProxy.Generators;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace AirTrafficMonitor.Test.UnitTest
+namespace ATM.UnitTest
 {
     class TestTrackFormatter
     {
