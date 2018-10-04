@@ -8,7 +8,7 @@ namespace ATMPart1
 {
     public interface ITrackManager
     {
-        IList<ITrack> tracks { get; }
+        IList<ITrack> Tracks { get; }
         
         void HandleTrack(ITrack track,IAirspace airspace);
     }
