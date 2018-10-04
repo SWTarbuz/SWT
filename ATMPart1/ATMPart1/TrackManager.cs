@@ -47,15 +47,13 @@ namespace ATMPart1
                 {
                     if (t.tag == Track.tag)
                     {
-
+                        if (airspace.IsWithinBounds(t))
+                        {
+                            tracks.Remove(t);
+                        }
                     }
-
                 }
             }
-
-
-
-
         }
     }
 }
