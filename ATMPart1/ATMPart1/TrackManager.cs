@@ -22,10 +22,23 @@ namespace ATMPart1
         {
 
 
+            foreach (var t in tracks)
+            {
+                if (t.tag == Track.tag)
+                {
+                    t.changePosition(Track);
+                    tracks.Remove(t);
+
+                    return;
+                }
+            }
+
             if (airspace.IsWithinBounds(Track))
             {
                 tracks.Add(Track);
             }
+
+
 
 
         }
