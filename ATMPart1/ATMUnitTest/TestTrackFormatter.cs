@@ -18,7 +18,7 @@ namespace ATMUnitTest
         }
 
         [Test]
-        public void TestRecieveTrackFake_LegalValue_ReturnsTrack() //naming is not specific enough yet
+        public void TestRecieveTrack_LegalValueInSubstiture_ReturnsTrack() //naming is not specific enough yet
         {
             var data = "";
             var time = DateTime.Now;
@@ -33,7 +33,7 @@ namespace ATMUnitTest
         }
 
         [Test]
-        public void TestRecieveTrack_LegalValue_ReturnsExpectedTime() //naming is not specific enough yet
+        public void TestRecieveTrack_validData_ReturnsExpectedTime() //naming is not specific enough yet
         {
             //Arrange
             var data = "tag;3.7;2000.5;5000;201712122000250";
@@ -46,6 +46,44 @@ namespace ATMUnitTest
             var res = trackFormatter.RecieveTrack(data);
 
             Assert.That(res.timestamp, Is.EqualTo(time));
+        }
+
+        [Test]
+        public void TestRecieveTrack_LegalData_ReturnsExpectedTag() //naming is not specific enough yet
+        {
+            //Arrange
+            var data = "tag;3.7;2000.5;5000;201712122000250";
+
+            var trackFormatter = new TrackFormatter();
+
+            //Act
+            var res = trackFormatter.RecieveTrack(data);
+
+            Assert.That(res.tag, Is.EqualTo("tag"));
+        }
+
+        [Test]
+        public void TestRecieveTrack_TooLongDataString_Throws() //naming is not specific enough yet
+        {
+            //Arrange
+            var data = "tag;3.7;2000.5;5000;201712122000250;forMeget";
+
+            var trackFormatter = new TrackFormatter();
+
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => trackFormatter.RecieveTrack(data));
+        }
+
+        [Test]
+        public void TestRecieveTrack_TooShortDataString_Throws() //naming is not specific enough yet
+        {
+            //Arrange
+            var data = "tag;3.7;2000.5;5000";
+
+            var trackFormatter = new TrackFormatter();
+
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => trackFormatter.RecieveTrack(data));
         }
     }
 }

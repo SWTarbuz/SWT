@@ -69,5 +69,16 @@ namespace ATMUnitTest
             Assert.That(Math.Round(UUT.velocity, 6), Is.EqualTo(Math.Round(expectedResult, 6)));
         }
 
+        [Test]
+        public void TestChangePosition_NoChangeInTime_ThrowsArgumentException() //naming is not specific enough yet
+        {
+            var time = DateTime.Now;
+
+            var UUT = new Track("", 0, 0, 0, time);
+
+            //rounds to 6 decimals to ensure that the result of the test isn't a false negative due to rounding differences
+            Assert.Throws<ArgumentException>(() => UUT.ChangePosition(0, 0, 0, time));
+        }
+
     }
 }
