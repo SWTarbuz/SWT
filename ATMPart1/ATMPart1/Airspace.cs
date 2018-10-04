@@ -7,7 +7,7 @@ using ATMPart1;
 
 namespace ATMPart1
 {
-    class Airspace : IAirspace
+    public class Airspace : IAirspace
     {
         public int SouthBounds { get; private set; }
         public int EastBounds { get; private set; }
