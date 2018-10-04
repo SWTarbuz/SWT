@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="TestAirspace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestTrack.cs" />
     <Compile Include="TestTrackFormatter.cs" />
   </ItemGroup>
   <ItemGroup>

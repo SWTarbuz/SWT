@@ -16,5 +16,8 @@ namespace ATMPart1
         int compassCourse { get; }
 
         DateTime timestamp { get; }
+
+
+        void ChangePosition(float x, float y, float alt, DateTime time);
     }
 }
