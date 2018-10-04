@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Air_Traffic_Monitoring_part_1;
 using Castle.DynamicProxy.Generators;
 using NSubstitute;
@@ -31,18 +32,19 @@ namespace AirTrafficMonitor.Test.UnitTest
         }
 
         [Test]
-        public void TestRecieveTrack_LegalValue_ReturnsMatchingTrack() //naming is not specific enough yet
+        public void TestRecieveTrack_LegalValue_ReturnsExpectedTime() //naming is not specific enough yet
         {
-            var data = "tag;3.7;2000.5;5000;20151006213456789";
-            var time = DateTime.Now;
+            //Arrange
+            var data = "tag;3.7;2000.5;5000;201712122000250";
+            string[] formats = { "yyyyMMddHHmmfff" };
+            var time = DateTime.ParseExact("201712122000250", formats[0], CultureInfo.CurrentCulture); ;
 
             var trackFormatter = new TrackFormatter();
 
-            //tagString, xPosFloat, yPosFloat, altitudeFloat, timestamp
-            var returnVal = Substitute.For<Track>("tag", 3.7f, 2000.5f, 5000, time); //sets up our return value
-            trackFormatter.RecieveTrack("").Returns(returnVal);
+            //Act
+            var res = trackFormatter.RecieveTrack(data);
 
-            Assert.That(trackFormatter.RecieveTrack(data), Is.EqualTo(returnVal)); //act and assert
+            Assert.That(res.timestamp, Is.EqualTo(time));
         }
     }
 }

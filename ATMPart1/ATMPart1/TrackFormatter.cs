@@ -18,10 +18,11 @@ namespace Air_Traffic_Monitoring_part_1
         {
             string[] tokens;
             char[] separators = { ';' };
+            string[] formats = {"yyyyMMddHHmmfff"};
 
-            tokens = data.Split(separators, 6, StringSplitOptions.None);
+            tokens = data.Split(separators, 5, StringSplitOptions.None);
 
-            var time = DateTime.Parse(tokens[4]); //maybe this isn't the right way of parsing it
+            var time = DateTime.ParseExact(tokens[4], formats[0], CultureInfo.CurrentCulture); //maybe this isn't the right way of parsing it
           
 
             var track = new Track(tokens[0], float.Parse(tokens[1]), float.Parse(tokens[2]), float.Parse(tokens[3]), time);
