@@ -12,6 +12,7 @@ namespace ATMPart1
         private ITransponderReceiver _receiver;
         private ITrackFormatter _formatter;
         private ITrackManager _manager;
+        private IAirspace _airspace;
 
         public TransponderRecieverClient(ITransponderReceiver receiver, ITrackFormatter formatter, ITrackManager manager)
         {
@@ -31,7 +32,7 @@ namespace ATMPart1
             foreach (var data in e.TransponderData)
             {
                 var track = _formatter.RecieveTrack(data);
-                _manager.HandleTrack(track);
+                _manager.HandleTrack(track,_airspace);
             }
         }
     }
