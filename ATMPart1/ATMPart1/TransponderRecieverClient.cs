@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiver;
 
-namespace Air_Traffic_Monitoring_part_1
+namespace ATMPart1
 {
     class TransponderRecieverClient
     {
