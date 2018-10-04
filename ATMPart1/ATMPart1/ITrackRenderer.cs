@@ -8,6 +8,8 @@ namespace ATMPart1
 {
     public interface ITrackRenderer
     {
-        void Update();
+        void UpdateTracks(IList<ITrack> tracks);
+        void UpdateEvents(ISeperationEventList events);
+
     }
 }

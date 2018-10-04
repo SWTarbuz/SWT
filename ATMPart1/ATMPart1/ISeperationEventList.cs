@@ -11,7 +11,7 @@ namespace ATMPart1
         IList<ISeperationEvent> CurrEvents { get; }
         IList<ISeperationEvent> PrevEvents { get; } //maybe this doesn't make sense, if not kill it before it lays eggs
 
-        void UpdateCurrEvent(ISeperationEvent sepEvent, int index);
+        void UpdateCurrEvent(ISeperationEvent sepEvent);
         void EndEvent(ISeperationEvent sepEvent); //the event to end
     }
 }
