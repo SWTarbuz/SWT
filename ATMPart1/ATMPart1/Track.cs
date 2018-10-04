@@ -26,14 +26,22 @@ namespace ATMPart1
 
         }
 
-        void ChangePosition(float x, float y, float altitude, DateTime time)
+        void ChangePosition(float x, float y, float alt, DateTime time)
         {
-            //calculate velocity and course based on changes in x and y, and then set new values
+            CalcVelocityAndCourse(xPos, x, yPos, y, altitude, alt, timestamp, time);
 
             xPos = x;
             yPos = y;
-            this.altitude = altitude;
+            this.altitude = alt;
             timestamp = time;
+        }
+
+        void CalcVelocityAndCourse(float oldX, float newX, float oldY, float newY, float oldAlt, float newAlt, DateTime oldTime, DateTime newTime)
+        {
+            TimeSpan diff = newTime.Subtract(oldTime);
+
+            //var distance = Math.Sqrt(Math.Pow((newX, oldX), 2) + );
+
         }
     }
 }
