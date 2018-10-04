@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,7 +29,11 @@ namespace ATMPart1
 
         public void ChangePosition(float x, float y, float alt, DateTime time)
         {
-            CalcVelocityAndCourse(xPos, x, yPos, y, altitude, alt, timestamp, time);
+            TimeSpan diff = time.Subtract(timestamp);
+
+            if (diff == TimeSpan.Zero) throw new ArgumentException("datetime unchanged", nameof(time));
+
+            CalcVelocityAndCourse(xPos, x, yPos, y, altitude, alt, diff);
 
             xPos = x;
             yPos = y;
@@ -36,10 +41,9 @@ namespace ATMPart1
             timestamp = time;
         }
 
-        void CalcVelocityAndCourse(float oldX, float newX, float oldY, float newY, float oldAlt, float newAlt, DateTime oldTime, DateTime newTime)
+        //would be smart to make a setup function that calculates delta's thus reducing amount of arguments to test for in this and calcCourse
+        void CalcVelocityAndCourse(float oldX, float newX, float oldY, float newY, float oldAlt, float newAlt, TimeSpan deltaT)
         {
-            TimeSpan diff = newTime.Subtract(oldTime);
-
             //setup
             var y = newY - oldY;
             var x = newX - oldX;
@@ -48,16 +52,19 @@ namespace ATMPart1
             //calculate velocity in m/s
             var distance = Math.Sqrt(Math.Pow((double)x, 2 ) + Math.Pow((double)y, 2) + Math.Pow((double)z, 2));
 
-            velocity = (float)((double)distance / (double)diff.TotalSeconds);
+            velocity = (float)((double)distance / (double)deltaT.TotalSeconds);
 
             //use pythagoras to find compass course, as the angle between north (y), and c
             
-            int c = (int)Math.Sqrt(Math.Pow((double)x, 2) + Math.Pow((double)y, 2));
+            int r = (int)Math.Sqrt(Math.Pow((double)x, 2) + Math.Pow((double)y, 2));
 
-            if (y > 0 && x > 0) compassCourse = (int)Math.Acos(y / c); //0 to 90 degrees (N to E) y and x greater than 0
-            else if (y < 0 && x > 0) compassCourse = (int)Math.Acos(y / c) + 90; //90 to 180 degrees (E to S) y less than 0 and x greater than 0
-            else if (y < 0 && x < 0) compassCourse = (int)Math.Acos(y / c) + 180; //180 to 270 degrees (S to W) y and x less than 0
-            else if (y > 0 && x < 0) compassCourse = (int)Math.Acos(y / c) + 270; //270 to 360 degrees (W to N) y greater than 0 and x less than 0
+            
+            //se schaum's outline mathmatical handbook for info om Quadrants, bruger dem omvendt grundet vi gerne vil havde den inverse vinkel.
+            if (r == 0) return; //if no movement, keep previous direction
+            else if (y >= 0 && x > 0) compassCourse = Math.Abs((int) Math.Round(Math.Asin(x / r) * 360 / (2 * Math.PI))); //Q1
+            else if (y < 0 && x >= 0) compassCourse = 90 + Math.Abs((int) Math.Round(Math.Acos(x / r) * 360 / (2 * Math.PI))); //Q4
+            else if (y <= 0 && x < 0) compassCourse = 180 + Math.Abs((int) Math.Round(Math.Acos(y / r) * 360 / (2 * Math.PI))); //Q3
+            else if (y > 0 && x <= 0) compassCourse = 270 + Math.Abs((int) Math.Round(Math.Asin(y / r) * 360 / (2 * Math.PI))); //Q2
         }
     }
 }
