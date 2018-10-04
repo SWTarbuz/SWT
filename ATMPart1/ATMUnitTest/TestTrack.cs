@@ -18,7 +18,13 @@ namespace ATMUnitTest
         }
 
         [Test]
-        void TestStuff_Things_ExpectedBehaviour()
+        void TestChangePosition_ValidValues_CalculatesCorrectCompassCourse()
+        {
+
+        }
+
+        [Test]
+        void TestChangePosition_ValidValues_CalculatesCorrectVelocity()
         {
 
         }
