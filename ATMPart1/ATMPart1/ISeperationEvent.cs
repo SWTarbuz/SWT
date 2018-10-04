@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Air_Traffic_Monitoring_part_1
+namespace ATMPart1
 {
     public interface ISeperationEvent
     {
