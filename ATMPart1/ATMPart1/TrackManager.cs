@@ -8,11 +8,25 @@ namespace ATMPart1
 {
     class TrackManager : ITrackManager
     {
-        public IList<ITrack> tracks => throw new NotImplementedException();
 
+        private IList<ITrack> tracks;
+
+        public IList<ITrack> Tracks
+        {
+            get
+            {
+               return tracks;
+            }
+        }
         public void HandleTrack(ITrack Track,IAirspace airspace)
         {
-            airspace.IsWithinBounds(Track);
+
+
+            if (airspace.IsWithinBounds(Track))
+            {
+                tracks.Add(Track);
+            }
+
 
         }
     }
