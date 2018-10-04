@@ -26,7 +26,7 @@ namespace ATMPart1
 
         }
 
-        void ChangePosition(float x, float y, float alt, DateTime time)
+        public void ChangePosition(float x, float y, float alt, DateTime time)
         {
             CalcVelocityAndCourse(xPos, x, yPos, y, altitude, alt, timestamp, time);
 
