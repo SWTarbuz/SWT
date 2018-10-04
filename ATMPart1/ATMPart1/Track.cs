@@ -54,10 +54,10 @@ namespace ATMPart1
             
             int c = (int)Math.Sqrt(Math.Pow((double)x, 2) + Math.Pow((double)y, 2));
 
-            if (y >= 0 && x >= 0) compassCourse = (int)Math.Acos(y / c); //0 to 90 degrees (N to E) y and x greater than 0
-            else if (y < 0 && x >= 0) compassCourse = (int)Math.Acos(y / c) + 90; //90 to 180 degrees (E to S) y less than 0 and x greater than 0
+            if (y > 0 && x > 0) compassCourse = (int)Math.Acos(y / c); //0 to 90 degrees (N to E) y and x greater than 0
+            else if (y < 0 && x > 0) compassCourse = (int)Math.Acos(y / c) + 90; //90 to 180 degrees (E to S) y less than 0 and x greater than 0
             else if (y < 0 && x < 0) compassCourse = (int)Math.Acos(y / c) + 180; //180 to 270 degrees (S to W) y and x less than 0
-            else if (y >= 0 && x < 0) compassCourse = (int)Math.Acos(y / c) + 270; //270 to 360 degrees (W to N) y greater than 0 and x less than 0
+            else if (y > 0 && x < 0) compassCourse = (int)Math.Acos(y / c) + 270; //270 to 360 degrees (W to N) y greater than 0 and x less than 0
         }
     }
 }
