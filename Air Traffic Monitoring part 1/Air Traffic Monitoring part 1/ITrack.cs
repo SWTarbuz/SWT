@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Air_Traffic_Monitoring_part_1
 {
-    interface ITrack
+    public interface ITrack
     {
         string tag { get; }
         float xPos { get; }

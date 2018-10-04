@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Air_Traffic_Monitoring_part_1
 {
-    class Track : ITrack
+    public class Track : ITrack
     {
         public string tag { get; private set; }
         public float xPos { get; private set; }

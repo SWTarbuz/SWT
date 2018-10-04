@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Air_Traffic_Monitoring_part_1;
+using Castle.DynamicProxy.Generators;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -16,7 +17,14 @@ namespace AirTrafficMonitor.Test.UnitTest
         [Test]
         public void TestRecieveTrack_LegalValue_ReturnsTrack() //naming is not specific enough yet
         {
+            var data = "";
 
+            var trackFormatter = Substitute.For<ITrackFormatter>();
+            //tagString, xPosFloat, yPosFloat, altitudeFloat, velocityFloat, courseInt
+            var returnVal = Substitute.For<Track>("tag", 3.7f, 2000.5f, 5000, 230.7f, 0);
+
+            trackFormatter.RecieveTrack("").Returns(returnVal);
+            Assert.That(trackFormatter.RecieveTrack(data), Is.EqualTo(returnVal));
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Air_Traffic_Monitoring_part_1
 {
-    interface ISeperationEventDetector
+    public interface ISeperationEventDetector
     {
         void UpdateEvents(ITrack updatedTrack);
     }

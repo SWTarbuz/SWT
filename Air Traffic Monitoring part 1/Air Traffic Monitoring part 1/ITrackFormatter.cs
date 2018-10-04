@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Air_Traffic_Monitoring_part_1
 {
-    interface ITrackFormatter
+    public interface ITrackFormatter
     {
         ITrack RecieveTrack(string data);
     }

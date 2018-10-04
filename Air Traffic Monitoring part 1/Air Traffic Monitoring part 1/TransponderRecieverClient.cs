@@ -13,7 +13,7 @@ namespace Air_Traffic_Monitoring_part_1
         private ITrackFormatter _formatter;
         private ITrackManager _manager;
 
-        public Reciever(ITransponderReceiver receiver, ITrackFormatter formatter, ITrackManager manager)
+        public TransponderRecieverClient(ITransponderReceiver receiver, ITrackFormatter formatter, ITrackManager manager)
         {
             // This will store the real or the fake transponder data receiver
             this._receiver = receiver;
