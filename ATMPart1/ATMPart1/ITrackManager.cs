@@ -10,6 +10,6 @@ namespace ATMPart1
     {
         IList<ITrack> tracks { get; }
         
-        void HandleTrack(ITrack track);
+        void HandleTrack(ITrack track,IAirspace airspace);
     }
 }
