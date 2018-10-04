@@ -14,5 +14,6 @@ namespace Air_Traffic_Monitoring_part_1
         int NorthBounds { get; }
         int LowerAltitudeBound { get; }
         int UpperAltitudeBound { get; }
+        bool IsWithinBounds(ITrack track);
     }
 }

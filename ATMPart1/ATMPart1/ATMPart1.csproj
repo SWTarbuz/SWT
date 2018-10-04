@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Airspace.cs" />
     <Compile Include="IAirspace.cs" />
     <Compile Include="ISeperationEvent.cs" />
     <Compile Include="ISeperationEventDetector.cs" />
