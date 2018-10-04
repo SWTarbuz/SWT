@@ -40,8 +40,24 @@ namespace ATMPart1
         {
             TimeSpan diff = newTime.Subtract(oldTime);
 
-            //var distance = Math.Sqrt(Math.Pow((newX, oldX), 2) + );
+            //setup
+            var y = newY - oldY;
+            var x = newX - oldX;
+            var z = newAlt - oldAlt;
 
+            //calculate velocity in m/s
+            var distance = Math.Sqrt(Math.Pow((double)x, 2 ) + Math.Pow((double)y, 2) + Math.Pow((double)z, 2));
+
+            velocity = (float)((double)distance / (double)diff.TotalSeconds);
+
+            //use pythagoras to find compass course, as the angle between north (y), and c
+            
+            int c = (int)Math.Sqrt(Math.Pow((double)x, 2) + Math.Pow((double)y, 2));
+
+            if (y >= 0 && x >= 0) compassCourse = (int)Math.Acos(y / c); //0 to 90 degrees (N to E) y and x greater than 0
+            else if (y < 0 && x >= 0) compassCourse = (int)Math.Acos(y / c) + 90; //90 to 180 degrees (E to S) y less than 0 and x greater than 0
+            else if (y < 0 && x < 0) compassCourse = (int)Math.Acos(y / c) + 180; //180 to 270 degrees (S to W) y and x less than 0
+            else if (y >= 0 && x < 0) compassCourse = (int)Math.Acos(y / c) + 270; //270 to 360 degrees (W to N) y greater than 0 and x less than 0
         }
     }
 }
