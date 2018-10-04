@@ -23,8 +23,8 @@ namespace AirTrafficMonitor.Test.UnitTest
 
             var trackFormatter = Substitute.For<ITrackFormatter>();
 
-            //tagString, xPosFloat, yPosFloat, altitudeFloat, timestamp
-            var returnVal = Substitute.For<Track>("tag", 3.7f, 2000.5f, 5000, time); //sets up our return value
+            tagString, xPosFloat, yPosFloat, altitudeFloat, timestamp
+           var returnVal = Substitute.For<Track>("tag", 3.7f, 2000.5f, 5000, time); //sets up our return value
             trackFormatter.RecieveTrack("").Returns(returnVal);
 
             Assert.That(trackFormatter.RecieveTrack(data), Is.EqualTo(returnVal)); //act and assert
@@ -38,11 +38,11 @@ namespace AirTrafficMonitor.Test.UnitTest
 
             var trackFormatter = new TrackFormatter();
 
-            //tagString, xPosFloat, yPosFloat, altitudeFloat, timestamp
+            tagString, xPosFloat, yPosFloat, altitudeFloat, timestamp
             var returnVal = Substitute.For<Track>("tag", 3.7f, 2000.5f, 5000, time); //sets up our return value
             trackFormatter.RecieveTrack("").Returns(returnVal);
 
-            Assert.That(trackFormatter.RecieveTrack(data), Is.EqualTo(returnVal)); //act and assert
+           Assert.That(trackFormatter.RecieveTrack(data), Is.EqualTo(returnVal)); //act and assert
         }
     }
 }

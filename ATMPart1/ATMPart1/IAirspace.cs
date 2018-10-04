@@ -14,5 +14,6 @@ namespace ATMPart1
         int NorthBounds { get; }
         int LowerAltitudeBound { get; }
         int UpperAltitudeBound { get; }
+        bool IsWithinBounds(ITrack track);
     }
 }

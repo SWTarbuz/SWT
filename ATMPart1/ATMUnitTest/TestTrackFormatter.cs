@@ -5,7 +5,8 @@ using Castle.DynamicProxy.Generators;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace ATM.UnitTest
+namespace ATMUnitTest
+
 {
     class TestTrackFormatter
     {
