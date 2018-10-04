@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28010.2003
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Air Traffic Monitoring part 1", "Air Traffic Monitoring part 1\Air Traffic Monitoring part 1.csproj", "{FDB2D313-8C4D-41F4-9DE8-FBBDF6016CC8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirTrafficMonitor.Test.UnitTest", "AirTrafficMonitor.Test.UnitTest\AirTrafficMonitor.Test.UnitTest.csproj", "{7E6EB6E8-552F-44C0-95CA-0EC5D4D36ED0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1BCF41BA-D776-480E-B4C2-4320B5929DB4}"
+	ProjectSection(SolutionItems) = preProject
+		..\Calculator\Calculator\dotCoverCoverageConfig.xml = ..\Calculator\Calculator\dotCoverCoverageConfig.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
