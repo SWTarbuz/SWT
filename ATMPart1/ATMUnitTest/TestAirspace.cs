@@ -28,5 +28,17 @@ namespace ATMUnitTest
 
             Assert.That(airspace.IsWithinBounds(returnVal), Is.EqualTo(true));
         }
+
+        [Test]
+        public void TestWithinBounds_TrackWithinBounds_ReturnsFalse()
+        {
+
+            var time = DateTime.Now;
+            var airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 2000);
+
+            var returnVal = Substitute.For<Track>("tag", 20000, 20000, 400, time);
+
+            Assert.That(airspace.IsWithinBounds(returnVal), Is.EqualTo(false));
+        }
     }
 }
