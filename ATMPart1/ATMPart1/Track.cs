@@ -75,7 +75,7 @@ namespace ATMPart1
             if (r == 0) return; //if no movement, keep previous direction
             else if (dY >= 0 && dX > 0) compassCourse = Math.Abs((int)Math.Round(Math.Asin(dX / r) * 360 / (2 * Math.PI))); //Q1
             else if (dY < 0 && dX >= 0) compassCourse = 90 + Math.Abs((int)Math.Round(Math.Acos(dX / r) * 360 / (2 * Math.PI))); //Q4
-            else if (dY <= 0 && dX < 0) compassCourse = 180 + Math.Abs((int)Math.Round(Math.Acos(dY / r) * 360 / (2 * Math.PI))); //Q3
+            else if (dY <= 0 && dX < 0) compassCourse = 90 + Math.Abs((int)Math.Round(Math.Acos(dX / r) * 360 / (2 * Math.PI))); //Q3 (NOT SURE WHY BUT, THE MATH ADDS UP WITH +90, INSTEAD OF +180)
             else if (dY > 0 && dX <= 0) compassCourse = 270 + Math.Abs((int)Math.Round(Math.Asin(dY / r) * 360 / (2 * Math.PI))); //Q2
 
             if (compassCourse == 360) compassCourse = 0; // Fix to ensure values between 0 and 359

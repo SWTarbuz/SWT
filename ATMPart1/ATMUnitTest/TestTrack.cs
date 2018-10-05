@@ -27,11 +27,16 @@ namespace ATMUnitTest
         /// Test of calls to CalcCourse from ChangePosition
         /// </summary>
         //         dX     dY    expectedResult
+        [TestCase(1,      1000, 0)] //Q1 0* = 0* (Q1 lower bound)
         [TestCase(1000,   1000, 45)] //Q1 45* = 45*
         [TestCase(2000,   1000, 63)] //Q1 63* = 63*
-        [TestCase(0,     -1000, 180)] //Q4 90* = 180*
-        [TestCase(-1000,   0,   270)] //Q3 90* = 270*
-        [TestCase(0,      1000, 0)] //Q2 90* = 360* = 0* due to this being the same and design says 0* to 359*
+        [TestCase(1000,   0,    90)] //Q1 90* = 90* (Q1 upper bound)
+        [TestCase(1000,   -1,   90)] //Q4  0* = 90* (Q4 lower bound)
+        [TestCase(0,     -1000, 180)] //Q4 90* = 180* (Q4 upper bound)
+        [TestCase(-1,    -1000, 180)] //Q3  0* = 180* *Q3 lower bound)
+        [TestCase(-1000,   0,   270)] //Q3 90* = 270* *Q3 upper bound)
+        [TestCase(-1000,   1,   270)] //Q2 0* = 270* (Q2 lower bound)
+        [TestCase(0,      1000, 0)] //Q2 90* = 360* = 0* due to this being the same and design says 0* to 359* (Q2 upper bound)
         public void TestChangePosition_CalcCourse_CalculatesExpectedValue(float dX, float dY, int expectedResult)
         {
             DateTime time = DateTime.Now.Add(new TimeSpan(0, 1, 0, 0));
