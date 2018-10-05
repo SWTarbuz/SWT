@@ -20,7 +20,12 @@ namespace ATMPart1
             char[] separators = { ';' };
             string[] formats = {"yyyyMMddHHmmfff"};
 
-            tokens = data.Split(separators, 5, StringSplitOptions.None);
+            tokens = data.Split(separators, StringSplitOptions.None);
+            if (tokens.Length != 5)
+            {
+                throw new ArgumentOutOfRangeException(nameof(data), tokens.Length, "data contains more or less than 5 strings");
+            }
+
 
             var time = DateTime.ParseExact(tokens[4], formats[0], CultureInfo.CurrentCulture); //maybe this isn't the right way of parsing it
           

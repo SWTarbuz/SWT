@@ -24,7 +24,7 @@ namespace ATMUnitTest
             var time = DateTime.Now;
             var airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 20000);
             var trak = Substitute.For<Track>("tag", 20000, 20000, 550f, time);
-            var tm = Substitute.For<ITrackManager>();
+            var tm = new TrackManager();
 
             tm.HandleTrack(trak,airspace);           
 
@@ -37,7 +37,7 @@ namespace ATMUnitTest
             var time = DateTime.Now;
             var airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 20000);
             var trak = Substitute.For<Track>("tag", 20000, 20000, 550, time);
-            var tm = Substitute.For<ITrackManager>();
+            var tm = new TrackManager();
 
             tm.HandleTrack(trak, airspace);
 
