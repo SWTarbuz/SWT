@@ -15,6 +15,8 @@ namespace ATMPart1
         public int NorthBounds { get; private set; }
         public int LowerAltitudeBound { get; private set; }
         public int UpperAltitudeBound { get; private set; }
+
+        // Checks if within altitude upper and lower bounds
         public bool IsWithinBounds(ITrack track)
         {
             if (track.xPos >= WestBounds && track.xPos <= EastBounds && track.yPos >= SouthBounds &&
@@ -29,6 +31,7 @@ namespace ATMPart1
             }
         }
 
+        // Constructor for Airspace
         public Airspace(int SouthBounds_, int EastBounds_, int WestBounds_, int NorthBounds_, int LowerAltitudeBound_, int UpperAltitudeBound_)
         {
             SouthBounds = SouthBounds_;

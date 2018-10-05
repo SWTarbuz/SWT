@@ -42,7 +42,7 @@ namespace ATMPart1
             CalcVelocity(deltaDistances[0], deltaDistances[1], deltaDistances[2], diff);
             CalcCourse(deltaDistances[0], deltaDistances[1]);
             
-            //change positions
+            // Change positions
             xPos = x;
             yPos = y;
             this.altitude = alt;
@@ -57,8 +57,8 @@ namespace ATMPart1
             return new float[3]{(newX-oldX), (newY-oldY), (newAlt-oldAlt)};
         }
 
-        //would be smart to make a setup function that calculates delta's thus reducing amount of arguments to test for in this and calcCourse
-        //calculate velocity in m/s
+        // Would be smart to make a setup function that calculates delta's thus reducing amount of arguments to test for in this and calcCourse
+        // Calculate velocity in m/s
         void CalcVelocity(float dX, float dY, float dZ, TimeSpan deltaT)
         {
             var distance = Math.Sqrt(Math.Pow((double)dX, 2 ) + Math.Pow((double)dY, 2) + Math.Pow((double)dZ, 2));
@@ -66,19 +66,19 @@ namespace ATMPart1
             velocity = (float)((double)distance / (double)deltaT.TotalSeconds);
         }
 
-        //calc course 0 = north, 90 = east, 180 = south 270 = west, and so forth
+        // Calc course 0 = north, 90 = east, 180 = south 270 = west, and so forth
         void CalcCourse(float dX, float dY)
         {
             int r = (int)Math.Sqrt(Math.Pow((double)dX, 2) + Math.Pow((double)dY, 2));
 
-            //se schaum's outline mathmatical handbook for info om Quadrants, bruger dem omvendt grundet vi gerne vil havde den inverse vinkel.
+            // Se schaum's outline mathmatical handbook for info om Quadrants, bruger dem omvendt grundet vi gerne vil havde den inverse vinkel.
             if (r == 0) return; //if no movement, keep previous direction
             else if (dY >= 0 && dX > 0) compassCourse = Math.Abs((int)Math.Round(Math.Asin(dX / r) * 360 / (2 * Math.PI))); //Q1
             else if (dY < 0 && dX >= 0) compassCourse = 90 + Math.Abs((int)Math.Round(Math.Acos(dX / r) * 360 / (2 * Math.PI))); //Q4
             else if (dY <= 0 && dX < 0) compassCourse = 180 + Math.Abs((int)Math.Round(Math.Acos(dY / r) * 360 / (2 * Math.PI))); //Q3
             else if (dY > 0 && dX <= 0) compassCourse = 270 + Math.Abs((int)Math.Round(Math.Asin(dY / r) * 360 / (2 * Math.PI))); //Q2
 
-            if (compassCourse == 360) compassCourse = 0; //fix to ensure values between 0 and 359
+            if (compassCourse == 360) compassCourse = 0; // Fix to ensure values between 0 and 359
         }
     }
 }
