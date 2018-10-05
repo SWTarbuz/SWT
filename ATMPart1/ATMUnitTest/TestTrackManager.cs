@@ -32,7 +32,7 @@ namespace ATMUnitTest
         }
 
         [Test]
-        public void testHandleTrack2_TrackEntersAirspace_AddsTrack()
+        public void testHandleTrack_TrackEntersAirspace_ListCountIs1()
         {
             var time = DateTime.Now;
             var airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 20000);

@@ -29,7 +29,7 @@ namespace ATMPart1
                 {
                     if (t.tag == Track.tag) //compare new track tag to tracks already known
                     {
-                        t.ChangePosition(Track.xPos,Track.yPos,Track.altitude,Track.timestamp); //same tag, change position
+                        t.ChangePosition(Track.xPos,Track.yPos,Track.altitude,Track.timestamp); //known tag, change position
 
                         check = false;
                     }
@@ -37,7 +37,7 @@ namespace ATMPart1
                 }
                 if (check)
                 {
-                    tracks.Add(Track); //new tag just add it
+                    tracks.Add(Track); //new tag, just add it
                 }
                 
             }
