@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ATMPart1
 {
-    class TrackManager : ITrackManager
+    public class TrackManager : ITrackManager
     {
 
         private IList<ITrack> tracks = new List<ITrack>();
