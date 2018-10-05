@@ -23,7 +23,10 @@ namespace ATMPart1
             var cnt = 0;
             foreach (var track in tracks)
             {
-                var detectedEvent = CompareTracks(updatedTrack, track);
+                ISeperationEvent detectedEvent = null;
+
+                if (updatedTrack.tag != track.tag) detectedEvent = CompareTracks(updatedTrack, track);
+
                 if (detectedEvent != null)
                 {
                     events.UpdateCurrEvent(detectedEvent);
@@ -38,7 +41,7 @@ namespace ATMPart1
             var newXY = Math.Sqrt((Math.Pow(newTrack.xPos, 2)) + (Math.Pow(newTrack.yPos, 2)));
             var oldXY = Math.Sqrt((Math.Pow(oldTrack.xPos, 2)) + (Math.Pow(oldTrack.yPos, 2)));
 
-            if (Math.Abs(newXY - oldXY) <= 5000 && Math.Abs(newTrack.altitude - oldTrack.altitude) <= 500)
+            if (Math.Abs(newXY - oldXY) < 5000 && Math.Abs(newTrack.altitude - oldTrack.altitude) < 300)
             {
                 return new SeperationEvent(newTrack, oldTrack);
             }
