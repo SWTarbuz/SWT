@@ -10,6 +10,8 @@ namespace ATMPart1
     {
         public ITrack[] InvolvedTracks { get; private set; }
         public DateTime timeOfOccurence { get; private set; }
+
+        // Method for setting time of occurence - Redundant to be deleted?
         public void setTimeOfOccurence(DateTime time)
         {
             timeOfOccurence = time;

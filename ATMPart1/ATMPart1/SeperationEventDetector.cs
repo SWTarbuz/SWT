@@ -18,6 +18,7 @@ namespace ATMPart1
             _renderer = renderer;
         }
 
+        // Method for updating events
         public void UpdateEvents(ITrack updatedTrack, IList<ITrack> tracks)
         {
             var cnt = 0;
@@ -33,6 +34,7 @@ namespace ATMPart1
             if (cnt > 0) _renderer.UpdateEvents(events);
         }
 
+        // Method for comparing tracks
         ISeperationEvent CompareTracks(ITrack newTrack, ITrack oldTrack)
         {
             var newXY = Math.Sqrt((Math.Pow(newTrack.xPos, 2)) + (Math.Pow(newTrack.yPos, 2)));
