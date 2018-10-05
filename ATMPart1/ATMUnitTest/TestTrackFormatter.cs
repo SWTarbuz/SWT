@@ -17,8 +17,9 @@ namespace ATMUnitTest
 
         }
 
+        //not really sure if this is even testing anything, except that recieveTrack can be called
         [Test]
-        public void TestRecieveTrack_LegalValueInSubstiture_ReturnsTrack() //naming is not specific enough yet
+        public void TestRecieveTrack_LegalValueInSubstiture_ReturnsTrack()
         {
             var data = "";
             var time = DateTime.Now;
@@ -33,7 +34,7 @@ namespace ATMUnitTest
         }
 
         [Test]
-        public void TestRecieveTrack_validData_ReturnsExpectedTime() //naming is not specific enough yet
+        public void TestRecieveTrack_validData_ReturnsExpectedTime() //format test to match the way  TestRecieveTrack_IllegalTimeString_ThrowsFormatException is set up.
         {
             //Arrange
             var data = "tag;3.7;2000.5;5000;201712122000250";
@@ -49,7 +50,7 @@ namespace ATMUnitTest
         }
 
         [Test]
-        public void TestRecieveTrack_LegalData_ReturnsExpectedTag() //naming is not specific enough yet
+        public void TestRecieveTrack_LegalData_ReturnsExpectedTag()
         {
             //Arrange
             var data = "tag;3.7;2000.5;5000;201712122000250";
@@ -63,7 +64,7 @@ namespace ATMUnitTest
         }
 
         [Test]
-        public void TestRecieveTrack_TooLongDataString_Throws() //naming is not specific enough yet
+        public void TestRecieveTrack_TooLongDataString_ThrowsArgumentOutOfRangeException()
         {
             //Arrange
             var data = "tag;3.7;2000.5;5000;201712122000250;forMeget";
@@ -75,7 +76,7 @@ namespace ATMUnitTest
         }
 
         [Test]
-        public void TestRecieveTrack_TooShortDataString_Throws() //naming is not specific enough yet
+        public void TestRecieveTrack_TooShortDataString_ThrowsArgumentOutOfRangeException()
         {
             //Arrange
             var data = "tag;3.7;2000.5;5000";
@@ -84,6 +85,23 @@ namespace ATMUnitTest
 
 
             Assert.Throws<ArgumentOutOfRangeException>(() => trackFormatter.RecieveTrack(data));
+        }
+
+        //technically really just a test of the dateTime class, as this is the one throwing the exception
+        [TestCase("201713122000251")] //13th month, not legal
+        [TestCase("2017121220002511")] //too long string, doens't match required format
+        [TestCase("201712122400251")] //24 hrs, when hrs are defined in 0-23 Hrs.
+        [TestCase("201712122061251")] //61 minutes
+        [TestCase("20100122061251")] //0th month
+        public void TestRecieveTrack_IllegalTimeString_ThrowsFormatException(String dateString)
+        {
+            //Arrange
+            var data = String.Concat("tag;3.7;2000.5;5000;", dateString);
+
+            var trackFormatter = new TrackFormatter();
+
+
+            Assert.Throws<FormatException>(() => trackFormatter.RecieveTrack(data));
         }
     }
 }

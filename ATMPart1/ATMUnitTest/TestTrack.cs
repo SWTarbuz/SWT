@@ -52,7 +52,6 @@ namespace ATMUnitTest
         [TestCase(3000, 2000, 3000, 2000, 3000, 2000, "201712122000250", "201712122100250", 0.481125f)] //negative vals & 1 hour
         [TestCase(2000, 3000, 2000, 3000, 2000, 3000, "201712122000250", "201712122100250", 0.481125f)] //positive vals & 1 hour
         [TestCase(2000, 3000, 2000, 3000, 2000, 3000, "201712122000250", "201712122000251", 1732050.807569f)] //1000'th of a second positive vals
-        [TestCase(2000, 2000, 2000, 2000, 2000, 2000, "201712122000250", "201712122000251", 0f)] //no location difference, 1000th of a second
         //[TestCase(2000, 3000, 2000, 3000, 2000, 3000, "201712122000250", "201712122000251", 1732050.807569f)] //no time difference positive vals (expects time rounding)
         public void TestChangePosition_CalcVelocity_CalculatesExpectedValue(float oldX, float newX, float oldY, float newY, float oldZ, float newZ, string oldTime, string newTime, float expectedResult)
         {
@@ -70,7 +69,7 @@ namespace ATMUnitTest
         }
 
         [Test]
-        public void TestChangePosition_NoChangeInTime_ThrowsArgumentException() //naming is not specific enough yet
+        public void TestChangePosition_NoChangeInTime_ThrowsArgumentException()
         {
             var time = DateTime.Now;
 
