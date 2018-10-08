@@ -17,22 +17,6 @@ namespace ATMUnitTest
 
         }
 
-        //not really sure if this is even testing anything, except that recieveTrack can be called
-        [Test]
-        public void TestRecieveTrack_LegalValueInSubstiture_ReturnsTrack()
-        {
-            var data = "";
-            var time = DateTime.Now;
-
-            var trackFormatter = Substitute.For<ITrackFormatter>();
-
-            //tagString, xPosFloat, yPosFloat, altitudeFloat, timestamp
-            var returnVal = Substitute.For<Track>("tag", 3.7f, 2000.5f, 5000, time); //sets up our return value
-            trackFormatter.RecieveTrack("").Returns(returnVal);
-
-            Assert.That(trackFormatter.RecieveTrack(data), Is.EqualTo(returnVal)); //act and assert
-        }
-
         [Test]
         public void TestRecieveTrack_validData_ReturnsExpectedTime() //format test to match the way  TestRecieveTrack_IllegalTimeString_ThrowsFormatException is set up.
         {
