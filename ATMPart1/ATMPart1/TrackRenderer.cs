@@ -6,10 +6,17 @@ using System.Threading.Tasks;
 
 namespace ATMPart1
 {
-    class TrackRenderer
+    public class TrackRenderer
     {
         private List<ITrack> currTracks;
         private List<ISeperationEvent> currEvents;
+
+        public TrackRenderer()
+        {
+            currTracks = new List<ITrack>();
+            currEvents = new List<ISeperationEvent>();
+        }
+
 
         public void UpdateTracks(List<ITrack> tracks)
         {
