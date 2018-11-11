@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -58,6 +59,7 @@
     <Compile Include="Track.cs" />
     <Compile Include="TrackFormatter.cs" />
     <Compile Include="TrackManager.cs" />
+    <Compile Include="TrackRenderer.cs" />
     <Compile Include="TransponderReceiver.cs" />
     <Compile Include="TransponderRecieverClient.cs" />
   </ItemGroup>
