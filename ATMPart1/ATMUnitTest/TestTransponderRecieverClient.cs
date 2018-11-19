@@ -33,6 +33,7 @@ namespace ATMUnitTest
             _fakeTransponderReceiver.TransponderDataReady += (sender, args) => _eventsRecieved++;
         }
 
+        //TODO: fix this test to actually check something more than the fact that the given event actually happened, or remove it
         //really not sure how to test this, as this just tests that the event is sent.
         [Test]
         public void TestReception_LegalValues_RecievesData()
@@ -48,6 +49,10 @@ namespace ATMUnitTest
             Assert.That(_eventsRecieved, Is.EqualTo(1));
         }
 
+        /// <summary>
+        /// Checks that the Reciever calls the formatter for every single string in the recieved event. (Indirectly checks that event is received aswell)
+        /// </summary>
+        /// <param name="x"></param>
         [TestCase(1)]
         [TestCase(2)]
         [TestCase(10)]
