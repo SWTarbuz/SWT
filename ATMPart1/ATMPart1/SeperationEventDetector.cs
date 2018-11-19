@@ -12,11 +12,22 @@ namespace ATMPart1
 
         private ITrackRenderer _renderer;
 
-        public SeperationEventDetector(ISeperationEventList eventList, ITrackRenderer renderer)
+        public SeperationEventDetector(ISeperationEventList eventList, ITrackRenderer renderer, ITrackManager trackManager) //TODO: Update to use event to renderer instead of this.
         {
             events = eventList;
             _renderer = renderer;
+
+            trackManager.RaiseTracksUpdatedEvent += HandleTrackUpdate;
         }
+
+        #region eventsAndHandlers
+
+        void HandleTrackUpdate(object sender, TracksUpdatedEventArgs e)
+        {
+            UpdateEvents(e.UpdatedTrack, e.Tracks);
+        }
+
+        #endregion
 
         // Method for updating events
         public void UpdateEvents(ITrack updatedTrack, IList<ITrack> tracks)

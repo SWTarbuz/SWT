@@ -38,10 +38,12 @@ namespace ATMUnitTest
                 tracks.Add(new Track(i.ToString(), 0, 0, 0, DateTime.Now)); //keeps same values to ensure that even occurs
             }
 
+            //TODO: move these to Setup, to avoid repeat code
             var eList = Substitute.For<ISeperationEventList>();
             var rend = Substitute.For<ITrackRenderer>();
+            var tm = Substitute.For<ITrackManager>();
 
-            SeperationEventDetector UUT = new SeperationEventDetector(eList, rend);
+            SeperationEventDetector UUT = new SeperationEventDetector(eList, rend, tm);
 
             //sets up fake to count up variable, thus eliminating dependency
             eList.When(x => x.UpdateCurrEvent(Arg.Any<ISeperationEvent>()))
@@ -71,8 +73,9 @@ namespace ATMUnitTest
 
             var eList = Substitute.For<ISeperationEventList>();
             var rend = Substitute.For<ITrackRenderer>();
+            var tm = Substitute.For<ITrackManager>();
 
-            SeperationEventDetector UUT = new SeperationEventDetector(eList, rend);
+            SeperationEventDetector UUT = new SeperationEventDetector(eList, rend, tm);
 
             //sets up fake to count up variable, thus eliminating dependency
             eList.When(x => x.UpdateCurrEvent(Arg.Any<ISeperationEvent>()))
@@ -97,8 +100,9 @@ namespace ATMUnitTest
 
             var eList = Substitute.For<ISeperationEventList>();
             var rend = Substitute.For<ITrackRenderer>();
+            var tm = Substitute.For<ITrackManager>();
 
-            SeperationEventDetector UUT = new SeperationEventDetector(eList, rend);
+            SeperationEventDetector UUT = new SeperationEventDetector(eList, rend, tm);
 
             //sets up fake to count up variable, thus eliminating dependency
             eList.When(x => x.UpdateCurrEvent(Arg.Any<ISeperationEvent>()))

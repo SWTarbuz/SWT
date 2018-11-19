@@ -59,7 +59,7 @@ namespace ATMPart1
             }
 
             //TODO: Move so we only call when a change has been made to the list.
-            OnRaiseTrackUpdatedEvent(new TracksUpdatedEventArgs(tracks.ToList()));
+            OnRaiseTrackUpdatedEvent(new TracksUpdatedEventArgs(tracks.ToList(), Track));
         }
 
         //https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/events/how-to-publish-events-that-conform-to-net-framework-guidelines

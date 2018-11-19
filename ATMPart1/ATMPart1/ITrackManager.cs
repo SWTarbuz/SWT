@@ -15,10 +15,12 @@ namespace ATMPart1
 
     public class TracksUpdatedEventArgs : EventArgs
     {
-        public TracksUpdatedEventArgs(List<ITrack> tracks)
+        public TracksUpdatedEventArgs(List<ITrack> tracks, ITrack updatedTrack)
         {
             Tracks = tracks;
+            UpdatedTrack = updatedTrack;
         }
         public List<ITrack> Tracks { get; set; }
+        public ITrack UpdatedTrack { get; set; }
     }
 }

@@ -16,6 +16,7 @@ namespace ATMPart1
             currTracks = new List<ITrack>();
             currEvents = new List<ISeperationEvent>();
 
+            //TODO: add handler for event from SeperationEventDetector
             trackManager.RaiseTracksUpdatedEvent += HandleTrackUpdate;
         }
 
