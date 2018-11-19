@@ -41,6 +41,7 @@ namespace ATMPart1
                 if (check)
                 {
                     tracks.Add(Track); //new tag, just add it
+                    //TODO: Add EntryEvent
                 }
                 
             }
@@ -52,6 +53,7 @@ namespace ATMPart1
                     {
                         
                         tracks.Remove(t);
+                        //TODO: Add ExitEvent
                         return;
                         
                     }
