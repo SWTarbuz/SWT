@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Airspace.cs" />
     <Compile Include="EnteredAirspaceEvent.cs" />
+    <Compile Include="ExitEvent.cs" />
     <Compile Include="IAirspace.cs" />
     <Compile Include="IEvent.cs" />
     <Compile Include="ISeperationEventDetector.cs" />
