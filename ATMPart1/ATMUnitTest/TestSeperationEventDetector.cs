@@ -88,7 +88,7 @@ namespace ATMUnitTest
         }
 
         //TODO: Handle the failing test here once events have been added in SeperetionEventList.
-        [TestCase(3000, 3999, 299, true)] //just within bounds
+        [TestCase(3000, 3999, 299, true)] //just within bounds //TODO: fix the test, as it fails, due to the changes made.
         [TestCase(3000, 3999, 300, false)] //just outside vertical bound
         [TestCase(3000, 4000, 299, false)] //just outside horizontal bound
         public void TestUpdateEvents_EventDetectionWith2TracksWithDistances_CallsRendererUpdateIfEventOccured(float xDist, float yDist, float zDist, bool expectedResult)
@@ -108,8 +108,8 @@ namespace ATMUnitTest
             //sets up fake to count up variable, thus eliminating dependency
             eList.When(x => x.UpdateCurrEvent(Arg.Any<ISeperationEvent>()))
                 .Do(x => DidEventOccur = true);
-            rend.When(x => rend.UpdateEvents(Arg.Any<ISeperationEventList>()))
-                .Do(x => updatedRenderer = true);
+            //rend.When(x => rend.UpdateEvents(Arg.Any<ISeperationEventList>()))
+            //    .Do(x => updatedRenderer = true);
 
             UUT.UpdateEvents(tracks[0], tracks);
 

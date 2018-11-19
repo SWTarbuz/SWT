@@ -6,61 +6,45 @@ using System.Threading.Tasks;
 
 namespace ATMPart1
 {
+    //TODO: Update to either take advantage of the local list, or not have one.
     public class TrackRenderer : ITrackRenderer
     {
         private List<ITrack> currTracks;
         private List<ISeperationEvent> currEvents;
 
-        public TrackRenderer(ITrackManager trackManager)
+        public TrackRenderer(ITrackManager trackManager, ISeperationEventList eventList)
         {
             currTracks = new List<ITrack>();
             currEvents = new List<ISeperationEvent>();
 
-            //TODO: add handler for event from SeperationEventDetector
             trackManager.RaiseTracksUpdatedEvent += HandleTrackUpdate;
+            eventList.RaiseEventsUpdatedEvent += HandleEventUpdate;
         }
+
+        #region EventHandlers
 
         void HandleTrackUpdate(object sender, TracksUpdatedEventArgs e)
         {
-            UpdateTracks(e.Tracks);
+            currTracks =  e.Tracks;
+            UpdateDisplay();
         }
 
-        public void UpdateTracks(List<ITrack> tracks)
+        void HandleEventUpdate(object sender, RaiseEventsUpdatedEventArgs e)
         {
-            currTracks = tracks;
-
-            Console.Clear();
-            WriteOutEvents();
-            WriteOutTracks();
-        }
-
-        public void UpdateEvents(List<ISeperationEvent> sepEvents)
-        {
-            currEvents = sepEvents;
-
-            Console.Clear();
-            WriteOutEvents();
-            WriteOutTracks();
-        }
-
-        //TODO: fix me, aka update this to have a proper interface, and then make the rest better with events
-        #region Pointless things due to interface
-
-        public void UpdateTracks(IList<ITrack> tracks)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateEvents(ISeperationEventList events)
-        {
-            currEvents = events.CurrEvents.ToList();
-
-            Console.Clear();
-            WriteOutEvents();
-            WriteOutTracks();
+            currEvents = e.Events;
+            UpdateDisplay();
         }
 
         #endregion
+
+        #region Helpers
+
+        private void UpdateDisplay()
+        {
+            Console.Clear();
+            WriteOutEvents();
+            WriteOutTracks();
+        }
 
         private void WriteOutTracks()
         {
@@ -77,5 +61,6 @@ namespace ATMPart1
                 System.Console.WriteLine($"at the time of: {evnt.timeOfOccurence}, the following tracks had a seperation event occur: {evnt.InvolvedTracks[0].tag}, and {evnt.InvolvedTracks[1].tag}");
             }
         }
+        #endregion
     }
 }
