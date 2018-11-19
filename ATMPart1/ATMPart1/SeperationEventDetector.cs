@@ -10,13 +10,9 @@ namespace ATMPart1
     {
         public ISeperationEventList events { get; private set; }
 
-        private ITrackRenderer _renderer;
-
-        public SeperationEventDetector(ISeperationEventList eventList, ITrackRenderer renderer, ITrackManager trackManager) //TODO: Update to use event to renderer instead of this.
+        public SeperationEventDetector(ISeperationEventList eventList, ITrackManager trackManager) //TODO: Update to use event to renderer instead of this.
         {
             events = eventList;
-            _renderer = renderer;
-
             trackManager.RaiseTracksUpdatedEvent += HandleTrackUpdate;
         }
 
@@ -45,11 +41,12 @@ namespace ATMPart1
                     cnt++;
                 }
             }
-            if (cnt > 0) _renderer.UpdateEvents(events);
         }
 
+        #region Helpers
+
         // Method for comparing tracks
-        ISeperationEvent CompareTracks(ITrack newTrack, ITrack oldTrack)
+        private ISeperationEvent CompareTracks(ITrack newTrack, ITrack oldTrack)
         {
             var newXY = Math.Sqrt((Math.Pow(newTrack.xPos, 2)) + (Math.Pow(newTrack.yPos, 2)));
             var oldXY = Math.Sqrt((Math.Pow(oldTrack.xPos, 2)) + (Math.Pow(oldTrack.yPos, 2)));
@@ -60,5 +57,7 @@ namespace ATMPart1
             }
             return null;
         }
+
+        #endregion
     }
 }

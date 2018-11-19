@@ -37,7 +37,7 @@ namespace ATMPart1
             {
                 if (DoesEventExist(evnt, sepEvent))
                 {
-                    //TODO: implement update
+                    //TODO: implement update renderer when event is added.
                     eventExists = true;
                     break;
                 }
