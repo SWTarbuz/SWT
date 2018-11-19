@@ -6,8 +6,20 @@ using System.Threading.Tasks;
 
 namespace ATMPart1
 {
-    public class EnteredAirspaceEvent : ATMPart1.IEvent
+    public class EnteredAirspaceEvent : IEvent
     {
+        public ITrack[] InvolvedTracks { get; }
+        public DateTime timeOfOccurence { get; }
 
+        public EnteredAirspaceEvent(ITrack track)
+        {
+            InvolvedTracks = new ITrack[1]{track};
+            timeOfOccurence = track.timestamp;
+        }
+
+        public void setTimeOfOccurence(DateTime time)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
