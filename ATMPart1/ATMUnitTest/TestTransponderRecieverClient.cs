@@ -7,6 +7,8 @@ using NSubstitute;
 using NUnit.Framework;
 using TransponderReceiver;
 
+//MethodUnderTest_Scenario_Behaviour
+
 namespace ATMUnitTest
 {
     class TestTransponderRecieverClient
@@ -46,19 +48,26 @@ namespace ATMUnitTest
             Assert.That(_eventsRecieved, Is.EqualTo(1));
         }
 
-        [Test]
-        public void TestReception_LegalValues_FormatterCalled()
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(10)]
+        [TestCase(100)]
+        public void ReceiverOnTransponderDataReady_xSetsOfData_FormatterCalledxTimes(int x)
         {
+            int dataRecieved = 0;
+            _formatter.When(f => f.RecieveTrack(Arg.Any<string>())).Do(f => dataRecieved++);
+
             List<string> testData = new List<string>();
-            testData.Add("ATR423;39045;12932;14000;20151006213456789");
-            testData.Add("BCD123;10005;85890;12000;20151006213456789");
-            testData.Add("XYZ987;25059;75654;4000;20151006213456789");
+            for (int i = 0; i < x; i++)
+            {
+                testData.Add("ATR423;39045;12932;14000;20151006213456789");
+            }
 
             _fakeTransponderReceiver.TransponderDataReady +=
                 Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
 
-            //Assert.That(_formatter.Received().RecieveTrack(Arg.Any<string>());
+            Assert.That(dataRecieved, Is.EqualTo(x));
         }
     }
 }
