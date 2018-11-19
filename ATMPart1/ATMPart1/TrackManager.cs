@@ -58,8 +58,20 @@ namespace ATMPart1
                 }
             }
 
+            //TODO: Move so we only call when a change has been made to the list.
+            OnRaiseTrackUpdatedEvent(new TracksUpdatedEventArgs(tracks.ToList()));
+        }
 
-            RaiseTracksUpdatedEvent(this, new TracksUpdatedEventArgs(Tracks.ToList()));
+        //https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/events/how-to-publish-events-that-conform-to-net-framework-guidelines
+        //seperating so we can override later, and due to us needing to call from multiple places
+        protected  virtual void OnRaiseTrackUpdatedEvent(TracksUpdatedEventArgs e)
+        {
+            EventHandler<TracksUpdatedEventArgs> handler = RaiseTracksUpdatedEvent;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
         }
     }
 }
