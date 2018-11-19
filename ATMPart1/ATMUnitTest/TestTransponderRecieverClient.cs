@@ -7,6 +7,8 @@ using NSubstitute;
 using NUnit.Framework;
 using TransponderReceiver;
 
+//MethodUnderTest_Scenario_Behaviour
+
 namespace ATMUnitTest
 {
     class TestTransponderRecieverClient
@@ -31,6 +33,7 @@ namespace ATMUnitTest
             _fakeTransponderReceiver.TransponderDataReady += (sender, args) => _eventsRecieved++;
         }
 
+        //TODO: fix this test to actually check something more than the fact that the given event actually happened, or remove it
         //really not sure how to test this, as this just tests that the event is sent.
         [Test]
         public void TestReception_LegalValues_RecievesData()
@@ -43,22 +46,34 @@ namespace ATMUnitTest
             _fakeTransponderReceiver.TransponderDataReady +=
                 Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
+            //_uut.Received().ReceiverOnTransponderDataReady(Arg.Is(_fakeTransponderReceiver), Arg.Any<RawTransponderDataEventArgs>()); //TODO: Does it make sense to use a substitute for uut to do this, and thus check that the event can be recieved?
             Assert.That(_eventsRecieved, Is.EqualTo(1));
         }
 
-        [Test]
-        public void TestReception_LegalValues_FormatterCalled()
+        /// <summary>
+        /// Checks that the Reciever calls the formatter for every single string in the recieved event. (Indirectly checks that event is received aswell)
+        /// </summary>
+        /// <param name="x"></param>
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(10)]
+        [TestCase(100)]
+        public void ReceiverOnTransponderDataReady_xSetsOfData_FormatterCalledxTimes(int x)
         {
+            int dataRecieved = 0;
+            _formatter.When(f => f.RecieveTrack(Arg.Any<string>())).Do(f => dataRecieved++);
+
             List<string> testData = new List<string>();
-            testData.Add("ATR423;39045;12932;14000;20151006213456789");
-            testData.Add("BCD123;10005;85890;12000;20151006213456789");
-            testData.Add("XYZ987;25059;75654;4000;20151006213456789");
+            for (int i = 0; i < x; i++)
+            {
+                testData.Add("ATR423;39045;12932;14000;20151006213456789");
+            }
 
             _fakeTransponderReceiver.TransponderDataReady +=
                 Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
 
-            //Assert.That(_formatter.Received().RecieveTrack(Arg.Any<string>());
+            Assert.That(dataRecieved, Is.EqualTo(x));
         }
     }
 }
