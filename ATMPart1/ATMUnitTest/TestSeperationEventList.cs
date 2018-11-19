@@ -46,12 +46,13 @@ namespace ATMUnitTest
             //Assert.That(_uut.CurrEvents[0].InvolvedTracks[0].timestamp, Is.EqualTo(DateTime.MaxValue));
         }
 
-        [Test]
-        public void UpdateCurrEvent_EventExists_OriginalEventKeptUnchanged()
+        [TestCase("1", "2")]
+        [TestCase("2", "1")]
+        public void UpdateCurrEvent_EventExists_OriginalEventKeptUnchanged(string tag1, string tag2)
         {
             //Arrange
-            ITrack track1 = Substitute.For<Track>("", 10, 10, 10, DateTime.MinValue);
-            ITrack track2 = Substitute.For<Track>("", 10, 10, 10, DateTime.MinValue);
+            ITrack track1 = Substitute.For<Track>(tag1, 10, 10, 10, DateTime.MinValue);
+            ITrack track2 = Substitute.For<Track>(tag2, 10, 10, 10, DateTime.MinValue);
 
             ISeperationEvent evnt = Substitute.For<SeperationEvent>(track1, track2);
 
@@ -63,14 +64,17 @@ namespace ATMUnitTest
             //Assert.That(_uut.CurrEvents[0].InvolvedTracks[0].timestamp, Is.EqualTo(DateTime.MaxValue));
         }
 
-        [Test]
-        public void UpdateCurrEvent_EventDoesntExist_EventAdded()
+        [TestCase("1", "3")]
+        [TestCase("3", "1")]
+        [TestCase("3", "2")]
+        [TestCase("3", "4")]
+        public void UpdateCurrEvent_EventDoesntExist_EventAdded(string tag1, string tag2)
         {
             //Arrange
             _uut.CurrEvents = Substitute.For<List<ISeperationEvent>>();
 
-            ITrack track1 = Substitute.For<Track>("", 10, 10, 10, DateTime.MinValue);
-            ITrack track2 = Substitute.For<Track>("", 10, 10, 10, DateTime.MinValue);
+            ITrack track1 = Substitute.For<Track>(tag1, 10, 10, 10, DateTime.MinValue);
+            ITrack track2 = Substitute.For<Track>(tag2, 10, 10, 10, DateTime.MinValue);
 
             ISeperationEvent evnt = Substitute.For<SeperationEvent>(track1, track2);
 
