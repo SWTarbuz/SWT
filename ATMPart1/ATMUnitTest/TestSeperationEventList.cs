@@ -45,6 +45,24 @@ namespace ATMUnitTest
             //Assert.That(_uut.CurrEvents[0].InvolvedTracks[0].timestamp, Is.EqualTo(DateTime.MaxValue));
         }
 
+        [Test]
+        public void UpdateCurrEvent_EventDoesntExist_EventAdded()
+        {
+            //Arrange
+            _uut.CurrEvents = Substitute.For<List<ISeperationEvent>>();
+
+            ITrack track1 = Substitute.For<Track>("", 10, 10, 10, DateTime.MinValue);
+            ITrack track2 = Substitute.For<Track>("", 10, 10, 10, DateTime.MinValue);
+
+            ISeperationEvent evnt = Substitute.For<SeperationEvent>(track1, track2);
+
+            //Act
+            _uut.UpdateCurrEvent(evnt);
+
+            //Assert
+            Assert.That(_uut.CurrEvents[0], Is.EqualTo(evnt));
+        }
+
         //MethodUnderTest_Scenario_Behaviour
         [Test]
         public void EndEvent_EventExists_RemovesEvent()
