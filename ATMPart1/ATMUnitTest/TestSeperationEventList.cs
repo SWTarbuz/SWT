@@ -20,8 +20,8 @@ namespace ATMUnitTest
         {
             _uut = new SeperationEventList();
 
-            ITrack track1 = Substitute.For<Track>("", 10, 10, 10, DateTime.MaxValue);
-            ITrack track2 = Substitute.For<Track>("", 10, 10, 10, DateTime.MaxValue);
+            ITrack track1 = Substitute.For<Track>("1", 10, 10, 10, DateTime.MaxValue);
+            ITrack track2 = Substitute.For<Track>("2", 10, 10, 10, DateTime.MaxValue);
 
             _event = Substitute.For<SeperationEvent>(track1, track2);
             _uut.CurrEvents = Substitute.For<List<ISeperationEvent>>();
@@ -32,8 +32,8 @@ namespace ATMUnitTest
         public void UpdateCurrEvent_EventExists_EventNotAdded()
         {
             //Arrange
-            ITrack track1 = Substitute.For<Track>("", 10, 10, 10, DateTime.MinValue);
-            ITrack track2 = Substitute.For<Track>("", 10, 10, 10, DateTime.MinValue);
+            ITrack track1 = Substitute.For<Track>("2", 10, 10, 10, DateTime.MinValue);
+            ITrack track2 = Substitute.For<Track>("1", 10, 10, 10, DateTime.MinValue);
 
             ISeperationEvent evnt = Substitute.For<SeperationEvent>(track1, track2);
 
