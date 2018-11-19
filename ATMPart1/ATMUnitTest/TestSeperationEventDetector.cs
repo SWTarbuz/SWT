@@ -43,7 +43,7 @@ namespace ATMUnitTest
             var rend = Substitute.For<ITrackRenderer>();
             var tm = Substitute.For<ITrackManager>();
 
-            SeperationEventDetector UUT = new SeperationEventDetector(eList, rend, tm);
+            SeperationEventDetector UUT = new SeperationEventDetector(eList, tm);
 
             //sets up fake to count up variable, thus eliminating dependency
             eList.When(x => x.UpdateCurrEvent(Arg.Any<ISeperationEvent>()))
@@ -75,7 +75,7 @@ namespace ATMUnitTest
             var rend = Substitute.For<ITrackRenderer>();
             var tm = Substitute.For<ITrackManager>();
 
-            SeperationEventDetector UUT = new SeperationEventDetector(eList, rend, tm);
+            SeperationEventDetector UUT = new SeperationEventDetector(eList, tm);
 
             //sets up fake to count up variable, thus eliminating dependency
             eList.When(x => x.UpdateCurrEvent(Arg.Any<ISeperationEvent>()))
@@ -87,6 +87,7 @@ namespace ATMUnitTest
             //Assert that eList was called correct amount of times
         }
 
+        //TODO: Handle the failing test here once events have been added in SeperetionEventList.
         [TestCase(3000, 3999, 299, true)] //just within bounds
         [TestCase(3000, 3999, 300, false)] //just outside vertical bound
         [TestCase(3000, 4000, 299, false)] //just outside horizontal bound
@@ -102,7 +103,7 @@ namespace ATMUnitTest
             var rend = Substitute.For<ITrackRenderer>();
             var tm = Substitute.For<ITrackManager>();
 
-            SeperationEventDetector UUT = new SeperationEventDetector(eList, rend, tm);
+            SeperationEventDetector UUT = new SeperationEventDetector(eList, tm);
 
             //sets up fake to count up variable, thus eliminating dependency
             eList.When(x => x.UpdateCurrEvent(Arg.Any<ISeperationEvent>()))

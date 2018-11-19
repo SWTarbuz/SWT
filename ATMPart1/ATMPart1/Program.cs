@@ -18,7 +18,7 @@ namespace ATMPart1
 
             ITrackManager tm = new TrackManager();
             ITrackRenderer renderer = new TrackRenderer(tm);
-            ISeperationEventDetector evntDetector = new SeperationEventDetector(new SeperationEventList(), renderer, tm);
+            ISeperationEventDetector evntDetector = new SeperationEventDetector(new SeperationEventList(), tm);
 
             TransponderRecieverClient client = new TransponderRecieverClient(reciever, new TrackFormatter(), tm);
 
