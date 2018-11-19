@@ -8,31 +8,31 @@ namespace ATMPart1
 {
     public class SeperationEventList : ISeperationEventList
     {
-        private List<ISeperationEvent> _currEvents { get; set; }
-        private List<ISeperationEvent> _prevEvents { get; set; }
+        private List<IEvent> _currEvents { get; set; }
+        private List<IEvent> _prevEvents { get; set; }
 
         public event EventHandler<RaiseEventsUpdatedEventArgs> RaiseEventsUpdatedEvent;
 
         public SeperationEventList()
         {
-            _currEvents = new List<ISeperationEvent>();
-            _prevEvents = new List<ISeperationEvent>();
+            _currEvents = new List<IEvent>();
+            _prevEvents = new List<IEvent>();
         }
 
 
-        public IList<ISeperationEvent> CurrEvents
+        public IList<IEvent> CurrEvents
         {
             get { return _currEvents;}
             set { _currEvents = value.ToList(); }
         }
 
-        public IList<ISeperationEvent> PrevEvents
+        public IList<IEvent> PrevEvents
         {
             get { return _prevEvents; }
         }
 
         //TODO: 99% sure that he didn't want us to make it update events, except for ending them. Thus further work on this isn't needed.
-        public void UpdateCurrEvent(ISeperationEvent sepEvent)
+        public void UpdateCurrEvent(IEvent sepEvent)
         {
             bool eventExists = false;
             foreach (var evnt in _currEvents)
@@ -52,7 +52,7 @@ namespace ATMPart1
             }
         }
 
-        public void EndEvent(ISeperationEvent sepEvent)
+        public void EndEvent(IEvent sepEvent)
         {
             _currEvents.Remove(sepEvent);
             _prevEvents.Add(sepEvent);
@@ -61,7 +61,7 @@ namespace ATMPart1
 
         #region Helpers
 
-        private bool DoesEventExist(ISeperationEvent event1, ISeperationEvent event2)
+        private bool DoesEventExist(IEvent event1, IEvent event2)
         {
             bool[] tagsMatch = new bool[2]{false, false};
 

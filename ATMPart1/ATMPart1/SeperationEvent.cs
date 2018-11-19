@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATMPart1
 {
-    public class SeperationEvent : ISeperationEvent
+    public class SeperationEvent : IEvent
     {
         public ITrack[] InvolvedTracks { get; private set; }
         public DateTime timeOfOccurence { get; private set; }

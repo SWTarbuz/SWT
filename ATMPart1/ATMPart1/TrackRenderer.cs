@@ -10,12 +10,12 @@ namespace ATMPart1
     public class TrackRenderer : ITrackRenderer
     {
         private List<ITrack> currTracks;
-        private List<ISeperationEvent> currEvents;
+        private List<IEvent> currEvents;
 
         public TrackRenderer(ITrackManager trackManager, ISeperationEventList eventList)
         {
             currTracks = new List<ITrack>();
-            currEvents = new List<ISeperationEvent>();
+            currEvents = new List<IEvent>();
 
             trackManager.RaiseTracksUpdatedEvent += HandleTrackUpdate;
             eventList.RaiseEventsUpdatedEvent += HandleEventUpdate;

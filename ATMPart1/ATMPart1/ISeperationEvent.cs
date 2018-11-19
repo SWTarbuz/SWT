@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ATMPart1
 {
-    public interface ISeperationEvent
+    public interface IEvent
     {
         ITrack[] InvolvedTracks { get; } //make it to 2 tracks for now
         DateTime timeOfOccurence { get; }

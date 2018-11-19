@@ -46,7 +46,7 @@ namespace ATMUnitTest
             SeperationEventDetector UUT = new SeperationEventDetector(eList, tm);
 
             //sets up fake to count up variable, thus eliminating dependency
-            eList.When(x => x.UpdateCurrEvent(Arg.Any<ISeperationEvent>()))
+            eList.When(x => x.UpdateCurrEvent(Arg.Any<IEvent>()))
                 .Do(x=> checkCnt++);
 
             UUT.UpdateEvents(tracks[0], tracks);
@@ -78,7 +78,7 @@ namespace ATMUnitTest
             SeperationEventDetector UUT = new SeperationEventDetector(eList, tm);
 
             //sets up fake to count up variable, thus eliminating dependency
-            eList.When(x => x.UpdateCurrEvent(Arg.Any<ISeperationEvent>()))
+            eList.When(x => x.UpdateCurrEvent(Arg.Any<IEvent>()))
                 .Do(x => DidEventOccur = true);
 
             UUT.UpdateEvents(tracks[0], tracks);
@@ -104,7 +104,7 @@ namespace ATMUnitTest
             SeperationEventDetector UUT = new SeperationEventDetector(eList, tm);
 
             //sets up fake to count up variable, thus eliminating dependency
-            eList.When(e => e.UpdateCurrEvent(Arg.Any<ISeperationEvent>())).Do(e => updatedList = true);
+            eList.When(e => e.UpdateCurrEvent(Arg.Any<IEvent>())).Do(e => updatedList = true);
 
             UUT.UpdateEvents(tracks[0], tracks);
 

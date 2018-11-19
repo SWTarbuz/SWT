@@ -13,7 +13,7 @@ namespace ATMUnitTest
     class TestSeperationEventList
     {
         private ISeperationEventList _uut;
-        private ISeperationEvent _event;
+        private IEvent _event;
 
         [SetUp]
         public void Setup()
@@ -24,7 +24,7 @@ namespace ATMUnitTest
             ITrack track2 = Substitute.For<Track>("2", 10, 10, 10, DateTime.MaxValue);
 
             _event = Substitute.For<SeperationEvent>(track1, track2);
-            _uut.CurrEvents = Substitute.For<List<ISeperationEvent>>();
+            _uut.CurrEvents = Substitute.For<List<IEvent>>();
             _uut.CurrEvents.Add(_event);
         }
 
@@ -36,7 +36,7 @@ namespace ATMUnitTest
             ITrack track1 = Substitute.For<Track>(tag1, 10, 10, 10, DateTime.MinValue);
             ITrack track2 = Substitute.For<Track>(tag2, 10, 10, 10, DateTime.MinValue);
 
-            ISeperationEvent evnt = Substitute.For<SeperationEvent>(track1, track2);
+            IEvent evnt = Substitute.For<SeperationEvent>(track1, track2);
 
             //Act
             _uut.UpdateCurrEvent(evnt);
@@ -54,7 +54,7 @@ namespace ATMUnitTest
             ITrack track1 = Substitute.For<Track>(tag1, 10, 10, 10, DateTime.MinValue);
             ITrack track2 = Substitute.For<Track>(tag2, 10, 10, 10, DateTime.MinValue);
 
-            ISeperationEvent evnt = Substitute.For<SeperationEvent>(track1, track2);
+            IEvent evnt = Substitute.For<SeperationEvent>(track1, track2);
 
             //Act
             _uut.UpdateCurrEvent(evnt);
@@ -74,7 +74,7 @@ namespace ATMUnitTest
             ITrack track1 = Substitute.For<Track>(tag1, 10, 10, 10, DateTime.MinValue);
             ITrack track2 = Substitute.For<Track>(tag2, 10, 10, 10, DateTime.MinValue);
 
-            ISeperationEvent evnt = Substitute.For<SeperationEvent>(track1, track2);
+            IEvent evnt = Substitute.For<SeperationEvent>(track1, track2);
 
             //Act
             _uut.UpdateCurrEvent(evnt);

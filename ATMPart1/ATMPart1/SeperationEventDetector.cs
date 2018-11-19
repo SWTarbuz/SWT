@@ -31,7 +31,7 @@ namespace ATMPart1
             var cnt = 0;
             foreach (var track in tracks)
             {
-                ISeperationEvent detectedEvent = null;
+                IEvent detectedEvent = null;
 
                 if (updatedTrack.tag != track.tag) detectedEvent = CompareTracks(updatedTrack, track);
 
@@ -46,7 +46,7 @@ namespace ATMPart1
         #region Helpers
 
         // Method for comparing tracks
-        private ISeperationEvent CompareTracks(ITrack newTrack, ITrack oldTrack)
+        private IEvent CompareTracks(ITrack newTrack, ITrack oldTrack)
         {
             var newXY = Math.Sqrt((Math.Pow(newTrack.xPos, 2)) + (Math.Pow(newTrack.yPos, 2)));
             var oldXY = Math.Sqrt((Math.Pow(oldTrack.xPos, 2)) + (Math.Pow(oldTrack.yPos, 2)));
