@@ -87,33 +87,28 @@ namespace ATMUnitTest
             //Assert that eList was called correct amount of times
         }
 
-        //TODO: Handle the failing test here once events have been added in SeperetionEventList.
-        [TestCase(3000, 3999, 299, true)] //just within bounds //TODO: fix the test, as it fails, due to the changes made.
+        [TestCase(3000, 3999, 299, true)] //just within bounds 
         [TestCase(3000, 3999, 300, false)] //just outside vertical bound
         [TestCase(3000, 4000, 299, false)] //just outside horizontal bound
-        public void TestUpdateEvents_EventDetectionWith2TracksWithDistances_CallsRendererUpdateIfEventOccured(float xDist, float yDist, float zDist, bool expectedResult)
+        public void TestUpdateEvents_EventDetectionWith2TracksWithDistances_CallsSeperationEventList(float xDist, float yDist, float zDist, bool expectedResult)
         {
             var DidEventOccur = false; //technically this will give the correct result, if the above tests work, but uses expected to make independent from this.
-            var updatedRenderer = false;
+            var updatedList = false;
 
             tracks.Add(new Track("0", 0, 0, 0, DateTime.Now));
             tracks.Add(new Track("1", xDist, yDist, zDist, DateTime.Now));
 
             var eList = Substitute.For<ISeperationEventList>();
-            var rend = Substitute.For<ITrackRenderer>();
             var tm = Substitute.For<ITrackManager>();
 
             SeperationEventDetector UUT = new SeperationEventDetector(eList, tm);
 
             //sets up fake to count up variable, thus eliminating dependency
-            eList.When(x => x.UpdateCurrEvent(Arg.Any<ISeperationEvent>()))
-                .Do(x => DidEventOccur = true);
-            //rend.When(x => rend.UpdateEvents(Arg.Any<ISeperationEventList>()))
-            //    .Do(x => updatedRenderer = true);
+            eList.When(e => e.UpdateCurrEvent(Arg.Any<ISeperationEvent>())).Do(e => updatedList = true);
 
             UUT.UpdateEvents(tracks[0], tracks);
 
-            Assert.AreEqual(expectedResult, updatedRenderer);
+            Assert.AreEqual(expectedResult, updatedList);
             //Assert that renderer is called if the list was updated
         }
     }
