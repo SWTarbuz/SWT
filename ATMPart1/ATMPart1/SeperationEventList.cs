@@ -32,14 +32,18 @@ namespace ATMPart1
         //TODO: 99% sure that he didn't want us to make it update events, except for ending them. Thus further work on this isn't needed.
         public void UpdateCurrEvent(ISeperationEvent sepEvent)
         {
+            bool eventExists = false;
             foreach (var evnt in _currEvents)
             {
                 if (evnt.InvolvedTracks == sepEvent.InvolvedTracks)
                 {
                     //TODO: implement update
+                    eventExists = true;
                     break;
                 }
             }
+
+            if (eventExists == false) _currEvents.Add(sepEvent);
         }
 
         public void EndEvent(ISeperationEvent sepEvent)

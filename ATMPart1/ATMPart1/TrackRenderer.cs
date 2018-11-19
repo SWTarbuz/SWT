@@ -53,7 +53,11 @@ namespace ATMPart1
 
         public void UpdateEvents(ISeperationEventList events)
         {
-            throw new NotImplementedException();
+            currEvents = events.CurrEvents.ToList();
+
+            Console.Clear();
+            WriteOutEvents();
+            WriteOutTracks();
         }
 
         #endregion
