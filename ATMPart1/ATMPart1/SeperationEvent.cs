@@ -12,6 +12,8 @@ namespace ATMPart1
         public DateTime timeOfOccurence { get; private set; }
 
         // Method for setting time of occurence - Redundant to be deleted?
+
+        // setTime Function is not necessary
         public void setTimeOfOccurence(DateTime time)
         {
             timeOfOccurence = time;
@@ -20,8 +22,12 @@ namespace ATMPart1
         public SeperationEvent(ITrack newTrack, ITrack oldTrack)
         {
             //TODO: add something to ensure that the tracks can't be the same / have the same tag.
-            InvolvedTracks = new ITrack[2]{newTrack, oldTrack};
-            timeOfOccurence = newTrack.timestamp;
+            //Think it is fixed by encapsulating with an If statement
+            if(newTrack.tag != oldTrack.tag)
+            {
+                InvolvedTracks = new ITrack[2]{newTrack, oldTrack};
+                timeOfOccurence = newTrack.timestamp;
+            }
         }
     }
 }
