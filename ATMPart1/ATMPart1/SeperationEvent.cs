@@ -19,6 +19,7 @@ namespace ATMPart1
 
         public SeperationEvent(ITrack newTrack, ITrack oldTrack)
         {
+            //TODO: add something to ensure that the tracks can't be the same / have the same tag.
             InvolvedTracks = new ITrack[2]{newTrack, oldTrack};
             timeOfOccurence = newTrack.timestamp;
         }
