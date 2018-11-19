@@ -8,7 +8,7 @@ using TransponderReceiver;
 
 namespace ATMPart1
 {
-    class TransponderRecieverClient
+    public class TransponderRecieverClient
     {
         private ITransponderReceiver _receiver;
 
