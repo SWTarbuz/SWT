@@ -11,6 +11,8 @@ namespace ATMPart1
         private List<ISeperationEvent> _currEvents { get; set; }
         private List<ISeperationEvent> _prevEvents { get; set; }
 
+        public event EventHandler<RaiseEventsUpdatedEventArgs> RaiseEventsUpdatedEvent;
+
         public SeperationEventList()
         {
             _currEvents = new List<ISeperationEvent>();
@@ -37,19 +39,24 @@ namespace ATMPart1
             {
                 if (DoesEventExist(evnt, sepEvent))
                 {
-                    //TODO: implement update renderer when event is added.
+                    //TODO: implement update renderer when event is added/removed.
                     eventExists = true;
                     break;
                 }
             }
 
-            if (eventExists == false) _currEvents.Add(sepEvent);
+            if (eventExists == false)
+            {
+                _currEvents.Add(sepEvent);
+                OnRaiseTrackUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
+            }
         }
 
         public void EndEvent(ISeperationEvent sepEvent)
         {
             _currEvents.Remove(sepEvent);
             _prevEvents.Add(sepEvent);
+            OnRaiseTrackUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
         }
 
         #region Helpers
@@ -65,10 +72,17 @@ namespace ATMPart1
                 event1.InvolvedTracks[1].tag == event2.InvolvedTracks[1].tag) tagsMatch[1] = true;
 
             return tagsMatch[0] & tagsMatch[1];
-            //if (tagsMatch[0] == true && tagsMatch[1] == true) return true;
-            //return false;
         }
 
+        protected virtual void OnRaiseTrackUpdatedEvent(RaiseEventsUpdatedEventArgs e)
+        {
+            EventHandler<RaiseEventsUpdatedEventArgs> handler = RaiseEventsUpdatedEvent;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
         #endregion
     }
 }
