@@ -35,7 +35,7 @@ namespace ATMPart1
             bool eventExists = false;
             foreach (var evnt in _currEvents)
             {
-                if (evnt.InvolvedTracks == sepEvent.InvolvedTracks)
+                if (DoesEventExist(evnt, sepEvent))
                 {
                     //TODO: implement update
                     eventExists = true;
@@ -51,5 +51,24 @@ namespace ATMPart1
             _currEvents.Remove(sepEvent);
             _prevEvents.Add(sepEvent);
         }
+
+        #region Helpers
+
+        private bool DoesEventExist(ISeperationEvent event1, ISeperationEvent event2)
+        {
+            bool[] tagsMatch = new bool[2]{false, false};
+
+            if (event1.InvolvedTracks[0].tag == event2.InvolvedTracks[0].tag ||
+                event1.InvolvedTracks[0].tag == event2.InvolvedTracks[1].tag) tagsMatch[0] = true;
+
+            if (event1.InvolvedTracks[1].tag == event2.InvolvedTracks[0].tag ||
+                event1.InvolvedTracks[1].tag == event2.InvolvedTracks[1].tag) tagsMatch[1] = true;
+
+            return tagsMatch[0] & tagsMatch[1];
+            //if (tagsMatch[0] == true && tagsMatch[1] == true) return true;
+            //return false;
+        }
+
+        #endregion
     }
 }
