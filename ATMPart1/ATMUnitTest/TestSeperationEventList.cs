@@ -71,8 +71,6 @@ namespace ATMUnitTest
         public void UpdateCurrEvent_EventDoesntExist_EventAdded(string tag1, string tag2)
         {
             //Arrange
-            _uut.CurrEvents = Substitute.For<List<ISeperationEvent>>();
-
             ITrack track1 = Substitute.For<Track>(tag1, 10, 10, 10, DateTime.MinValue);
             ITrack track2 = Substitute.For<Track>(tag2, 10, 10, 10, DateTime.MinValue);
 
@@ -82,7 +80,7 @@ namespace ATMUnitTest
             _uut.UpdateCurrEvent(evnt);
 
             //Assert
-            Assert.That(_uut.CurrEvents[0], Is.EqualTo(evnt));
+            Assert.That(_uut.CurrEvents[1], Is.EqualTo(evnt)); //TODO: Consider if testing for amount of events makes more sense
         }
 
         //MethodUnderTest_Scenario_Behaviour
