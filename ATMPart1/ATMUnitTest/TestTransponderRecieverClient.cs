@@ -46,6 +46,7 @@ namespace ATMUnitTest
             _fakeTransponderReceiver.TransponderDataReady +=
                 Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
+            //_uut.Received().ReceiverOnTransponderDataReady(Arg.Is(_fakeTransponderReceiver), Arg.Any<RawTransponderDataEventArgs>()); //TODO: Does it make sense to use a substitute for uut to do this, and thus check that the event can be recieved?
             Assert.That(_eventsRecieved, Is.EqualTo(1));
         }
 
