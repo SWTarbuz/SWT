@@ -6,17 +6,23 @@ using System.Threading.Tasks;
 
 namespace ATMPart1
 {
-    public class TrackRenderer
+    public class TrackRenderer : ITrackRenderer
     {
         private List<ITrack> currTracks;
         private List<ISeperationEvent> currEvents;
 
-        public TrackRenderer()
+        public TrackRenderer(ITrackManager trackManager)
         {
             currTracks = new List<ITrack>();
             currEvents = new List<ISeperationEvent>();
+
+            trackManager.RaiseTracksUpdatedEvent += HandleTrackUpdate;
         }
 
+        void HandleTrackUpdate(object sender, TracksUpdatedEventArgs e)
+        {
+            UpdateTracks(e.Tracks);
+        }
 
         public void UpdateTracks(List<ITrack> tracks)
         {
@@ -36,6 +42,20 @@ namespace ATMPart1
             WriteOutTracks();
         }
 
+        //TODO: fix me, aka update this to have a proper interface, and then make the rest better with events
+        #region Pointless things due to interface
+
+        public void UpdateTracks(IList<ITrack> tracks)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateEvents(ISeperationEventList events)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
 
         private void WriteOutTracks()
         {

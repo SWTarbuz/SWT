@@ -9,7 +9,16 @@ namespace ATMPart1
     public interface ITrackManager
     {
         IList<ITrack> Tracks { get; }
-        
+        event EventHandler<TracksUpdatedEventArgs> RaiseTracksUpdatedEvent;
         void HandleTrack(ITrack track,IAirspace airspace);
+    }
+
+    public class TracksUpdatedEventArgs : EventArgs
+    {
+        public TracksUpdatedEventArgs(List<ITrack> tracks)
+        {
+            Tracks = tracks;
+        }
+        public List<ITrack> Tracks { get; set; }
     }
 }

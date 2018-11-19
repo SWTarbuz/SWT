@@ -11,6 +11,7 @@ namespace ATMPart1
     {
         private IList<ITrack> tracks = new List<ITrack>();
 
+
         public IList<ITrack> Tracks
         {
             get
@@ -18,6 +19,9 @@ namespace ATMPart1
                return tracks;
             }
         }
+
+        public event EventHandler<TracksUpdatedEventArgs> RaiseTracksUpdatedEvent;
+
         public void HandleTrack(ITrack Track,IAirspace airspace)
         {
             bool check = true; //bool to make a check after list loop
@@ -53,6 +57,9 @@ namespace ATMPart1
                     }
                 }
             }
+
+
+            RaiseTracksUpdatedEvent(this, new TracksUpdatedEventArgs(Tracks.ToList()));
         }
     }
 }
