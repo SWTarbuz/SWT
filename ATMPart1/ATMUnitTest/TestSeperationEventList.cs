@@ -13,31 +13,47 @@ namespace ATMUnitTest
     class TestSeperationEventList
     {
         private ISeperationEventList _uut;
+        private ISeperationEvent _event;
 
         [SetUp]
         public void Setup()
         {
             _uut = new SeperationEventList();
+
+            ITrack track1 = Substitute.For<Track>("", 10, 10, 10, DateTime.MaxValue);
+            ITrack track2 = Substitute.For<Track>("", 10, 10, 10, DateTime.MaxValue);
+
+            _event = Substitute.For<SeperationEvent>(track1, track2);
+            _uut.CurrEvents = Substitute.For<List<ISeperationEvent>>();
+            _uut.CurrEvents.Add(_event);
+        }
+
+        [Test]
+        public void UpdateCurrEvent_EventExists_OriginalEventKeptUnchanged()
+        {
+            //Arrange
+            ITrack track1 = Substitute.For<Track>("", 10, 10, 10, DateTime.MinValue);
+            ITrack track2 = Substitute.For<Track>("", 10, 10, 10, DateTime.MinValue);
+
+            ISeperationEvent evnt = Substitute.For<SeperationEvent>(track1, track2);
+
+            //Act
+            _uut.UpdateCurrEvent(evnt);
+
+            //Assert
+            Assert.That(_uut.CurrEvents[0], Is.EqualTo(_event));
+            //Assert.That(_uut.CurrEvents[0].InvolvedTracks[0].timestamp, Is.EqualTo(DateTime.MaxValue));
         }
 
         //MethodUnderTest_Scenario_Behaviour
         [Test]
         public void EndEvent_EventExists_RemovesEvent()
         {
-            //Arrange
-            ITrack track1 = Substitute.For<Track>("", 10, 10, 10, DateTime.Now);
-            ITrack track2 = Substitute.For<Track>("", 10, 10, 10, DateTime.Now);
-
-            ISeperationEvent evnt = Substitute.For<SeperationEvent>(track1, track2);
-            _uut.CurrEvents = Substitute.For<List<ISeperationEvent>>();
-            _uut.CurrEvents.Add(evnt);
-
             //Act
-            _uut.EndEvent(evnt);
+            _uut.EndEvent(_event);
 
             //Assert
             Assert.That(_uut.CurrEvents.Count, Is.EqualTo(0));
-
         }
     }
 }
