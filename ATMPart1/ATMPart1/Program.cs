@@ -16,10 +16,11 @@ namespace ATMPart1
         {
             ITransponderReceiver reciever = TransponderReceiver.TransponderReceiverFactory.CreateTransponderDataReceiver();
 
-            ITrackManager trackManager = new TrackManager();
-            ITrackRenderer renderer = new TrackRenderer(trackManager);
+            ITrackManager tm = new TrackManager();
+            ITrackRenderer renderer = new TrackRenderer(tm);
+            ISeperationEventDetector evntDetector = new SeperationEventDetector(new SeperationEventList(), renderer, tm);
 
-            TransponderRecieverClient client = new TransponderRecieverClient(reciever, new TrackFormatter(), trackManager);
+            TransponderRecieverClient client = new TransponderRecieverClient(reciever, new TrackFormatter(), tm);
 
             while (true)
             {
