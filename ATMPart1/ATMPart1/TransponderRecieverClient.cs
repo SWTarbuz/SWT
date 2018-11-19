@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiver;
+using TransponderReceiver;
 
 namespace ATMPart1
 {
     class TransponderRecieverClient
     {
         private ITransponderReceiver _receiver;
+
         private ITrackFormatter _formatter;
         private ITrackManager _manager;
         private IAirspace _airspace;
@@ -17,8 +19,9 @@ namespace ATMPart1
         public TransponderRecieverClient(ITransponderReceiver receiver, ITrackFormatter formatter, ITrackManager manager)
         {
             // This will store the real or the fake transponder data receiver
-            this._receiver = receiver;
+            _receiver = receiver;
 
+            _airspace = new Airspace(10000, 90000, 10000, 90000, 500, 20000);
             _formatter = formatter;
             _manager = manager;
 
@@ -26,7 +29,7 @@ namespace ATMPart1
             this._receiver.TransponderDataReady += ReceiverOnTransponderDataReady;
         }
 
-        private void ReceiverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
+        public void ReceiverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
             // saves and updates for each recieved track/dataset
             foreach (var data in e.TransponderData)

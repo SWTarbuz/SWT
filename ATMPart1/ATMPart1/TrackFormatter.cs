@@ -18,7 +18,7 @@ namespace ATMPart1
         {
             string[] tokens;
             char[] separators = { ';' };
-            string[] formats = {"yyyyMMddHHmmfff"};
+            string[] formats = {"yyyyMMddHHmmssfff"};
 
             tokens = data.Split(separators, StringSplitOptions.None);
             if (tokens.Length != 5)

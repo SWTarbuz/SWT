@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace ATMPart1
 {
-    public class TrackManager : ITrackManager
+    public class TrackManager : ITrackManager //TODO: Add so that ITrackRenderer is informed of update
     {
-
         private IList<ITrack> tracks = new List<ITrack>();
 
         public IList<ITrack> Tracks
