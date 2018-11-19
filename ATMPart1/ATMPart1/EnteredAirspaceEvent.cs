@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ATMPart1
 {
-    public class EnteredAirspaceEvent
+    public class EnteredAirspaceEvent : ATMPart1.IEvent
     {
+
     }
 }
