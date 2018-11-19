@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATMPart1
 {
-    public class SeperationEventList : ISeperationEventList
+    public class SeperationEventList : IEventList
     {
         private List<IEvent> _currEvents { get; set; }
         private List<IEvent> _prevEvents { get; set; }

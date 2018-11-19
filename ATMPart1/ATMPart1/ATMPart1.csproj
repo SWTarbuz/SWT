@@ -52,7 +52,7 @@
     <Compile Include="IAirspace.cs" />
     <Compile Include="IEvent.cs" />
     <Compile Include="ISeperationEventDetector.cs" />
-    <Compile Include="ISeperationEventList.cs" />
+    <Compile Include="IEventList.cs" />
     <Compile Include="ITrack.cs" />
     <Compile Include="ITrackFormatter.cs" />
     <Compile Include="ITrackManager.cs" />

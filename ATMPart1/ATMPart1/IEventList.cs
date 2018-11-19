@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATMPart1
 {
-    public interface ISeperationEventList
+    public interface IEventList
     {
         IList<IEvent> CurrEvents { get; set; }
         IList<IEvent> PrevEvents { get;} //maybe this doesn't make sense, if not kill it before it lays eggs

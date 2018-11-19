@@ -8,9 +8,9 @@ namespace ATMPart1
 {
     public class SeperationEventDetector : ISeperationEventDetector
     {
-        public ISeperationEventList events { get; private set; }
+        public IEventList events { get; private set; }
 
-        public SeperationEventDetector(ISeperationEventList eventList, ITrackManager trackManager) //TODO: Update to use event to renderer instead of this.
+        public SeperationEventDetector(IEventList eventList, ITrackManager trackManager) //TODO: Update to use event to renderer instead of this.
         {
             events = eventList;
             trackManager.RaiseTracksUpdatedEvent += HandleTrackUpdate;

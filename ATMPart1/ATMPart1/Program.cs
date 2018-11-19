@@ -17,7 +17,7 @@ namespace ATMPart1
             ITransponderReceiver reciever = TransponderReceiver.TransponderReceiverFactory.CreateTransponderDataReceiver();
 
             ITrackManager tm = new TrackManager();
-            ISeperationEventList evntList = new SeperationEventList();
+            IEventList evntList = new SeperationEventList();
 
             ITrackRenderer renderer = new TrackRenderer(tm, evntList);
             ISeperationEventDetector evntDetector = new SeperationEventDetector(evntList, tm);

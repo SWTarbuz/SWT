@@ -12,7 +12,7 @@ namespace ATMUnitTest
 {
     class TestSeperationEventList
     {
-        private ISeperationEventList _uut;
+        private IEventList _uut;
         private IEvent _event;
 
         [SetUp]

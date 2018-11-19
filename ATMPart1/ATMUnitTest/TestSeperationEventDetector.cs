@@ -39,7 +39,7 @@ namespace ATMUnitTest
             }
 
             //TODO: move these to Setup, to avoid repeat code
-            var eList = Substitute.For<ISeperationEventList>();
+            var eList = Substitute.For<IEventList>();
             var rend = Substitute.For<ITrackRenderer>();
             var tm = Substitute.For<ITrackManager>();
 
@@ -71,7 +71,7 @@ namespace ATMUnitTest
             tracks.Add(new Track("0", 0, 0, 0, DateTime.Now));
             tracks.Add(new Track("1", xDist, yDist, zDist, DateTime.Now));
 
-            var eList = Substitute.For<ISeperationEventList>();
+            var eList = Substitute.For<IEventList>();
             var rend = Substitute.For<ITrackRenderer>();
             var tm = Substitute.For<ITrackManager>();
 
@@ -98,7 +98,7 @@ namespace ATMUnitTest
             tracks.Add(new Track("0", 0, 0, 0, DateTime.Now));
             tracks.Add(new Track("1", xDist, yDist, zDist, DateTime.Now));
 
-            var eList = Substitute.For<ISeperationEventList>();
+            var eList = Substitute.For<IEventList>();
             var tm = Substitute.For<ITrackManager>();
 
             SeperationEventDetector UUT = new SeperationEventDetector(eList, tm);

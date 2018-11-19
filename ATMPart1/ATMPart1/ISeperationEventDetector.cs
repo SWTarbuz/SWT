@@ -8,7 +8,7 @@ namespace ATMPart1
 {
     public interface ISeperationEventDetector
     {
-        ISeperationEventList events { get; }
+        IEventList events { get; }
 
         void UpdateEvents(ITrack updatedTrack, IList<ITrack> tracks);
     }

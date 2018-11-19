@@ -12,7 +12,7 @@ namespace ATMPart1
         private List<ITrack> currTracks;
         private List<IEvent> currEvents;
 
-        public TrackRenderer(ITrackManager trackManager, ISeperationEventList eventList)
+        public TrackRenderer(ITrackManager trackManager, IEventList eventList)
         {
             currTracks = new List<ITrack>();
             currEvents = new List<IEvent>();
