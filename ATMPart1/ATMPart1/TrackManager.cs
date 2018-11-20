@@ -21,6 +21,8 @@ namespace ATMPart1
         }
 
         public event EventHandler<TracksUpdatedEventArgs> RaiseTracksUpdatedEvent;
+        public event EventHandler<TracksUpdatedEventArgs> RaiseEntryDetectedEvent;
+        public event EventHandler<TracksUpdatedEventArgs> RaiseExitDetectedEvent;
 
         public void HandleTrack(ITrack Track,IAirspace airspace)
         {
@@ -41,7 +43,7 @@ namespace ATMPart1
                 if (check)
                 {
                     tracks.Add(Track); //new tag, just add it
-                    //TODO: Add EntryEvent
+                    OnRaiseEntryDetectedEvent(new TracksUpdatedEventArgs(tracks.ToList(), Track));
                 }
                 
             }
@@ -53,7 +55,7 @@ namespace ATMPart1
                     {
                         
                         tracks.Remove(t);
-                        //TODO: Add ExitEvent
+                        OnRaiseExitDetectedEvent(new TracksUpdatedEventArgs(tracks.ToList(), Track));
                         return;
                         
                     }
@@ -64,9 +66,11 @@ namespace ATMPart1
             OnRaiseTrackUpdatedEvent(new TracksUpdatedEventArgs(tracks.ToList(), Track));
         }
 
+        #region Helpers
+
         //https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/events/how-to-publish-events-that-conform-to-net-framework-guidelines
         //seperating so we can override later, and due to us needing to call from multiple places
-        protected  virtual void OnRaiseTrackUpdatedEvent(TracksUpdatedEventArgs e)
+        protected virtual void OnRaiseTrackUpdatedEvent(TracksUpdatedEventArgs e)
         {
             EventHandler<TracksUpdatedEventArgs> handler = RaiseTracksUpdatedEvent;
 
@@ -75,5 +79,25 @@ namespace ATMPart1
                 handler(this, e);
             }
         }
+        protected virtual void OnRaiseEntryDetectedEvent(TracksUpdatedEventArgs e)
+        {
+            EventHandler<TracksUpdatedEventArgs> handler = RaiseExitDetectedEvent;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+        protected virtual void OnRaiseExitDetectedEvent(TracksUpdatedEventArgs e)
+        {
+            EventHandler<TracksUpdatedEventArgs> handler = RaiseExitDetectedEvent;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        #endregion
     }
 }

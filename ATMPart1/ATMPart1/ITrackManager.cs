@@ -10,6 +10,8 @@ namespace ATMPart1
     {
         IList<ITrack> Tracks { get; }
         event EventHandler<TracksUpdatedEventArgs> RaiseTracksUpdatedEvent;
+        event EventHandler<TracksUpdatedEventArgs> RaiseEntryDetectedEvent;
+        event EventHandler<TracksUpdatedEventArgs> RaiseExitDetectedEvent;
         void HandleTrack(ITrack track,IAirspace airspace);
     }
 
