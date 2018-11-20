@@ -14,14 +14,19 @@ namespace ATMUnitTest
     {
         private IEventList _uut;
         private IEvent _event;
-        private ITrackManager tm;
+        private ITrackManager _tm;
+
+        private int _eventsOccured;
+        private List<IEvent> _eventArgs;
 
         [SetUp]
         public void Setup()
         {
-            tm = Substitute.For<TrackManager>();
+            _eventsOccured = 0;
+            _tm = Substitute.For<ITrackManager>();
 
-            _uut = new EventList(tm);
+            _uut = new EventList(_tm);
+            
 
             ITrack track1 = Substitute.For<Track>("1", 10, 10, 10, DateTime.MaxValue);
             ITrack track2 = Substitute.For<Track>("2", 10, 10, 10, DateTime.MaxValue);
@@ -32,6 +37,12 @@ namespace ATMUnitTest
 
             _uut.CurrEvents = Substitute.For<List<IEvent>>();
             _uut.CurrEvents.Add(_event);
+
+            _uut.RaiseEventsUpdatedEvent += (o, args) =>
+            {
+                _eventArgs = args.Events;
+                _eventsOccured++;
+            };
         }
 
         // TODO Test fails because substitude for seperation event is not a real seperation event so GetType() != seperationevent
@@ -126,6 +137,83 @@ namespace ATMUnitTest
         }
 
         //TODO: Add tests of EventHandlers, as these do make a new event, and that we can test for. Or in case of the timer removes an item.
+        
+        [Test]
+        public void HandleRaiseEntryDetectedEvent_EventOccured_RaiseEventsUpdatedEventOnce()
+        {
+            //Arrange
+            ITrack track1 = Substitute.For<Track>("3", 10, 10, 10, DateTime.MinValue);
+            List<ITrack> tl = Substitute.For<List<ITrack>>();
+            tl.Add(track1);
+
+            var args = new TracksUpdatedEventArgs(tl, track1);
+            _tm.RaiseEntryDetectedEvent += Raise.EventWith(args);
+
+            //Assert
+            Assert.That(_eventsOccured, Is.EqualTo(1));
+        }
+        [Test]
+        public void HandleRaiseEntryDetectedEvent_EventOccured_EntryEventAdded()
+        {
+            //Arrange
+            _uut.CurrEvents = Substitute.For<List<IEvent>>();
+            ITrack track1 = Substitute.For<Track>("3", 10, 10, 10, DateTime.MinValue);
+            List<ITrack> tl = Substitute.For<List<ITrack>>();
+            tl.Add(track1);
+
+            var args = new TracksUpdatedEventArgs(tl, track1);
+            _tm.RaiseEntryDetectedEvent += Raise.EventWith(args);
+
+            //Assert
+            Assert.That(_uut.CurrEvents[0], Is.TypeOf<EntryEvent>());
+        }
+
+        [Test]
+        public void HandleRaiseExitDetectedEvent_EventOccured_RaiseEventsUpdatedEventOnce()
+        {
+            //Arrange
+            ITrack track1 = Substitute.For<Track>("3", 10, 10, 10, DateTime.MinValue);
+            List<ITrack> tl = Substitute.For<List<ITrack>>();
+            tl.Add(track1);
+
+            var args = new TracksUpdatedEventArgs(tl, track1);
+            _tm.RaiseExitDetectedEvent += Raise.EventWith(args);
+
+            //Assert
+            Assert.That(_eventsOccured, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void HandleRaiseExitDetectedEvent_EventOccured_ExitEventAdded()
+        {
+            //Arrange
+            _uut.CurrEvents = Substitute.For<List<IEvent>>();
+            ITrack track1 = Substitute.For<Track>("3", 10, 10, 10, DateTime.MinValue);
+            List<ITrack> tl = Substitute.For<List<ITrack>>();
+            tl.Add(track1);
+
+            var args = new TracksUpdatedEventArgs(tl, track1);
+            _tm.RaiseExitDetectedEvent += Raise.EventWith(args);
+
+            //Assert
+            Assert.That(_uut.CurrEvents[0], Is.TypeOf<ExitEvent>());
+        }
+
+        [Test]
+        public void HandleRaiseEntryAndExitDetectedEvent_EventOccured_RaiseEventsUpdatedEventTwice()
+        {
+            //Arrange
+            ITrack track1 = Substitute.For<Track>("3", 10, 10, 10, DateTime.MinValue);
+            List<ITrack> tl = Substitute.For<List<ITrack>>();
+            tl.Add(track1);
+
+            var args = new TracksUpdatedEventArgs(tl, track1);
+            _tm.RaiseEntryDetectedEvent += Raise.EventWith(args);
+            _tm.RaiseExitDetectedEvent += Raise.EventWith(args);
+
+            //Assert
+            Assert.That(_eventsOccured, Is.EqualTo(2));
+        }
 
     }
 }
