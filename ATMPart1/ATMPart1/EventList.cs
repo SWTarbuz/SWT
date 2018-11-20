@@ -27,11 +27,13 @@ namespace ATMPart1
         private void HandleRaiseEntryDetectedEvent(object sender, TracksUpdatedEventArgs e)
         {
             _currEvents.Add(new EnteredAirspaceEvent(e.UpdatedTrack));
+            OnRaiseTrackUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
         }
 
         private void HandleRaiseExitDetectedEvent(object sender, TracksUpdatedEventArgs e)
         {
             _currEvents.Add(new ExitEvent(e.UpdatedTrack));
+            OnRaiseTrackUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
         }
         #endregion
 

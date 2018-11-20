@@ -19,7 +19,7 @@ namespace ATMPart1
 
         public string Print()
         {
-            return $"at the time of: {timeOfOccurence}, the track: {InvolvedTracks[0]}, Left the Airspace";
+            return $"at the time of: {timeOfOccurence}, the track: {InvolvedTracks[0].tag}, Left the Airspace";
         }
 
         public void setTimeOfOccurence(DateTime time)

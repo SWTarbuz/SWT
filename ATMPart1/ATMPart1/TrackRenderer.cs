@@ -58,7 +58,7 @@ namespace ATMPart1
         {
             foreach (var evnt in currEvents)
             {
-                evnt.Print();
+                Console.WriteLine(evnt.Print());
             }
         }
         #endregion
