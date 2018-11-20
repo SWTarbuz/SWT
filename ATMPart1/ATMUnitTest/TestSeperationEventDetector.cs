@@ -13,13 +13,26 @@ namespace ATMUnitTest
 {
     class TestSeperationEventDetector
     {
+        private List<ITrack> _tracks;
+        private IEventList _el;
+        private ITrackRenderer _rend;
+        private ITrackManager _tm;
 
-        List<ITrack> tracks = new List<ITrack>();
+        private ISeperationEventDetector _uut;
 
         [SetUp]
         public void Setup()
         {
-            tracks = new List<ITrack>();
+            _tracks = Substitute.For<List<ITrack>>();
+
+            _tracks.Add(Substitute.For<Track>("0", 0, 0, 0, DateTime.Now));
+
+            _el = Substitute.For<IEventList>();
+            _rend = Substitute.For<ITrackRenderer>();
+            _tm = Substitute.For<ITrackManager>();
+
+            _uut = new SeperationEventDetector(_el, _tm);
+
         }
 
 
@@ -35,21 +48,14 @@ namespace ATMUnitTest
 
             for (int i = 0; i < trackCount; i++)
             {
-                tracks.Add(new Track(i.ToString(), 0, 0, 0, DateTime.Now)); //keeps same values to ensure that even occurs
+                _tracks.Add(new Track(i.ToString(), 0, 0, 0, DateTime.Now)); //keeps same values to ensure that even occurs
             }
 
-            //TODO: move these to Setup, to avoid repeat code
-            var eList = Substitute.For<IEventList>();
-            var rend = Substitute.For<ITrackRenderer>();
-            var tm = Substitute.For<ITrackManager>();
-
-            SeperationEventDetector UUT = new SeperationEventDetector(eList, tm);
-
             //sets up fake to count up variable, thus eliminating dependency
-            eList.When(x => x.UpdateCurrEvent(Arg.Any<IEvent>()))
+            _el.When(x => x.UpdateCurrEvent(Arg.Any<IEvent>()))
                 .Do(x=> checkCnt++);
 
-            UUT.UpdateEvents(tracks[0], tracks);
+            _uut.UpdateEvents(_tracks[0], _tracks);
 
             Assert.AreEqual(trackCount-1, checkCnt);
             //Assert that eList was called correct amount of times
@@ -68,20 +74,13 @@ namespace ATMUnitTest
         {
             var DidEventOccur = false;
 
-            tracks.Add(new Track("0", 0, 0, 0, DateTime.Now));
-            tracks.Add(new Track("1", xDist, yDist, zDist, DateTime.Now));
-
-            var eList = Substitute.For<IEventList>();
-            var rend = Substitute.For<ITrackRenderer>();
-            var tm = Substitute.For<ITrackManager>();
-
-            SeperationEventDetector UUT = new SeperationEventDetector(eList, tm);
+            _tracks.Add(Substitute.For<Track>("1", xDist, yDist, zDist, DateTime.Now));
 
             //sets up fake to count up variable, thus eliminating dependency
-            eList.When(x => x.UpdateCurrEvent(Arg.Any<IEvent>()))
+            _el.When(x => x.UpdateCurrEvent(Arg.Any<IEvent>()))
                 .Do(x => DidEventOccur = true);
 
-            UUT.UpdateEvents(tracks[0], tracks);
+            _uut.UpdateEvents(_tracks[0], _tracks);
 
             Assert.AreEqual(expectedResult, DidEventOccur);
             //Assert that eList was called correct amount of times
@@ -95,18 +94,12 @@ namespace ATMUnitTest
             var DidEventOccur = false; //technically this will give the correct result, if the above tests work, but uses expected to make independent from this.
             var updatedList = false;
 
-            tracks.Add(new Track("0", 0, 0, 0, DateTime.Now));
-            tracks.Add(new Track("1", xDist, yDist, zDist, DateTime.Now));
-
-            var eList = Substitute.For<IEventList>();
-            var tm = Substitute.For<ITrackManager>();
-
-            SeperationEventDetector UUT = new SeperationEventDetector(eList, tm);
+            _tracks.Add(Substitute.For<Track>("1", xDist, yDist, zDist, DateTime.Now));
 
             //sets up fake to count up variable, thus eliminating dependency
-            eList.When(e => e.UpdateCurrEvent(Arg.Any<IEvent>())).Do(e => updatedList = true);
+            _el.When(e => e.UpdateCurrEvent(Arg.Any<IEvent>())).Do(e => updatedList = true);
 
-            UUT.UpdateEvents(tracks[0], tracks);
+            _uut.UpdateEvents(_tracks[0], _tracks);
 
             Assert.AreEqual(expectedResult, updatedList);
             //Assert that renderer is called if the list was updated
