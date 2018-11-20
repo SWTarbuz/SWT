@@ -26,7 +26,7 @@ namespace ATMPart1
 
         private void HandleRaiseEntryDetectedEvent(object sender, TracksUpdatedEventArgs e)
         {
-            _currEvents.Add(new EnteredAirspaceEvent(e.UpdatedTrack));
+            _currEvents.Add(new EntryEvent(e.UpdatedTrack));
             OnRaiseTrackUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
         }
 

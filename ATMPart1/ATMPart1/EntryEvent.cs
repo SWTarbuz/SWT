@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace ATMPart1
 {
-    public class EnteredAirspaceEvent : IEvent
+    public class EntryEvent : IEvent
     {
         public EventTimer EndTimer { get; } //TODO: consider doing this in interface, of another way
 
         public ITrack[] InvolvedTracks { get; }
         public DateTime timeOfOccurence { get; }
 
-        public EnteredAirspaceEvent(ITrack track)
+        public EntryEvent(ITrack track)
         {
             InvolvedTracks = new ITrack[1]{track};
             timeOfOccurence = track.timestamp;
