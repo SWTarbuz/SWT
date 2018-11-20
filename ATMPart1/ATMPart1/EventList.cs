@@ -42,6 +42,7 @@ namespace ATMPart1
         private void HandleRaiseTimerOccuredEvent(object source, TimerForEventOccuredEventArgs e)
         {
             _currEvents.Remove(e.Evnt);
+            //TODO: consider informing renderer of this event not being relevant anymore.
         }
 
         #endregion
