@@ -26,11 +26,15 @@ namespace ATMUnitTest
             ITrack track1 = Substitute.For<Track>("1", 10, 10, 10, DateTime.MaxValue);
             ITrack track2 = Substitute.For<Track>("2", 10, 10, 10, DateTime.MaxValue);
 
+            
             _event = Substitute.For<SeperationEvent>(track1, track2);
+            //_event = new SeperationEvent(track1, track2);
+
             _uut.CurrEvents = Substitute.For<List<IEvent>>();
             _uut.CurrEvents.Add(_event);
         }
 
+        // TODO Test fails because substitude for seperation event is not a real seperation event so GetType() != seperationevent
         [TestCase("1", "2")]
         [TestCase("2", "1")]
         public void UpdateCurrEvent_EventExists_EventNotAdded(string tag1, string tag2)
