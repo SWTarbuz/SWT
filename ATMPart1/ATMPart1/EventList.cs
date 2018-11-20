@@ -59,7 +59,6 @@ namespace ATMPart1
             get { return _prevEvents; }
         }
 
-        //TODO: 99% sure that he didn't want us to make it update events, except for ending them. Thus further work on this isn't needed.
         public void UpdateCurrEvent(IEvent sepEvent)
         {
             bool eventExists = false;
@@ -67,7 +66,6 @@ namespace ATMPart1
             {
                 if (DoesEventExist(evnt, sepEvent))
                 {
-                    //TODO: implement update renderer when event is added/removed.
                     eventExists = true;
                     break;
                 }
