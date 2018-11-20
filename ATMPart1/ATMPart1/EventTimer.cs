@@ -10,7 +10,7 @@ namespace ATMPart1
 
         private IEvent _controlledEvent;
 
-        private EventHandler<TimerForEventOccuredEventArgs> RaiseTimerOccuredEvent;
+        public EventHandler<TimerForEventOccuredEventArgs> RaiseTimerOccuredEvent;
 
         public EventTimer (IEvent evnt, int time)
         {
@@ -45,10 +45,10 @@ namespace ATMPart1
     {
         public TimerForEventOccuredEventArgs(IEvent evnt)
         {
-            _event = evnt;
+            Evnt = evnt;
         }
 
-        public IEvent _event;
+        public IEvent Evnt;
     }
 
 }
