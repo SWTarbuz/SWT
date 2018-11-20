@@ -12,13 +12,13 @@ namespace ATMPart1
 
         private EventHandler<TimerForEventOccuredEventArgs> RaiseTimerOccuredEvent;
 
-        public EventTimer (IEvent evnt)
+        public EventTimer (IEvent evnt, int time)
         {
             _controlledEvent = evnt;
 
             _eTimer = new System.Timers.Timer();
             _eTimer.Elapsed += OnTimerElapse;
-            _eTimer.Interval = 5000;
+            _eTimer.Interval = time;
             _eTimer.Enabled = true;
         }
 

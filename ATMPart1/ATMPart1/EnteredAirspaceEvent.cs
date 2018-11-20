@@ -8,6 +8,8 @@ namespace ATMPart1
 {
     public class EnteredAirspaceEvent : IEvent
     {
+        public EventTimer EndTimer { get; } //TODO: consider doing this in interface, of another way
+
         public ITrack[] InvolvedTracks { get; }
         public DateTime timeOfOccurence { get; }
 
@@ -15,6 +17,8 @@ namespace ATMPart1
         {
             InvolvedTracks = new ITrack[1]{track};
             timeOfOccurence = track.timestamp;
+
+            EndTimer = new EventTimer(this, 5000);
         }
 
         public string Print()
