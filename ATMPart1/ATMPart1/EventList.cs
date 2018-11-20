@@ -13,11 +13,27 @@ namespace ATMPart1
 
         public event EventHandler<RaiseEventsUpdatedEventArgs> RaiseEventsUpdatedEvent;
 
-        public EventList()
+        public EventList(ITrackManager tm)
         {
             _currEvents = new List<IEvent>();
             _prevEvents = new List<IEvent>();
+
+            tm.RaiseEntryDetectedEvent += HandleRaiseEntryDetectedEvent;
+            tm.RaiseExitDetectedEvent += HandleRaiseExitDetectedEvent;
         }
+
+        #region EventHandlers
+
+        private void HandleRaiseEntryDetectedEvent(object sender, TracksUpdatedEventArgs e)
+        {
+            _currEvents.Add(new EnteredAirspaceEvent(e.UpdatedTrack));
+        }
+
+        private void HandleRaiseExitDetectedEvent(object sender, TracksUpdatedEventArgs e)
+        {
+            _currEvents.Add(new ExitEvent(e.UpdatedTrack));
+        }
+        #endregion
 
 
         public IList<IEvent> CurrEvents
