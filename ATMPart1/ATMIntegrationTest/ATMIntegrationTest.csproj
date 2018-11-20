@@ -77,8 +77,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DependencyTreeWithSteps.png" />
-    <Content Include="IntegrationStepsBU.PNG" />
+    <Content Include="DepTreeWithSteps.png" />
+    <Content Include="SchemeWithSteps.PNG" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
