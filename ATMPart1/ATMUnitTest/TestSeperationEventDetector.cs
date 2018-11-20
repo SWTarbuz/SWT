@@ -15,7 +15,6 @@ namespace ATMUnitTest
     {
         private List<ITrack> _tracks;
         private IEventList _el;
-        private ITrackRenderer _rend;
         private ITrackManager _tm;
 
         private ISeperationEventDetector _uut;
@@ -28,7 +27,6 @@ namespace ATMUnitTest
             _tracks.Add(Substitute.For<Track>("0", 0, 0, 0, DateTime.Now));
 
             _el = Substitute.For<IEventList>();
-            _rend = Substitute.For<ITrackRenderer>();
             _tm = Substitute.For<ITrackManager>();
 
             _uut = new SeperationEventDetector(_el, _tm);
