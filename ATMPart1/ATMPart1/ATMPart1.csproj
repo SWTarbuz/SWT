@@ -54,12 +54,15 @@
   <ItemGroup>
     <Compile Include="Airspace.cs" />
     <Compile Include="EntryEvent.cs" />
+    <Compile Include="EventLogger.cs" />
     <Compile Include="EventTimer.cs" />
     <Compile Include="ExitEvent.cs" />
     <Compile Include="IAirspace.cs" />
     <Compile Include="IEvent.cs" />
+    <Compile Include="IObjectTimer.cs" />
     <Compile Include="ISeperationEventDetector.cs" />
     <Compile Include="IEventList.cs" />
+    <Compile Include="ITimedObject.cs" />
     <Compile Include="ITrack.cs" />
     <Compile Include="ITrackFormatter.cs" />
     <Compile Include="ITrackManager.cs" />
