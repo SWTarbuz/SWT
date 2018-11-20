@@ -26,7 +26,10 @@ namespace ATMPart1
 
         private void HandleRaiseEntryDetectedEvent(object sender, TracksUpdatedEventArgs e)
         {
-            _currEvents.Add(new EnteredAirspaceEvent(e.UpdatedTrack));
+            var evnt = new EntryEvent(e.UpdatedTrack);
+            evnt.EndTimer.RaiseTimerOccuredEvent += HandleRaiseTimerOccuredEvent;
+
+            _currEvents.Add(evnt);
             OnRaiseTrackUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
         }
 
@@ -35,6 +38,13 @@ namespace ATMPart1
             _currEvents.Add(new ExitEvent(e.UpdatedTrack));
             OnRaiseTrackUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
         }
+
+        private void HandleRaiseTimerOccuredEvent(object source, TimerForEventOccuredEventArgs e)
+        {
+            _currEvents.Remove(e.Evnt);
+            //TODO: consider informing renderer of this event not being relevant anymore.
+        }
+
         #endregion
 
 
