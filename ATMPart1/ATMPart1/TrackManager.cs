@@ -81,7 +81,7 @@ namespace ATMPart1
         }
         protected virtual void OnRaiseEntryDetectedEvent(TracksUpdatedEventArgs e)
         {
-            EventHandler<TracksUpdatedEventArgs> handler = RaiseExitDetectedEvent;
+            EventHandler<TracksUpdatedEventArgs> handler = RaiseEntryDetectedEvent;
 
             if (handler != null)
             {
