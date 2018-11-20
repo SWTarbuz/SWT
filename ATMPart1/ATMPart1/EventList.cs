@@ -31,12 +31,17 @@ namespace ATMPart1
 
             _currEvents.Add(evnt);
             OnRaiseTrackUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
+            EventLogger.LogEventToFile(evnt.Print());
         }
 
         private void HandleRaiseExitDetectedEvent(object sender, TracksUpdatedEventArgs e)
         {
-            _currEvents.Add(new ExitEvent(e.UpdatedTrack));
+            var evnt = new ExitEvent(e.UpdatedTrack);
+            evnt.ObjectTimer.RaiseTimerOccuredEvent += HandleRaiseTimerOccuredEvent;
+
+            _currEvents.Add(evnt);
             OnRaiseTrackUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
+            EventLogger.LogEventToFile(evnt.Print());
         }
 
         private void HandleRaiseTimerOccuredEvent(object source, TimerForEventOccuredEventArgs e)
@@ -75,6 +80,7 @@ namespace ATMPart1
             {
                 _currEvents.Add(sepEvent);
                 OnRaiseTrackUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
+                EventLogger.LogEventToFile(sepEvent.Print());
             }
         }
 
