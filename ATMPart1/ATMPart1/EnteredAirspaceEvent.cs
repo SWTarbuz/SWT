@@ -17,6 +17,11 @@ namespace ATMPart1
             timeOfOccurence = track.timestamp;
         }
 
+        public string print()
+        {
+            return $"at the time of: {timeOfOccurence}, the track: {InvolvedTracks[0]}, Entered the Airspace";
+        }
+
         public void setTimeOfOccurence(DateTime time)
         {
             throw new NotImplementedException();
