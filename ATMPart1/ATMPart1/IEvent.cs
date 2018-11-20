@@ -12,7 +12,7 @@ namespace ATMPart1
         ITrack[] InvolvedTracks { get; } //make it to 2 tracks for now
         DateTime timeOfOccurence { get; }
 
-        string print();
+        string Print();
         void setTimeOfOccurence(DateTime time);
     }
 }

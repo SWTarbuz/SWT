@@ -14,7 +14,7 @@ namespace ATMPart1
         // Method for setting time of occurence - Redundant to be deleted?
 
         // setTime Function is not necessary
-        public string print()
+        public string Print()
         {
             return $"at the time of: {timeOfOccurence}, the following tracks had a seperation event occur: {InvolvedTracks[0].tag}, and {InvolvedTracks[1].tag}";
         }

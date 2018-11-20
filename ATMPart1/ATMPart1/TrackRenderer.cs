@@ -58,7 +58,7 @@ namespace ATMPart1
         {
             foreach (var evnt in currEvents)
             {
-                System.Console.WriteLine($"at the time of: {evnt.timeOfOccurence}, the following tracks had a seperation event occur: {evnt.InvolvedTracks[0].tag}, and {evnt.InvolvedTracks[1].tag}");
+                evnt.Print();
             }
         }
         #endregion
