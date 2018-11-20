@@ -70,7 +70,7 @@
     <Compile Include="TestEventTimer.cs" />
     <Compile Include="TestSeperationEvent.cs" />
     <Compile Include="TestSeperationEventDetector.cs" />
-    <Compile Include="TestSeperationEventList.cs" />
+    <Compile Include="TestEventList.cs" />
     <Compile Include="TestTrack.cs" />
     <Compile Include="TestTrackFormatter.cs" />
     <Compile Include="TestTrackManager.cs" />

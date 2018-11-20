@@ -10,7 +10,7 @@ using TransponderReceiver;
 
 namespace ATMUnitTest
 {
-    class TestSeperationEventList
+    class TestEventList
     {
         private IEventList _uut;
         private IEvent _event;
