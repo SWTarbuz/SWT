@@ -74,6 +74,7 @@
     <Compile Include="TestTrack.cs" />
     <Compile Include="TestTrackFormatter.cs" />
     <Compile Include="TestTrackManager.cs" />
+    <Compile Include="TestTrackRenderer.cs" />
     <Compile Include="TestTransponderRecieverClient.cs" />
   </ItemGroup>
   <ItemGroup>
