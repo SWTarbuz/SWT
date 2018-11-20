@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace ATMPart1
 {
-    public class SeperationEventList : IEventList
+    public class EventList : IEventList
     {
         private List<IEvent> _currEvents { get; set; }
         private List<IEvent> _prevEvents { get; set; }
 
         public event EventHandler<RaiseEventsUpdatedEventArgs> RaiseEventsUpdatedEvent;
 
-        public SeperationEventList()
+        public EventList()
         {
             _currEvents = new List<IEvent>();
             _prevEvents = new List<IEvent>();

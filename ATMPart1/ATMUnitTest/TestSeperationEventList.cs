@@ -18,7 +18,7 @@ namespace ATMUnitTest
         [SetUp]
         public void Setup()
         {
-            _uut = new SeperationEventList();
+            _uut = new EventList();
 
             ITrack track1 = Substitute.For<Track>("1", 10, 10, 10, DateTime.MaxValue);
             ITrack track2 = Substitute.For<Track>("2", 10, 10, 10, DateTime.MaxValue);

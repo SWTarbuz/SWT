@@ -20,7 +20,7 @@ namespace ATMIntegrationTest
 
         private TrackManager tm;
         private TrackFormatter tf;
-        private SeperationEventList seList;
+        private EventList seList;
 
         [SetUp]
         public void SetUp()
