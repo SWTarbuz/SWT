@@ -42,5 +42,23 @@ namespace ATMUnitTest
             System.Threading.Thread.Sleep(time+20); //Adds a little bit to ensure that the timer has time to call the event
             Assert.That(_eventsReceived, Is.EqualTo(1));
         }
+
+        //TODO: These run perfectly fine when ran alone, but when together they fail.
+        [TestCase(500)] //likely to short a time to wait.
+        [TestCase(1000)]
+        [TestCase(2000)]
+        [TestCase(5000)]
+        public void EventTimer_xTime_RaiseTimerOccuredEventNotOccuredBeforexTime(int time)
+        {
+            _uut = new EventTimer(_evnt, time);
+            _uut.RaiseTimerOccuredEvent += (o, args) =>
+            {
+                _outEvent = args.Evnt;
+                ++_eventsReceived;
+            };
+            
+            System.Threading.Thread.Sleep(time -10);
+            Assert.That(_eventsReceived, Is.EqualTo(0));
+        }
     }
 }
