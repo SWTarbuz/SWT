@@ -97,6 +97,11 @@ namespace ATMPart1
         {
             bool[] tagsMatch = new bool[2]{false, false};
 
+            // Checks if event1 is a seperation event or not. If not then return false
+            if (event1.GetType() != typeof(SeperationEvent)) return false;
+  
+
+
             if (event1.InvolvedTracks[0].tag == event2.InvolvedTracks[0].tag ||
                 event1.InvolvedTracks[0].tag == event2.InvolvedTracks[1].tag) tagsMatch[0] = true;
 
