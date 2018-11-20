@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Airspace.cs" />
     <Compile Include="EntryEvent.cs" />
+    <Compile Include="EventLogger.cs" />
     <Compile Include="EventTimer.cs" />
     <Compile Include="ExitEvent.cs" />
     <Compile Include="IAirspace.cs" />
