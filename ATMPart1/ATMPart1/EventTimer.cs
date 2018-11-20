@@ -4,13 +4,13 @@ using System.Timers;
 namespace ATMPart1
 {
     //TODO: use this in event list to remove EntryEvents and ExitEvents once they have been active for 5 seconds.
-    public class EventTimer
+    public class EventTimer : IObjectTimer
     {
         private System.Timers.Timer _eTimer;
 
         private IEvent _controlledEvent;
 
-        public EventHandler<TimerForEventOccuredEventArgs> RaiseTimerOccuredEvent;
+        public event EventHandler<TimerForEventOccuredEventArgs> RaiseTimerOccuredEvent;
 
         public EventTimer (IEvent evnt, int time)
         {

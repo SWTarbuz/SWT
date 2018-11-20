@@ -58,7 +58,7 @@ namespace ATMPart1
         {
             get { return _prevEvents; }
         }
-
+        
         public void UpdateCurrEvent(IEvent sepEvent)
         {
             bool eventExists = false;
@@ -86,7 +86,7 @@ namespace ATMPart1
         }
 
         #region Helpers
-
+        //TODO: Update to take the Entry & Exit Events into consideration.
         private bool DoesEventExist(IEvent event1, IEvent event2)
         {
             bool[] tagsMatch = new bool[2]{false, false};

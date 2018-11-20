@@ -8,7 +8,7 @@ namespace ATMPart1
 {
     public class EntryEvent : IEvent, ITimedObject
     {
-        public EventTimer ObjectTimer { get; }
+        public IObjectTimer ObjectTimer { get; }
         public ITrack[] InvolvedTracks { get; }
         public DateTime timeOfOccurence { get; }
 

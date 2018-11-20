@@ -2,6 +2,6 @@
 {
     public interface ITimedObject
     {
-        EventTimer ObjectTimer { get; }
+        IObjectTimer ObjectTimer { get; }
     }
 }
