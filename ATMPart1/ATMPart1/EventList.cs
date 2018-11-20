@@ -27,7 +27,7 @@ namespace ATMPart1
         private void HandleRaiseEntryDetectedEvent(object sender, TracksUpdatedEventArgs e)
         {
             var evnt = new EntryEvent(e.UpdatedTrack);
-            evnt.EndTimer.RaiseTimerOccuredEvent += HandleRaiseTimerOccuredEvent;
+            evnt.ObjectTimer.RaiseTimerOccuredEvent += HandleRaiseTimerOccuredEvent;
 
             _currEvents.Add(evnt);
             OnRaiseTrackUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
@@ -58,8 +58,7 @@ namespace ATMPart1
         {
             get { return _prevEvents; }
         }
-
-        //TODO: 99% sure that he didn't want us to make it update events, except for ending them. Thus further work on this isn't needed.
+        
         public void UpdateCurrEvent(IEvent sepEvent)
         {
             bool eventExists = false;
@@ -67,7 +66,6 @@ namespace ATMPart1
             {
                 if (DoesEventExist(evnt, sepEvent))
                 {
-                    //TODO: implement update renderer when event is added/removed.
                     eventExists = true;
                     break;
                 }
@@ -88,7 +86,7 @@ namespace ATMPart1
         }
 
         #region Helpers
-
+        //TODO: Update to take the Entry & Exit Events into consideration.
         private bool DoesEventExist(IEvent event1, IEvent event2)
         {
             bool[] tagsMatch = new bool[2]{false, false};

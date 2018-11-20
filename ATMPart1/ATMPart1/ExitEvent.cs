@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace ATMPart1
 {
-    public class ExitEvent : IEvent
+    public class ExitEvent : IEvent, ITimedObject
     {
+        public IObjectTimer ObjectTimer { get; }
         public ITrack[] InvolvedTracks { get; }
         public DateTime timeOfOccurence { get; }
 
@@ -15,6 +16,8 @@ namespace ATMPart1
         {
             InvolvedTracks = new ITrack[1]{track};
             timeOfOccurence = track.timestamp;
+
+            ObjectTimer = new EventTimer(this, 5000);
         }
 
         public string Print()
