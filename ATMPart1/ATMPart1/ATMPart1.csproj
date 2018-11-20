@@ -60,6 +60,7 @@
     <Compile Include="IEvent.cs" />
     <Compile Include="ISeperationEventDetector.cs" />
     <Compile Include="IEventList.cs" />
+    <Compile Include="ITimedObject.cs" />
     <Compile Include="ITrack.cs" />
     <Compile Include="ITrackFormatter.cs" />
     <Compile Include="ITrackManager.cs" />
