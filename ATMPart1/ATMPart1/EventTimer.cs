@@ -25,6 +25,7 @@ namespace ATMPart1
         private void OnTimerElapse(object source, ElapsedEventArgs e)
         {
             OnRaiseTimerOccuredEvent(new TimerForEventOccuredEventArgs(_controlledEvent));
+            _eTimer.Enabled = false;
         }
 
         #region EventHelpers
