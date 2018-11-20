@@ -70,14 +70,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="IntegrationTestBUApproach.PNG" />
-    <Content Include="IntegrationTestDependencyTree.PNG" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ATMPart1\ATMPart1.csproj">
       <Project>{3af5a6a6-a408-4924-a6b7-e20325e54d8b}</Project>
       <Name>ATMPart1</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DependencyTreeWithSteps.png" />
+    <Content Include="IntegrationStepsBU.PNG" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
