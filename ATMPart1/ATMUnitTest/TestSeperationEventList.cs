@@ -39,11 +39,19 @@ namespace ATMUnitTest
         [TestCase("2", "1")]
         public void UpdateCurrEvent_EventExists_EventNotAdded(string tag1, string tag2)
         {
-            //Arrange
-            ITrack track1 = Substitute.For<Track>(tag1, 10, 10, 10, DateTime.MinValue);
-            ITrack track2 = Substitute.For<Track>(tag2, 10, 10, 10, DateTime.MinValue);
+            //TODO: Consider if this makes sense, or if the design of the program needs to be redone
+            //Silly arrange so GetType works as expected
+            ITrack track1 = Substitute.For<Track>("1", 10, 10, 10, DateTime.MaxValue);
+            ITrack track2 = Substitute.For<Track>("2", 10, 10, 10, DateTime.MaxValue);
+            _event = new SeperationEvent(track1, track2);
+            _uut.CurrEvents = Substitute.For<List<IEvent>>();
+            _uut.CurrEvents.Add(_event);
 
-            IEvent evnt = Substitute.For<SeperationEvent>(track1, track2);
+            //Arrange
+            ITrack track3 = Substitute.For<Track>(tag1, 10, 10, 10, DateTime.MinValue);
+            ITrack track4 = Substitute.For<Track>(tag2, 10, 10, 10, DateTime.MinValue);
+
+            IEvent evnt = Substitute.For<SeperationEvent>(track3, track4);
 
             //Act
             _uut.UpdateCurrEvent(evnt);
