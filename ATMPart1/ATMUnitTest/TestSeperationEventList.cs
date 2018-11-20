@@ -14,11 +14,14 @@ namespace ATMUnitTest
     {
         private IEventList _uut;
         private IEvent _event;
+        private ITrackManager tm;
 
         [SetUp]
         public void Setup()
         {
-            _uut = new EventList();
+            tm = Substitute.For<TrackManager>();
+
+            _uut = new EventList(tm);
 
             ITrack track1 = Substitute.For<Track>("1", 10, 10, 10, DateTime.MaxValue);
             ITrack track2 = Substitute.For<Track>("2", 10, 10, 10, DateTime.MaxValue);
