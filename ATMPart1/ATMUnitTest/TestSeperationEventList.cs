@@ -108,5 +108,24 @@ namespace ATMUnitTest
             //Assert
             Assert.That(_uut.CurrEvents.Count, Is.EqualTo(0));
         }
+
+        [Test]
+        public void EndEvent_EventDoesntExists_NoChangesAreMade()
+        {
+            //Act
+            ITrack track1 = Substitute.For<Track>("3", 10, 10, 10, DateTime.MinValue);
+            ITrack track2 = Substitute.For<Track>("4", 10, 10, 10, DateTime.MinValue);
+
+            IEvent evnt = Substitute.For<SeperationEvent>(track1, track2);
+            _uut.CurrEvents.Add(evnt);
+
+            _uut.EndEvent(evnt);
+
+            //Assert
+            Assert.That(_uut.CurrEvents.Count, Is.EqualTo(1));
+        }
+
+        //TODO: Add tests of EventHandlers, as these do make a new event, and that we can test for. Or in case of the timer removes an item.
+
     }
 }
