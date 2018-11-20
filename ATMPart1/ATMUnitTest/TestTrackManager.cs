@@ -31,7 +31,7 @@ namespace ATMUnitTest
             Assert.That(tm.Tracks.ElementAt(0).altitude, Is.EqualTo(trak.altitude));
         }
 
-        [Test]
+        [Test] //TODO: Add similiar test but checking that event has been raised
         public void testHandleTrack_TrackEntersAirspace_ListCountIs1()
         {
             var time = DateTime.Now;
@@ -45,7 +45,7 @@ namespace ATMUnitTest
         }
 
         [Test]
-        public void testHandleTrack_TrackLeavesAirspace_RemovesTrack()
+        public void testHandleTrack_TrackLeavesAirspace_RemovesTrack() //TODO: Add similiar test but checking that event has been raised
         {
             var time = DateTime.Now;
             var airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 20000);
@@ -59,5 +59,8 @@ namespace ATMUnitTest
             Assert.That(tm.Tracks.Count, Is.EqualTo(0));
         }
 
+        //TODO: Add test of track being updated with new position
+        //TODO: Add test of track being out of airspace, but not in our list
+        //TODO: add test that checks that 'OnRaiseTrackUpdatedEvent' is being raised correctly.
     }
 }
