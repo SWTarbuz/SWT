@@ -10,9 +10,9 @@ namespace ATMPart1
     public interface IEvent
     {
         ITrack[] InvolvedTracks { get; set; } //make it to 2 tracks for now
-        DateTime timeOfOccurence { get; set; }
+        DateTime TimeOfOccurence { get; set; }
 
         string Print();
-        void setTimeOfOccurence(DateTime time);
+        void SetTimeOfOccurence(DateTime time);
     }
 }

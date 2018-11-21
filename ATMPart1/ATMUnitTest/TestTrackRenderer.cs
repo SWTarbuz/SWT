@@ -37,7 +37,7 @@ namespace ATMUnitTest
             var evnt = Substitute.For<IEvent>();
             evnt.InvolvedTracks = new ITrack[1]; //Can't substitute for array of ITrack
             evnt.InvolvedTracks[0] = _track;
-            evnt.timeOfOccurence = _track.timestamp;
+            evnt.TimeOfOccurence = _track.timestamp;
             _events.Add(evnt);
 
             _eventsRecieved = 0;
@@ -102,7 +102,7 @@ namespace ATMUnitTest
                 var evnt = Substitute.For<IEvent>();
                 evnt.InvolvedTracks = new ITrack[1];
                 evnt.InvolvedTracks[0] = _track;
-                evnt.timeOfOccurence = _track.timestamp;
+                evnt.TimeOfOccurence = _track.timestamp;
 
                 _events.Add(evnt);
             }
