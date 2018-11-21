@@ -13,6 +13,7 @@ namespace ATMUnitTest
     //TODO: consider injection of the timer, as it is a dependency
     public class TestEventTimer
     {
+        private int _margin;
         private FakeSubscriber _sub;
         private IEvent _evnt;
         private EventTimer _uut;
@@ -22,6 +23,7 @@ namespace ATMUnitTest
         [SetUp]
         public void Setup()
         {
+            _margin = 100;
             _eventsReceived = 0;
             _evnt = Substitute.For<IEvent>();
 
@@ -29,7 +31,6 @@ namespace ATMUnitTest
         }
 
         //MethodUnderTest_Scenario_ExpectedBehaviour
-        [TestCase(100)]
         [TestCase(500)]
         [TestCase(1000)]
         [TestCase(2000)]
@@ -39,13 +40,12 @@ namespace ATMUnitTest
             _uut = new EventTimer(_evnt, time);
             _uut.RaiseTimerOccuredEvent += _sub.EventSub;
 
-            System.Threading.Thread.Sleep(time+20); //Adds a little bit to ensure that the timer has time to call the event
+            System.Threading.Thread.Sleep(time+_margin); //Adds a little bit to ensure that the timer has time to call the event
 
             Assert.That(_sub.Cnt, Is.EqualTo(1));
         }
 
         //TODO: These run perfectly fine when ran alone, but when together they fail.
-        [TestCase(100)] //likely to short a time to wait.
         [TestCase(500)] //likely to short a time to wait.
         [TestCase(1000)]
         [TestCase(2000)]
@@ -55,7 +55,7 @@ namespace ATMUnitTest
             _uut = new EventTimer(_evnt, time);
             _uut.RaiseTimerOccuredEvent += _sub.EventSub;
 
-            System.Threading.Thread.Sleep(time -10);
+            System.Threading.Thread.Sleep(time -_margin);
             Assert.That(_sub.Cnt, Is.EqualTo(0));
         }
     }

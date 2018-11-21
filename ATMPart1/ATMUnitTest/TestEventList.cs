@@ -135,8 +135,6 @@ namespace ATMUnitTest
             //Assert
             Assert.That(_uut.CurrEvents.Count, Is.EqualTo(1));
         }
-
-        //TODO: Add tests of EventHandlers, as these do make a new event, and that we can test for. Or in case of the timer removes an item.
         
         [Test]
         public void HandleRaiseEntryDetectedEvent_EventOccured_RaiseEventsUpdatedEventOnce()
