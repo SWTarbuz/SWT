@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WrapThat.SystemBase;
+using Console = System.Console;
 
 namespace ATMPart1
 {
@@ -12,10 +13,14 @@ namespace ATMPart1
         private List<ITrack> currTracks;
         private List<IEvent> currEvents;
 
-        public TrackRenderer(ITrackManager trackManager, IEventList eventList)
+        private readonly IConsole _console;
+
+        public TrackRenderer(ITrackManager trackManager, IEventList eventList, IConsole console=null)
         {
             currTracks = new List<ITrack>();
             currEvents = new List<IEvent>();
+
+            _console = console ?? new WrapThat.SystemBase.Console(); //if null defaults to normal Console
 
             trackManager.RaiseTracksUpdatedEvent += HandleTrackUpdate;
             eventList.RaiseEventsUpdatedEvent += HandleEventUpdate;
@@ -41,7 +46,7 @@ namespace ATMPart1
 
         private void UpdateDisplay()
         {
-            Console.Clear();
+            _console.Clear();
             WriteOutEvents();
             WriteOutTracks();
         }
@@ -50,7 +55,7 @@ namespace ATMPart1
         {
             foreach (var track in currTracks)
             {
-                System.Console.WriteLine($"track named: {track.tag}, located at x : {track.xPos}, y: {track.yPos}, altitude: {track.altitude}, with air speed velocity at: {track.velocity}, course: {track.compassCourse}, as of: {track.timestamp}");
+                _console.WriteLine($"track named: {track.tag}, located at x : {track.xPos}, y: {track.yPos}, altitude: {track.altitude}, with air speed velocity at: {track.velocity}, course: {track.compassCourse}, as of: {track.timestamp}");
             }
         }
 
@@ -58,7 +63,7 @@ namespace ATMPart1
         {
             foreach (var evnt in currEvents)
             {
-                Console.WriteLine(evnt.Print());
+                _console.WriteLine(evnt.Print());
             }
         }
         #endregion

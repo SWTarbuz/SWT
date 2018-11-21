@@ -61,6 +61,9 @@
     <Reference Include="TransponderReceiver">
       <HintPath>..\TransponderReceiver.dll</HintPath>
     </Reference>
+    <Reference Include="WrapThat.System, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WrapThat.System.1.0.0\lib\WrapThat.System.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestAirspace.cs" />
