@@ -21,6 +21,7 @@ namespace ATMUnitTest
             _uut = new TrackManager();
         }
 
+        //TODO: not really sure this is the correct way of testing this, I think we should make airspace.IsWithingBounds return true/false, and use that to get coverage.
         [TestCase(90001, 10000, 500)]
         [TestCase(90000, 90001, 500)]
         [TestCase(90000, 90000, 499)]
