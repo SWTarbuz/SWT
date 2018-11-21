@@ -44,6 +44,7 @@ namespace ATMPart1
                 {
                     tracks.Add(Track); //new tag, just add it
                     OnRaiseEntryDetectedEvent(new TracksUpdatedEventArgs(tracks.ToList(), Track));
+                    OnRaiseTrackUpdatedEvent(new TracksUpdatedEventArgs(tracks.ToList(), Track));
                 }
                 
             }
@@ -56,14 +57,15 @@ namespace ATMPart1
                         
                         tracks.Remove(t);
                         OnRaiseExitDetectedEvent(new TracksUpdatedEventArgs(tracks.ToList(), Track));
+                        OnRaiseTrackUpdatedEvent(new TracksUpdatedEventArgs(tracks.ToList(), Track));
                         return;
                         
                     }
                 }
             }
 
-            //TODO: Move so we only call when a change has been made to the list.
-            OnRaiseTrackUpdatedEvent(new TracksUpdatedEventArgs(tracks.ToList(), Track));
+            //TODO: Move so we only call when a change has been made to the list. -- This has been done
+
         }
 
         #region Helpers
