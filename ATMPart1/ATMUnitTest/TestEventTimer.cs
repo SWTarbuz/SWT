@@ -31,8 +31,6 @@ namespace ATMUnitTest
         }
 
         //MethodUnderTest_Scenario_ExpectedBehaviour
-        [TestCase(500)]
-        [TestCase(1000)]
         [TestCase(2000)]
         [TestCase(5000)]
         public void EventTimer_xTime_RaiseTimerOccuredEventAfterxTime(int time)
@@ -46,8 +44,6 @@ namespace ATMUnitTest
         }
 
         //TODO: These run perfectly fine when ran alone, but when together they fail.
-        [TestCase(500)] //likely to short a time to wait.
-        [TestCase(1000)]
         [TestCase(2000)]
         [TestCase(5000)]
         public void EventTimer_xTime_RaiseTimerOccuredEventNotOccuredBeforexTime(int time)
