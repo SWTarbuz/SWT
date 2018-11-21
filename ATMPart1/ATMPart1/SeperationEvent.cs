@@ -8,8 +8,9 @@ namespace ATMPart1
 {
     public class SeperationEvent : IEvent
     {
-        public ITrack[] InvolvedTracks { get; private set; }
-        public DateTime timeOfOccurence { get; private set; }
+        //TODO make privates that these get/set to protect from tampering
+        public ITrack[] InvolvedTracks { get; set; }
+        public DateTime timeOfOccurence { get; set; }
 
         // Method for setting time of occurence - Redundant to be deleted?
 

@@ -8,9 +8,10 @@ namespace ATMPart1
 {
     public class EntryEvent : IEvent, ITimedObject
     {
+        //TODO make privates that these get/set to protect from tampering
         public IObjectTimer ObjectTimer { get; }
-        public ITrack[] InvolvedTracks { get; }
-        public DateTime timeOfOccurence { get; }
+        public ITrack[] InvolvedTracks { get; set; }
+        public DateTime timeOfOccurence { get; set; }
 
         public EntryEvent(ITrack track)
         {

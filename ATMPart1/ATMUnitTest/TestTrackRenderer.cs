@@ -17,6 +17,7 @@ namespace ATMUnitTest
         private ITrack _track;
         private List<ITrack> _tracks;
 
+        private List<IEvent> _events;
         private ITrackManager _tm;
         private IEventList _el;
         private WrapThat.SystemBase.IConsole _console;
@@ -32,25 +33,62 @@ namespace ATMUnitTest
             _tracks = Substitute.For<List<ITrack>>();
             _tracks.Add(_track);
 
+            _events = Substitute.For<List<IEvent>>();
+            var evnt = Substitute.For<IEvent>();
+            evnt.InvolvedTracks = new ITrack[1]; //Can't substitute for aray of ITrack
+            evnt.InvolvedTracks[0] = _track;
+            evnt.timeOfOccurence = _track.timestamp;
+            _events.Add(evnt);
+
             _eventsRecieved = 0;
 
             _tm = Substitute.For<ITrackManager>();
             _el = Substitute.For<IEventList>();
+            
+
             _console = Substitute.For<WrapThat.SystemBase.IConsole>();
 
             _uut = new TrackRenderer(_tm, _el, _console);
         }
 
-        //TODO: Can this even be tested? As everything is private, and it doesn't send any events out.
         [Test]
-        public void TestHandleTrackUpdate_EventSent_RecievedEvent()
+        public void TestHandleTrackUpdate_EventSent_ConsoleWritesLineAny()
         {
             TracksUpdatedEventArgs sentArgs = new TracksUpdatedEventArgs(_tracks, _track);
 
             _tm.RaiseTracksUpdatedEvent += Raise.EventWith(_tm, sentArgs);
 
             _console.Received().WriteLine(Arg.Any<string>());
-            //Assert.That(1, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void TestHandleTrackUpdate_EventSent_ConsoleWritesLineTrack()
+        {
+            TracksUpdatedEventArgs sentArgs = new TracksUpdatedEventArgs(_tracks, _track);
+
+            _tm.RaiseTracksUpdatedEvent += Raise.EventWith(_tm, sentArgs);
+
+            _console.Received().WriteLine(Arg.Is($"track named: {_track.tag}, located at x : {_track.xPos}, y: {_track.yPos}, altitude: {_track.altitude}, with air speed velocity at: {_track.velocity}, course: {_track.compassCourse}, as of: {_track.timestamp}"));
+        }
+
+        [Test]
+        public void TestHandleEventUpdate_EventSent_ConsoleWritesLineAny()
+        {
+            RaiseEventsUpdatedEventArgs args = new RaiseEventsUpdatedEventArgs(_events);
+
+            _el.RaiseEventsUpdatedEvent += Raise.EventWith(args);
+
+            _console.Received().WriteLine(Arg.Any<string>());
+        }
+
+        [Test]
+        public void TestHandleEventUpdate_EventSent_ConsoleWritesLineEvent()
+        {
+            RaiseEventsUpdatedEventArgs args = new RaiseEventsUpdatedEventArgs(_events);
+
+            _el.RaiseEventsUpdatedEvent += Raise.EventWith(args);
+
+            _console.Received().WriteLine(Arg.Is(_events[0].Print()));
         }
     }
 }
