@@ -35,7 +35,7 @@ namespace ATMUnitTest
 
             _events = Substitute.For<List<IEvent>>();
             var evnt = Substitute.For<IEvent>();
-            evnt.InvolvedTracks = new ITrack[1]; //Can't substitute for aray of ITrack
+            evnt.InvolvedTracks = new ITrack[1]; //Can't substitute for array of ITrack
             evnt.InvolvedTracks[0] = _track;
             evnt.timeOfOccurence = _track.timestamp;
             _events.Add(evnt);
@@ -91,12 +91,32 @@ namespace ATMUnitTest
             _console.Received().WriteLine(Arg.Is(_events[0].Print()));
         }
 
+        [TestCase(2)]
+        [TestCase(4)]
+        [TestCase(10)]
+        public void TestHandleEventUpdate_EventSent_ConsoleWritesLineForEveryEvent(int cnt)
+        {
+            _events = Substitute.For<List<IEvent>>();
+            for (int i = 0; i < cnt; i++)
+            {
+                var evnt = Substitute.For<IEvent>();
+                evnt.InvolvedTracks = new ITrack[1];
+                evnt.InvolvedTracks[0] = _track;
+                evnt.timeOfOccurence = _track.timestamp;
+
+                _events.Add(evnt);
+            }
+            RaiseEventsUpdatedEventArgs args = new RaiseEventsUpdatedEventArgs(_events);
+
+            _el.RaiseEventsUpdatedEvent += Raise.EventWith(args);
+
+            _console.Received(cnt).WriteLine(Arg.Any<string>());
+        }
+
         [Test]
         public void TestHandleEventUpdate_EventNotSent_ConsoleDoesntWriteAnything()
         {
             _console.DidNotReceive().WriteLine(Arg.Any<string>());
         }
-
-        //TODO: add test of multiple tracks being received.
     }
 }
