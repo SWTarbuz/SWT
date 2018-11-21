@@ -8,20 +8,21 @@ namespace ATMPart1
 {
     public class SeperationEvent : IEvent
     {
-        public ITrack[] InvolvedTracks { get; private set; }
-        public DateTime timeOfOccurence { get; private set; }
+        //TODO make privates that these get/set to protect from tampering
+        public ITrack[] InvolvedTracks { get; set; }
+        public DateTime TimeOfOccurence { get; set; }
 
         // Method for setting time of occurence - Redundant to be deleted?
 
         // setTime Function is not necessary
         public string Print()
         {
-            return $"at the time of: {timeOfOccurence}, the following tracks had a seperation event occur: {InvolvedTracks[0].tag}, and {InvolvedTracks[1].tag}";
+            return $"at the time of: {TimeOfOccurence}, the following tracks had a seperation event occur: {InvolvedTracks[0].tag}, and {InvolvedTracks[1].tag}";
         }
 
-        public void setTimeOfOccurence(DateTime time)
+        public void SetTimeOfOccurence(DateTime time)
         {
-            timeOfOccurence = time;
+            TimeOfOccurence = time;
         }
 
         public SeperationEvent(ITrack newTrack, ITrack oldTrack)
@@ -31,7 +32,7 @@ namespace ATMPart1
             if(newTrack.tag != oldTrack.tag)
             {
                 InvolvedTracks = new ITrack[2]{newTrack, oldTrack};
-                timeOfOccurence = newTrack.timestamp;
+                TimeOfOccurence = newTrack.timestamp;
             }
         }
     }

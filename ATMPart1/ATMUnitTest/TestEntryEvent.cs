@@ -27,7 +27,7 @@ namespace ATMUnitTest
 
             IEvent entryEvent = new EntryEvent(trak);
 
-            Assert.That(entryEvent.timeOfOccurence, Is.EqualTo(trak.timestamp));
+            Assert.That(entryEvent.TimeOfOccurence, Is.EqualTo(trak.timestamp));
         }
 
         [Test]
@@ -50,7 +50,7 @@ namespace ATMUnitTest
 
             IEvent entryEvent = new EntryEvent(trak);
 
-            Assert.That(entryEvent.Print, Is.EqualTo($"at the time of: {entryEvent.timeOfOccurence}, the track: {entryEvent.InvolvedTracks[0].tag}, Entered the Airspace"));
+            Assert.That(entryEvent.Print, Is.EqualTo($"at the time of: {entryEvent.TimeOfOccurence}, the track: {entryEvent.InvolvedTracks[0].tag}, Entered the Airspace"));
 
         }
     }

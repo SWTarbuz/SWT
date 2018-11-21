@@ -8,24 +8,25 @@ namespace ATMPart1
 {
     public class ExitEvent : IEvent, ITimedObject
     {
+        //TODO make privates that these get/set to protect from tampering
         public IObjectTimer ObjectTimer { get; }
-        public ITrack[] InvolvedTracks { get; }
-        public DateTime timeOfOccurence { get; }
+        public ITrack[] InvolvedTracks { get; set; }
+        public DateTime TimeOfOccurence { get; set; }
 
         public ExitEvent(ITrack track)
         {
             InvolvedTracks = new ITrack[1]{track};
-            timeOfOccurence = track.timestamp;
+            TimeOfOccurence = track.timestamp;
 
             ObjectTimer = new EventTimer(this, 5000);
         }
 
         public string Print()
         {
-            return $"at the time of: {timeOfOccurence}, the track: {InvolvedTracks[0].tag}, Left the Airspace";
+            return $"at the time of: {TimeOfOccurence}, the track: {InvolvedTracks[0].tag}, Left the Airspace";
         }
 
-        public void setTimeOfOccurence(DateTime time)
+        public void SetTimeOfOccurence(DateTime time)
         {
             throw new NotImplementedException();
         }

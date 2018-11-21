@@ -27,7 +27,7 @@ namespace ATMUnitTest
 
             IEvent exitEvent = new ExitEvent(trak);
 
-            Assert.That(exitEvent.timeOfOccurence, Is.EqualTo(trak.timestamp));
+            Assert.That(exitEvent.TimeOfOccurence, Is.EqualTo(trak.timestamp));
         }
 
         [Test]
@@ -50,7 +50,7 @@ namespace ATMUnitTest
 
             IEvent exitEvent = new ExitEvent(trak);
 
-            Assert.That(exitEvent.Print, Is.EqualTo($"at the time of: {exitEvent.timeOfOccurence}, the track: {exitEvent.InvolvedTracks[0].tag}, Left the Airspace"));
+            Assert.That(exitEvent.Print, Is.EqualTo($"at the time of: {exitEvent.TimeOfOccurence}, the track: {exitEvent.InvolvedTracks[0].tag}, Left the Airspace"));
 
         }
     }

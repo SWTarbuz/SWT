@@ -31,7 +31,7 @@ namespace ATMUnitTest
 
             var se = new SeperationEvent(nTrack, oTrack);
 
-            Assert.That(se.timeOfOccurence, Is.EqualTo(date1));
+            Assert.That(se.TimeOfOccurence, Is.EqualTo(date1));
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace ATMUnitTest
 
             var se = new SeperationEvent(nTrack, oTrack);
 
-            Assert.That(se.timeOfOccurence, Is.EqualTo(defaultTime));
+            Assert.That(se.TimeOfOccurence, Is.EqualTo(defaultTime));
         }
     }
 }
