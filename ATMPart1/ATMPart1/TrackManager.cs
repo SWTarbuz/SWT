@@ -24,17 +24,17 @@ namespace ATMPart1
         public event EventHandler<TracksUpdatedEventArgs> RaiseEntryDetectedEvent;
         public event EventHandler<TracksUpdatedEventArgs> RaiseExitDetectedEvent;
 
-        public void HandleTrack(ITrack Track,IAirspace airspace)
+        public void HandleTrack(ITrack track,IAirspace airspace)
         {
             bool check = true; //bool to make a check after list loop
 
-            if (airspace.IsWithinBounds(Track)) // check if within bounds
+            if (airspace.IsWithinBounds(track)) // check if within bounds
             {
                 foreach (var t in tracks) //loop through list
                 {
-                    if (t.tag == Track.tag) //compare new track tag to tracks already known
+                    if (t.tag == track.tag) //compare new track tag to tracks already known
                     {
-                        t.ChangePosition(Track.xPos,Track.yPos,Track.altitude,Track.timestamp); //known tag, change position
+                        t.ChangePosition(track.xPos,track.yPos,track.altitude,track.timestamp); //known tag, change position
 
                         check = false;
                     }
@@ -42,9 +42,9 @@ namespace ATMPart1
                 }
                 if (check)
                 {
-                    tracks.Add(Track); //new tag, just add it
-                    OnRaiseEntryDetectedEvent(new TracksUpdatedEventArgs(tracks.ToList(), Track));
-                    OnRaiseTrackUpdatedEvent(new TracksUpdatedEventArgs(tracks.ToList(), Track));
+                    tracks.Add(track); //new tag, just add it
+                    OnRaiseEntryDetectedEvent(new TracksUpdatedEventArgs(tracks.ToList(), track));
+                    OnRaiseTrackUpdatedEvent(new TracksUpdatedEventArgs(tracks.ToList(), track));
                 }
                 
             }
@@ -52,12 +52,12 @@ namespace ATMPart1
             {
                 foreach (var t in tracks)
                 {
-                    if (t.tag == Track.tag)
+                    if (t.tag == track.tag)
                     {
                         
                         tracks.Remove(t);
-                        OnRaiseExitDetectedEvent(new TracksUpdatedEventArgs(tracks.ToList(), Track));
-                        OnRaiseTrackUpdatedEvent(new TracksUpdatedEventArgs(tracks.ToList(), Track));
+                        OnRaiseExitDetectedEvent(new TracksUpdatedEventArgs(tracks.ToList(), track));
+                        OnRaiseTrackUpdatedEvent(new TracksUpdatedEventArgs(tracks.ToList(), track));
                         return;
                         
                     }
