@@ -18,6 +18,24 @@ namespace ATMUnitTest
 
         }
 
+        [TestCase(90001, 10000, 500)]
+        [TestCase(90000, 90001, 500)]
+        [TestCase(90000, 90000, 499)]
+        [TestCase(90000, 9999, 500)]
+        [TestCase(9999, 10000, 500)]
+        [TestCase(10000, 10000, 20001)]
+        public void testHandleTrack_TrackOutsideAirspace_NothingChanged(int x, int y, int z)
+        {
+            var time = DateTime.Now;
+            var airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 20000);
+            var trak = Substitute.For<Track>("tag", x, y, z, time);
+            var tm = new TrackManager();
+
+            tm.HandleTrack(trak, airspace);
+
+            Assert.That(tm.Tracks.Count, Is.EqualTo(0));
+        }
+
         [Test]
         public void testHandleTrack_TrackEntersAirspace_AddsTrack()
         {
@@ -109,7 +127,7 @@ namespace ATMUnitTest
 
 
         //TODO: Add test of track being updated with new position -- I think this has been done now
-        //TODO: Add test of track being out of airspace, but not in our list
+
         //TODO: add test that checks that 'OnRaiseTrackUpdatedEvent' is being raised correctly.
     }
 }
