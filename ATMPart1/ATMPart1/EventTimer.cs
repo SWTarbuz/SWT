@@ -19,6 +19,7 @@ namespace ATMPart1
             _eTimer = new System.Timers.Timer();
             _eTimer.Elapsed += OnTimerElapse;
             _eTimer.Interval = time;
+            _eTimer.AutoReset = false;
             _eTimer.Enabled = true;
         }
 
