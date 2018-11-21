@@ -90,5 +90,13 @@ namespace ATMUnitTest
 
             _console.Received().WriteLine(Arg.Is(_events[0].Print()));
         }
+
+        [Test]
+        public void TestHandleEventUpdate_EventNotSent_ConsoleDoesntWriteAnything()
+        {
+            _console.DidNotReceive().WriteLine(Arg.Any<string>());
+        }
+
+        //TODO: add test of multiple tracks being received.
     }
 }
