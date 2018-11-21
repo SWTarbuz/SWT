@@ -11,11 +11,14 @@ namespace ATMUnitTest
 {
     class TestTrackManager
     {
+        private IAirspace _airspace;
+        private ITrackManager _uut;
 
         [SetUp]
         public void Setup()
         {
-
+           _airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 20000);
+            _uut = new TrackManager();
         }
 
         [TestCase(90001, 10000, 500)]
@@ -26,40 +29,31 @@ namespace ATMUnitTest
         [TestCase(10000, 10000, 20001)]
         public void testHandleTrack_TrackOutsideAirspace_NothingChanged(int x, int y, int z)
         {
-            var time = DateTime.Now;
-            var airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 20000);
-            var trak = Substitute.For<Track>("tag", x, y, z, time);
-            var tm = new TrackManager();
+            var trak = Substitute.For<Track>("tag", x, y, z, DateTime.Now);
 
-            tm.HandleTrack(trak, airspace);
+            _uut.HandleTrack(trak, _airspace);
 
-            Assert.That(tm.Tracks.Count, Is.EqualTo(0));
+            Assert.That(_uut.Tracks.Count, Is.EqualTo(0));
         }
 
         [Test]
         public void testHandleTrack_TrackEntersAirspace_AddsTrack()
         {
-            var time = DateTime.Now;
-            var airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 20000);
-            var trak = Substitute.For<Track>("tag", 20000, 20000, 550f, time);
-            var tm = new TrackManager();
+            var trak = Substitute.For<Track>("tag", 20000, 20000, 550f, DateTime.Now);
 
-            tm.HandleTrack(trak,airspace);
+            _uut.HandleTrack(trak, _airspace);
 
-            Assert.That(tm.Tracks.ElementAt(0).altitude, Is.EqualTo(trak.altitude));
+            Assert.That(_uut.Tracks.ElementAt(0).altitude, Is.EqualTo(trak.altitude));
         }
 
         [Test]
         public void testHandleTrack_TrackEntersAirspace_EntryEventGetsRaised()
         {
-            var time = DateTime.Now;
-            var airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 20000);
-            var trak = Substitute.For<Track>("tag", 20000, 20000, 550f, time);
-            var tm = new TrackManager();
+            var trak = Substitute.For<Track>("tag", 20000, 20000, 550f, DateTime.Now);
 
             var called = false;
-            tm.RaiseEntryDetectedEvent += (sender, args) => called = true;
-            tm.HandleTrack(trak, airspace);
+            _uut.RaiseEntryDetectedEvent += (sender, args) => called = true;
+            _uut.HandleTrack(trak, _airspace);
 
             Assert.IsTrue(called);
         }
@@ -67,44 +61,35 @@ namespace ATMUnitTest
         [Test] 
         public void testHandleTrack_TrackEntersAirspace_ListCountIs1()
         {
-            var time = DateTime.Now;
-            var airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 20000);
-            var trak = Substitute.For<Track>("tag", 20000, 20000, 550, time);
-            var tm = new TrackManager();
+            var trak = Substitute.For<Track>("tag", 20000, 20000, 550, DateTime.Now);
 
-            tm.HandleTrack(trak, airspace);
+            _uut.HandleTrack(trak, _airspace);
 
-            Assert.That(tm.Tracks.Count, Is.EqualTo(1));
+            Assert.That(_uut.Tracks.Count, Is.EqualTo(1));
         }
 
         [Test]
         public void testHandleTrack_TrackLeavesAirspace_RemovesTrack() 
         {
-            var time = DateTime.Now;
-            var airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 20000);
-            var trak = Substitute.For<Track>("tag", 20000, 20000, 550, time);
-            var trak2 = Substitute.For<Track>("tag", 20000, 20000, 400, time);
-            var tm = Substitute.For<ITrackManager>();
+            var trak = Substitute.For<Track>("tag", 20000, 20000, 550, DateTime.Now);
+            var trak2 = Substitute.For<Track>("tag", 20000, 20000, 400, DateTime.Now);
 
-            tm.HandleTrack(trak, airspace);
-            tm.HandleTrack(trak2, airspace);
+            _uut.HandleTrack(trak, _airspace);
+            _uut.HandleTrack(trak2, _airspace);
 
-            Assert.That(tm.Tracks.Count, Is.EqualTo(0));
+            Assert.That(_uut.Tracks.Count, Is.EqualTo(0));
         }
 
         [Test]
         public void testHandleTrack_TrackLeavesAirspace_ExitEventGetsRaised()
         {
-            var time = DateTime.Now;
-            var airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 20000);
-            var trak = Substitute.For<Track>("tag", 20000, 20000, 550, time);
-            var trak2 = Substitute.For<Track>("tag", 20000, 20000, 400, time);
-            var tm = new TrackManager();
+            var trak = Substitute.For<Track>("tag", 20000, 20000, 550, DateTime.Now);
+            var trak2 = Substitute.For<Track>("tag", 20000, 20000, 400, DateTime.Now);
 
-            tm.HandleTrack(trak, airspace);
+            _uut.HandleTrack(trak, _airspace);
             var called = false;
-            tm.RaiseExitDetectedEvent += (sender, args) => called = true;
-            tm.HandleTrack(trak2, airspace);
+            _uut.RaiseExitDetectedEvent += (sender, args) => called = true;
+            _uut.HandleTrack(trak2, _airspace);
 
             Assert.IsTrue(called);
         }
@@ -112,17 +97,14 @@ namespace ATMUnitTest
         [Test]
         public void testHandleTrack_TrackMovesWithinAirspace_UpdatesTrack() 
         {
-            var time = new DateTime();
-            var airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 20000);
-            var trak = Substitute.For<Track>("tag", 20000, 20000, 550, time);
-            var trak2 = Substitute.For<Track>("tag", 20000, 24000, 550, DateTime.Now);
-            var tm = new TrackManager();
+            var trak = Substitute.For<Track>("tag", 20000, 20000, 550, DateTime.MaxValue);
+            var trak2 = Substitute.For<Track>("tag", 20000, 24000, 550, DateTime.MinValue);
 
-            tm.HandleTrack(trak, airspace);
-            tm.HandleTrack(trak2, airspace);
+            _uut.HandleTrack(trak, _airspace);
+            _uut.HandleTrack(trak2, _airspace);
 
-            Assert.That(tm.Tracks.Count, Is.EqualTo(1));
-            Assert.That(tm.Tracks[0].yPos, Is.EqualTo(24000));
+            Assert.That(_uut.Tracks.Count, Is.EqualTo(1));
+            Assert.That(_uut.Tracks[0].yPos, Is.EqualTo(24000));
         }
 
 
