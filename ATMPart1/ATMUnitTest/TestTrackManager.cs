@@ -59,6 +59,18 @@ namespace ATMUnitTest
             Assert.IsTrue(called);
         }
 
+        [Test]
+        public void testHandleTrack_TrackEntersAirspace_UpdateTracksEventGetsRaised()
+        {
+            var trak = Substitute.For<Track>("tag", 20000, 20000, 550f, DateTime.Now);
+
+            var called = false;
+            _uut.RaiseTracksUpdatedEvent += (sender, args) => called = true;
+            _uut.HandleTrack(trak, _airspace);
+
+            Assert.IsTrue(called);
+        }
+
         [Test] 
         public void testHandleTrack_TrackEntersAirspace_ListCountIs1()
         {
@@ -96,6 +108,20 @@ namespace ATMUnitTest
         }
 
         [Test]
+        public void testHandleTrack_TrackLeavesAirspace_UpdateTracksEventGetsRaised()
+        {
+            var trak = Substitute.For<Track>("tag", 20000, 20000, 550, DateTime.Now);
+            var trak2 = Substitute.For<Track>("tag", 20000, 20000, 400, DateTime.Now);
+
+            _uut.HandleTrack(trak, _airspace);
+            var called = false;
+            _uut.RaiseTracksUpdatedEvent += (sender, args) => called = true;
+            _uut.HandleTrack(trak2, _airspace);
+
+            Assert.IsTrue(called);
+        }
+
+        [Test]
         public void testHandleTrack_TrackMovesWithinAirspace_UpdatesTrack() 
         {
             var trak = Substitute.For<Track>("tag", 20000, 20000, 550, DateTime.MaxValue);
@@ -111,6 +137,6 @@ namespace ATMUnitTest
 
         //TODO: Add test of track being updated with new position -- I think this has been done now
 
-        //TODO: add test that checks that 'OnRaiseTrackUpdatedEvent' is being raised correctly.
+        //TODO: add test that checks that 'OnRaiseTrackUpdatedEvent' is being raised correctly. - done too
     }
 }
