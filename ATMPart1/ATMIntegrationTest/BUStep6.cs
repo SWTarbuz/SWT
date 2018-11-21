@@ -23,7 +23,7 @@ namespace ATMIntegrationTest
         [SetUp]
         public void SetUp()
         {
-            _evnt = new EntryEvent();
+            //_evnt = new EntryEvent();
 
         }
     }
