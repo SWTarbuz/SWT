@@ -23,7 +23,7 @@ namespace ATMUnitTest
         [SetUp]
         public void Setup()
         {
-            _margin = 100;
+            _margin = 500;
             _eventsReceived = 0;
             _evnt = Substitute.For<IEvent>();
 
