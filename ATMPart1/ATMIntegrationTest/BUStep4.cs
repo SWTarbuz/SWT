@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace ATMIntegrationTest
 {
     [TestFixture]
-    public class BUStep1
+    public class BUStep4
     {
 
         private Track track;

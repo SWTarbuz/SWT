@@ -63,9 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BUStep1.cs" />
-    <Compile Include="BUStep2.cs" />
-    <Compile Include="BUStep3.cs" />
+    <Compile Include="BUStep4.cs" />
+    <Compile Include="BUStep5.cs" />
+    <Compile Include="BUStep6.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -78,8 +78,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DepTreeWithSteps.png" />
-    <Content Include="SchemeWithSteps.PNG" />
+    <Content Include="DTWithSteps.png" />
+    <Content Include="IntagrationSteps.PNG" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
