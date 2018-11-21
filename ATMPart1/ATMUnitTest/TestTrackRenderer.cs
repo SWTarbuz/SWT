@@ -19,6 +19,7 @@ namespace ATMUnitTest
 
         private ITrackManager _tm;
         private IEventList _el;
+        private WrapThat.SystemBase.IConsole _console;
         private ITrackRenderer _uut;
 
         private int _eventsRecieved;
@@ -35,19 +36,21 @@ namespace ATMUnitTest
 
             _tm = Substitute.For<ITrackManager>();
             _el = Substitute.For<IEventList>();
-            _uut = new TrackRenderer(_tm, _el);
+            _console = Substitute.For<WrapThat.SystemBase.IConsole>();
+
+            _uut = new TrackRenderer(_tm, _el, _console);
         }
 
         //TODO: Can this even be tested? As everything is private, and it doesn't send any events out.
-        //[Test]
-        //public void TestHandleTrackUpdate_EventSent_RecievedEvent()
-        //{
-        //    TracksUpdatedEventArgs sentArgs = new TracksUpdatedEventArgs(_tracks, _track);
+        [Test]
+        public void TestHandleTrackUpdate_EventSent_RecievedEvent()
+        {
+            TracksUpdatedEventArgs sentArgs = new TracksUpdatedEventArgs(_tracks, _track);
 
-        //    _tm.RaiseTracksUpdatedEvent += Raise.EventWith(_tm, sentArgs);
+            _tm.RaiseTracksUpdatedEvent += Raise.EventWith(_tm, sentArgs);
 
-            
-        //    Assert.That();
-        //}
+            _console.Received().WriteLine(Arg.Any<string>());
+            //Assert.That(1, Is.EqualTo(1));
+        }
     }
 }
