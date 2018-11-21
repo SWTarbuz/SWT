@@ -32,14 +32,14 @@ namespace ATMPart1
         }
 
         // Constructor for Airspace
-        public Airspace(int SouthBounds_, int EastBounds_, int WestBounds_, int NorthBounds_, int LowerAltitudeBound_, int UpperAltitudeBound_)
+        public Airspace(int southBounds, int eastBounds, int westBounds, int northBounds, int lowerAltitudeBound, int upperAltitudeBound)
         {
-            SouthBounds = SouthBounds_;
-            EastBounds = EastBounds_;
-            WestBounds = WestBounds_;
-            NorthBounds = NorthBounds_;
-            LowerAltitudeBound = LowerAltitudeBound_;
-            UpperAltitudeBound = UpperAltitudeBound_;
+            SouthBounds = southBounds;
+            EastBounds = eastBounds;
+            WestBounds = westBounds;
+            NorthBounds = northBounds;
+            LowerAltitudeBound = lowerAltitudeBound;
+            UpperAltitudeBound = upperAltitudeBound;
         }
 
     }
