@@ -65,6 +65,7 @@ namespace ATMPart1
                     }
                 }
             }
+            OnRaiseTrackUpdatedEvent(new TracksUpdatedEventArgs(tracks.ToList(), track));
         }
 
         #region Helpers

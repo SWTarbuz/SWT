@@ -30,8 +30,7 @@ namespace ATMPart1
         }
 
         public void ReceiverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
-        {
-            // saves and updates for each recieved track/dataset
+        {            
             foreach (var data in e.TransponderData)
             {
                 var track = _formatter.RecieveTrack(data);
