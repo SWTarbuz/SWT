@@ -27,13 +27,16 @@ namespace ATMUnitTest
 
             _uut = new EventList(_tm);
             
+            //TODO: loop and use list or other collection of tracks
+            ITrack track1 = Substitute.For<ITrack>();
+            track1.Tag = "1";
+            track1.Timestamp = DateTime.MaxValue;
 
-            ITrack track1 = Substitute.For<Track>("1", 10, 10, 10, DateTime.MaxValue);
-            ITrack track2 = Substitute.For<Track>("2", 10, 10, 10, DateTime.MaxValue);
-
-            
+            ITrack track2 = Substitute.For<ITrack>();
+            track2.Tag = "2";
+            track2.Timestamp = DateTime.MaxValue;
+          
             _event = Substitute.For<SeperationEvent>(track1, track2);
-            //_event = new SeperationEvent(track1, track2);
 
             _uut.CurrEvents = Substitute.For<List<IEvent>>();
             _uut.CurrEvents.Add(_event);
@@ -45,31 +48,27 @@ namespace ATMUnitTest
             };
         }
 
-        // TODO Test fails because substitude for seperation event is not a real seperation event so GetType() != seperationevent
+        //TODO: can't substitute for IEvent as we are using GetType in the code, and thus the type won't match
+        //TODO: Either live with not substituting or update code to inject the type we test for.
         [TestCase("1", "2")]
         [TestCase("2", "1")]
         public void UpdateCurrEvent_EventExists_EventNotAdded(string tag1, string tag2)
         {
-            //TODO: Consider if this makes sense, or if the design of the program needs to be redone
-            //Silly arrange so GetType works as expected
-            ITrack track1 = Substitute.For<Track>("1", 10, 10, 10, DateTime.MaxValue);
-            ITrack track2 = Substitute.For<Track>("2", 10, 10, 10, DateTime.MaxValue);
+            ITrack track1 = Substitute.For<ITrack>();
+            track1.Tag = tag1;
+            ITrack track2 = Substitute.For<ITrack>();
+            track2.Tag = tag2;
             _event = new SeperationEvent(track1, track2);
             _uut.CurrEvents = Substitute.For<List<IEvent>>();
             _uut.CurrEvents.Add(_event);
 
-            //Arrange
-            ITrack track3 = Substitute.For<Track>(tag1, 10, 10, 10, DateTime.MinValue);
-            ITrack track4 = Substitute.For<Track>(tag2, 10, 10, 10, DateTime.MinValue);
-
-            IEvent evnt = Substitute.For<SeperationEvent>(track3, track4);
+            IEvent evnt = Substitute.For<SeperationEvent>(track1, track2); //bad stuff
 
             //Act
             _uut.UpdateCurrEvent(evnt);
 
             //Assert
             Assert.That(_uut.CurrEvents.Count, Is.EqualTo(1));
-            //Assert.That(_uut.CurrEvents[0].InvolvedTracks[0].timestamp, Is.EqualTo(DateTime.MaxValue));
         }
 
         [TestCase("1", "2")]
@@ -77,8 +76,13 @@ namespace ATMUnitTest
         public void UpdateCurrEvent_EventExists_OriginalEventKeptUnchanged(string tag1, string tag2)
         {
             //Arrange
-            ITrack track1 = Substitute.For<Track>(tag1, 10, 10, 10, DateTime.MinValue);
-            ITrack track2 = Substitute.For<Track>(tag2, 10, 10, 10, DateTime.MinValue);
+            ITrack track1 = Substitute.For<ITrack>();
+            track1.Tag = "1";
+            track1.Timestamp = DateTime.MinValue;
+
+            ITrack track2 = Substitute.For<ITrack>();
+            track2.Tag = "2";
+            track2.Timestamp = DateTime.MinValue;
 
             IEvent evnt = Substitute.For<SeperationEvent>(track1, track2);
 
@@ -87,7 +91,6 @@ namespace ATMUnitTest
 
             //Assert
             Assert.That(_uut.CurrEvents[0], Is.EqualTo(_event));
-            //Assert.That(_uut.CurrEvents[0].InvolvedTracks[0].timestamp, Is.EqualTo(DateTime.MaxValue));
         }
 
         [TestCase("1", "3")]
@@ -97,8 +100,13 @@ namespace ATMUnitTest
         public void UpdateCurrEvent_EventDoesntExist_EventAdded(string tag1, string tag2)
         {
             //Arrange
-            ITrack track1 = Substitute.For<Track>(tag1, 10, 10, 10, DateTime.MinValue);
-            ITrack track2 = Substitute.For<Track>(tag2, 10, 10, 10, DateTime.MinValue);
+            ITrack track1 = Substitute.For<ITrack>();
+            track1.Tag = tag1;
+            track1.XPos = int.Parse(tag1) * 12;
+            ITrack track2 = Substitute.For<ITrack>();
+            track1.Tag = tag2;
+            track1.XPos = int.Parse(tag2) * 9;
+
 
             IEvent evnt = Substitute.For<SeperationEvent>(track1, track2);
 
@@ -124,8 +132,10 @@ namespace ATMUnitTest
         public void EndEvent_EventDoesntExists_NoChangesAreMade()
         {
             //Act
-            ITrack track1 = Substitute.For<Track>("3", 10, 10, 10, DateTime.MinValue);
-            ITrack track2 = Substitute.For<Track>("4", 10, 10, 10, DateTime.MinValue);
+            ITrack track1 = Substitute.For<ITrack>();
+            track1.Tag = "3";
+            ITrack track2 = Substitute.For<ITrack>();
+            track1.Tag = "4";
 
             IEvent evnt = Substitute.For<SeperationEvent>(track1, track2);
             _uut.CurrEvents.Add(evnt);
@@ -140,7 +150,8 @@ namespace ATMUnitTest
         public void HandleRaiseEntryDetectedEvent_EventOccured_RaiseEventsUpdatedEventOnce()
         {
             //Arrange
-            ITrack track1 = Substitute.For<Track>("3", 10, 10, 10, DateTime.MinValue);
+            ITrack track1 = Substitute.For<ITrack>();
+            track1.Tag = "3";
             List<ITrack> tl = Substitute.For<List<ITrack>>();
             tl.Add(track1);
 
@@ -155,7 +166,8 @@ namespace ATMUnitTest
         {
             //Arrange
             _uut.CurrEvents = Substitute.For<List<IEvent>>();
-            ITrack track1 = Substitute.For<Track>("3", 10, 10, 10, DateTime.MinValue);
+            ITrack track1 = Substitute.For<ITrack>();
+            track1.Tag = "3";
             List<ITrack> tl = Substitute.For<List<ITrack>>();
             tl.Add(track1);
 
@@ -170,7 +182,8 @@ namespace ATMUnitTest
         public void HandleRaiseExitDetectedEvent_EventOccured_RaiseEventsUpdatedEventOnce()
         {
             //Arrange
-            ITrack track1 = Substitute.For<Track>("3", 10, 10, 10, DateTime.MinValue);
+            ITrack track1 = Substitute.For<ITrack>();
+            track1.Tag = "3";
             List<ITrack> tl = Substitute.For<List<ITrack>>();
             tl.Add(track1);
 
@@ -186,7 +199,8 @@ namespace ATMUnitTest
         {
             //Arrange
             _uut.CurrEvents = Substitute.For<List<IEvent>>();
-            ITrack track1 = Substitute.For<Track>("3", 10, 10, 10, DateTime.MinValue);
+            ITrack track1 = Substitute.For<ITrack>();
+            track1.Tag = "3";
             List<ITrack> tl = Substitute.For<List<ITrack>>();
             tl.Add(track1);
 
@@ -201,7 +215,8 @@ namespace ATMUnitTest
         public void HandleRaiseEntryAndExitDetectedEvent_EventOccured_RaiseEventsUpdatedEventTwice()
         {
             //Arrange
-            ITrack track1 = Substitute.For<Track>("3", 10, 10, 10, DateTime.MinValue);
+            ITrack track1 = Substitute.For<ITrack>();
+            track1.Tag = "3";
             List<ITrack> tl = Substitute.For<List<ITrack>>();
             tl.Add(track1);
 

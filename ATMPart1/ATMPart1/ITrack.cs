@@ -8,7 +8,7 @@ namespace ATMPart1
 {
     public interface ITrack
     {
-        string Tag { get; }
+        string Tag { get; set; }
         float XPos { get; set; }
         float YPos { get; set; }
         float Altitude { get; set; }
