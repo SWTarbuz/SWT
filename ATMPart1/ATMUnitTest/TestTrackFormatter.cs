@@ -10,11 +10,12 @@ namespace ATMUnitTest
 {
     class TestTrackFormatter
     {
+        private ITrackFormatter _uut;
 
         [SetUp]
         public void Setup()
         {
-
+            _uut = new TrackFormatter();
         }
 
         [Test]
@@ -25,10 +26,8 @@ namespace ATMUnitTest
             string[] formats = { "yyyyMMddHHmmssfff" };
             var time = DateTime.ParseExact("20171212200012250", formats[0], CultureInfo.CurrentCulture); ;
 
-            var trackFormatter = new TrackFormatter();
-
             //Act
-            var res = trackFormatter.RecieveTrack(data);
+            var res = _uut.RecieveTrack(data);
 
             Assert.That(res.Timestamp, Is.EqualTo(time));
         }
@@ -39,10 +38,8 @@ namespace ATMUnitTest
             //Arrange
             var data = "tag;3.7;2000.5;5000;20171212200012250";
 
-            var trackFormatter = new TrackFormatter();
-
             //Act
-            var res = trackFormatter.RecieveTrack(data);
+            var res = _uut.RecieveTrack(data);
 
             Assert.That(res.Tag, Is.EqualTo("tag"));
         }
@@ -53,10 +50,7 @@ namespace ATMUnitTest
             //Arrange
             var data = "tag;3.7;2000.5;5000;20171212200012250;forMeget";
 
-            var trackFormatter = new TrackFormatter();
-
-
-            Assert.Throws<ArgumentOutOfRangeException>(() => trackFormatter.RecieveTrack(data));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _uut.RecieveTrack(data));
         }
 
         [Test]
@@ -65,10 +59,7 @@ namespace ATMUnitTest
             //Arrange
             var data = "tag;3.7;2000.5;5000";
 
-            var trackFormatter = new TrackFormatter();
-
-
-            Assert.Throws<ArgumentOutOfRangeException>(() => trackFormatter.RecieveTrack(data));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _uut.RecieveTrack(data));
         }
 
         //technically really just a test of the dateTime class, as this is the one throwing the exception
@@ -83,10 +74,7 @@ namespace ATMUnitTest
             //Arrange
             var data = String.Concat("tag;3.7;2000.5;5000;", dateString);
 
-            var trackFormatter = new TrackFormatter();
-
-
-            Assert.Throws<FormatException>(() => trackFormatter.RecieveTrack(data));
+            Assert.Throws<FormatException>(() => _uut.RecieveTrack(data));
         }
     }
 }
