@@ -16,14 +16,14 @@ namespace ATMPart1
         public EntryEvent(ITrack track)
         {
             InvolvedTracks = new ITrack[1]{track};
-            TimeOfOccurence = track.timestamp;
+            TimeOfOccurence = track.Timestamp;
 
             ObjectTimer = new EventTimer(this, 5000);
         }
 
         public string Print()
         {
-            return $"at the time of: {TimeOfOccurence}, the track: {InvolvedTracks[0].tag}, Entered the Airspace";
+            return $"at the time of: {TimeOfOccurence}, the track: {InvolvedTracks[0].Tag}, Entered the Airspace";
         }
 
         public void SetTimeOfOccurence(DateTime time)

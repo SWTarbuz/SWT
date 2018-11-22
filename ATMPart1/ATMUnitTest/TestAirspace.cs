@@ -29,9 +29,9 @@ namespace ATMUnitTest
         public void TestWithinBounds_TrackWithinBounds_ReturnsTrue(int x, int y, int z)
         {         
             var track = Substitute.For<ITrack>();
-            track.xPos = x;
-            track.yPos = y;
-            track.altitude = z;
+            track.XPos = x;
+            track.YPos = y;
+            track.Altitude = z;
 
             Assert.That(_uut.IsWithinBounds(track), Is.EqualTo(true));
         }
@@ -46,9 +46,9 @@ namespace ATMUnitTest
         public void TestWithinBounds_TrackOutsideBounds_ReturnsFalse(int x, int y, int z)
         {
             var track = Substitute.For<ITrack>();
-            track.xPos = x;
-            track.yPos = y;
-            track.altitude = z;
+            track.XPos = x;
+            track.YPos = y;
+            track.Altitude = z;
 
             Assert.That(_uut.IsWithinBounds(track), Is.EqualTo(false));
         }

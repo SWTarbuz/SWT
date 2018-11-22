@@ -33,7 +33,7 @@ namespace ATMPart1
             {
                 IEvent detectedEvent = null;
 
-                if (updatedTrack.tag != track.tag) detectedEvent = CompareTracks(updatedTrack, track);
+                if (updatedTrack.Tag != track.Tag) detectedEvent = CompareTracks(updatedTrack, track);
 
                 if (detectedEvent != null)
                 {
@@ -48,10 +48,10 @@ namespace ATMPart1
         // Method for comparing tracks
         private IEvent CompareTracks(ITrack newTrack, ITrack oldTrack)
         {
-            var newXY = Math.Sqrt((Math.Pow(newTrack.xPos, 2)) + (Math.Pow(newTrack.yPos, 2)));
-            var oldXY = Math.Sqrt((Math.Pow(oldTrack.xPos, 2)) + (Math.Pow(oldTrack.yPos, 2)));
+            var newXY = Math.Sqrt((Math.Pow(newTrack.XPos, 2)) + (Math.Pow(newTrack.YPos, 2)));
+            var oldXY = Math.Sqrt((Math.Pow(oldTrack.XPos, 2)) + (Math.Pow(oldTrack.YPos, 2)));
 
-            if (Math.Abs(newXY - oldXY) < 5000 && Math.Abs(newTrack.altitude - oldTrack.altitude) < 300)
+            if (Math.Abs(newXY - oldXY) < 5000 && Math.Abs(newTrack.Altitude - oldTrack.Altitude) < 300)
             {
                 return new SeperationEvent(newTrack, oldTrack);
             }

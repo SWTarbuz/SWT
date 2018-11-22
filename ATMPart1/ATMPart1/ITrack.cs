@@ -8,14 +8,14 @@ namespace ATMPart1
 {
     public interface ITrack
     {
-        string tag { get; }
-        float xPos { get; set; }
-        float yPos { get; set; }
-        float altitude { get; set; }
-        float velocity { get; }
-        int compassCourse { get; }
+        string Tag { get; }
+        float XPos { get; set; }
+        float YPos { get; set; }
+        float Altitude { get; set; }
+        float Velocity { get; }
+        int CompassCourse { get; }
 
-        DateTime timestamp { get; }
+        DateTime Timestamp { get; }
 
 
         void ChangePosition(float x, float y, float alt, DateTime time);

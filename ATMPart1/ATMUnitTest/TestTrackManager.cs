@@ -44,7 +44,7 @@ namespace ATMUnitTest
 
             _uut.HandleTrack(trak, _airspace);
 
-            Assert.That(_uut.Tracks.ElementAt(0).altitude, Is.EqualTo(trak.altitude));
+            Assert.That(_uut.Tracks.ElementAt(0).Altitude, Is.EqualTo(trak.Altitude));
         }
 
         [Test]
@@ -131,7 +131,7 @@ namespace ATMUnitTest
             _uut.HandleTrack(trak2, _airspace);
 
             Assert.That(_uut.Tracks.Count, Is.EqualTo(1));
-            Assert.That(_uut.Tracks[0].yPos, Is.EqualTo(24000));
+            Assert.That(_uut.Tracks[0].YPos, Is.EqualTo(24000));
         }
 
 

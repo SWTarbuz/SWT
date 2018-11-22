@@ -30,7 +30,7 @@ namespace ATMUnitTest
             //Act
             var res = trackFormatter.RecieveTrack(data);
 
-            Assert.That(res.timestamp, Is.EqualTo(time));
+            Assert.That(res.Timestamp, Is.EqualTo(time));
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace ATMUnitTest
             //Act
             var res = trackFormatter.RecieveTrack(data);
 
-            Assert.That(res.tag, Is.EqualTo("tag"));
+            Assert.That(res.Tag, Is.EqualTo("tag"));
         }
 
         [Test]

@@ -17,7 +17,7 @@ namespace ATMPart1
         // setTime Function is not necessary
         public string Print()
         {
-            return $"at the time of: {TimeOfOccurence}, the following tracks had a seperation event occur: {InvolvedTracks[0].tag}, and {InvolvedTracks[1].tag}";
+            return $"at the time of: {TimeOfOccurence}, the following tracks had a seperation event occur: {InvolvedTracks[0].Tag}, and {InvolvedTracks[1].Tag}";
         }
 
         public void SetTimeOfOccurence(DateTime time)
@@ -29,10 +29,10 @@ namespace ATMPart1
         {
             //TODO: add something to ensure that the tracks can't be the same / have the same tag.
             //Think it is fixed by encapsulating with an If statement
-            if(newTrack.tag != oldTrack.tag)
+            if(newTrack.Tag != oldTrack.Tag)
             {
                 InvolvedTracks = new ITrack[2]{newTrack, oldTrack};
-                TimeOfOccurence = newTrack.timestamp;
+                TimeOfOccurence = newTrack.Timestamp;
             }
         }
     }

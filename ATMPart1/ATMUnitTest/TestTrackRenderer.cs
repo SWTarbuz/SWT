@@ -37,7 +37,7 @@ namespace ATMUnitTest
             var evnt = Substitute.For<IEvent>();
             evnt.InvolvedTracks = new ITrack[1]; //Can't substitute for array of ITrack
             evnt.InvolvedTracks[0] = _track;
-            evnt.TimeOfOccurence = _track.timestamp;
+            evnt.TimeOfOccurence = _track.Timestamp;
             _events.Add(evnt);
 
             _eventsRecieved = 0;
@@ -68,7 +68,7 @@ namespace ATMUnitTest
 
             _tm.RaiseTracksUpdatedEvent += Raise.EventWith(_tm, sentArgs);
 
-            _console.Received().WriteLine(Arg.Is($"track named: {_track.tag}, located at x : {_track.xPos}, y: {_track.yPos}, altitude: {_track.altitude}, with air speed velocity at: {_track.velocity}, course: {_track.compassCourse}, as of: {_track.timestamp}"));
+            _console.Received().WriteLine(Arg.Is($"track named: {_track.Tag}, located at x : {_track.XPos}, y: {_track.YPos}, altitude: {_track.Altitude}, with air speed velocity at: {_track.Velocity}, course: {_track.CompassCourse}, as of: {_track.Timestamp}"));
         }
 
         [Test]
@@ -102,7 +102,7 @@ namespace ATMUnitTest
                 var evnt = Substitute.For<IEvent>();
                 evnt.InvolvedTracks = new ITrack[1];
                 evnt.InvolvedTracks[0] = _track;
-                evnt.TimeOfOccurence = _track.timestamp;
+                evnt.TimeOfOccurence = _track.Timestamp;
 
                 _events.Add(evnt);
             }

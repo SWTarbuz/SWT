@@ -19,9 +19,9 @@ namespace ATMPart1
         // Checks if within altitude upper and lower bounds
         public bool IsWithinBounds(ITrack track)
         {
-            if (track.xPos >= WestBounds && track.xPos <= EastBounds && track.yPos >= SouthBounds &&
-                track.yPos <= NorthBounds && track.altitude >= LowerAltitudeBound &&
-                track.altitude <= UpperAltitudeBound)
+            if (track.XPos >= WestBounds && track.XPos <= EastBounds && track.YPos >= SouthBounds &&
+                track.YPos <= NorthBounds && track.Altitude >= LowerAltitudeBound &&
+                track.Altitude <= UpperAltitudeBound)
             {
                 return true;
             }

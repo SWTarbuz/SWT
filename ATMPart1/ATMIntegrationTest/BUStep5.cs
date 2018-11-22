@@ -37,7 +37,7 @@ namespace ATMIntegrationTest
             //Act  
             track = (Track)tf.RecieveTrack(data);
 
-            Assert.That(track.timestamp, Is.EqualTo(time));
+            Assert.That(track.Timestamp, Is.EqualTo(time));
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace ATMIntegrationTest
             //Act
             track = (Track)tf.RecieveTrack(data);
 
-            Assert.That(track.tag, Is.EqualTo("tag"));
+            Assert.That(track.Tag, Is.EqualTo("tag"));
         }
 
 

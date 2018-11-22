@@ -16,14 +16,14 @@ namespace ATMPart1
         public ExitEvent(ITrack track)
         {
             InvolvedTracks = new ITrack[1]{track};
-            TimeOfOccurence = track.timestamp;
+            TimeOfOccurence = track.Timestamp;
 
             ObjectTimer = new EventTimer(this, 5000);
         }
 
         public string Print()
         {
-            return $"at the time of: {TimeOfOccurence}, the track: {InvolvedTracks[0].tag}, Left the Airspace";
+            return $"at the time of: {TimeOfOccurence}, the track: {InvolvedTracks[0].Tag}, Left the Airspace";
         }
 
         public void SetTimeOfOccurence(DateTime time)

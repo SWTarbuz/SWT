@@ -102,11 +102,11 @@ namespace ATMPart1
   
 
 
-            if (event1.InvolvedTracks[0].tag == event2.InvolvedTracks[0].tag ||
-                event1.InvolvedTracks[0].tag == event2.InvolvedTracks[1].tag) tagsMatch[0] = true;
+            if (event1.InvolvedTracks[0].Tag == event2.InvolvedTracks[0].Tag ||
+                event1.InvolvedTracks[0].Tag == event2.InvolvedTracks[1].Tag) tagsMatch[0] = true;
 
-            if (event1.InvolvedTracks[1].tag == event2.InvolvedTracks[0].tag ||
-                event1.InvolvedTracks[1].tag == event2.InvolvedTracks[1].tag) tagsMatch[1] = true;
+            if (event1.InvolvedTracks[1].Tag == event2.InvolvedTracks[0].Tag ||
+                event1.InvolvedTracks[1].Tag == event2.InvolvedTracks[1].Tag) tagsMatch[1] = true;
 
             return tagsMatch[0] & tagsMatch[1];
         }

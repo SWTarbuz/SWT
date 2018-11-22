@@ -55,7 +55,7 @@ namespace ATMPart1
         {
             foreach (var track in _currTracks)
             {
-                _console.WriteLine($"track named: {track.tag}, located at x : {track.xPos}, y: {track.yPos}, altitude: {track.altitude}, with air speed velocity at: {track.velocity}, course: {track.compassCourse}, as of: {track.timestamp}");
+                _console.WriteLine($"track named: {track.Tag}, located at x : {track.XPos}, y: {track.YPos}, altitude: {track.Altitude}, with air speed velocity at: {track.Velocity}, course: {track.CompassCourse}, as of: {track.Timestamp}");
             }
         }
 

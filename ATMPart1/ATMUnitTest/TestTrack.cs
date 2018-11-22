@@ -45,7 +45,7 @@ namespace ATMUnitTest
 
             UUT.ChangePosition(dX, dY, 0, time); //act
 
-            Assert.That(UUT.compassCourse, Is.EqualTo(expectedResult));
+            Assert.That(UUT.CompassCourse, Is.EqualTo(expectedResult));
 
         }
 
@@ -70,7 +70,7 @@ namespace ATMUnitTest
             UUT.ChangePosition(newX, newY, newZ, time2); //act
 
             //rounds to 6 decimals to ensure that the result of the test isn't a false negative due to rounding differences
-            Assert.That(Math.Round(UUT.velocity, 6), Is.EqualTo(Math.Round(expectedResult, 6)));
+            Assert.That(Math.Round(UUT.Velocity, 6), Is.EqualTo(Math.Round(expectedResult, 6)));
         }
 
         [Test]

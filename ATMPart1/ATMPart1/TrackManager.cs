@@ -32,9 +32,9 @@ namespace ATMPart1
             {
                 foreach (var t in tracks) //loop through list
                 {
-                    if (t.tag == track.tag) //compare new track tag to tracks already known
+                    if (t.Tag == track.Tag) //compare new track tag to tracks already known
                     {
-                        t.ChangePosition(track.xPos,track.yPos,track.altitude,track.timestamp); //known tag, change position
+                        t.ChangePosition(track.XPos,track.YPos,track.Altitude,track.Timestamp); //known tag, change position
 
                         check = false;
                     }
@@ -52,7 +52,7 @@ namespace ATMPart1
             {
                 foreach (var t in tracks)
                 {
-                    if (t.tag == track.tag)
+                    if (t.Tag == track.Tag)
                     {
                         
                         tracks.Remove(t);
