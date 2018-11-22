@@ -69,6 +69,7 @@
     <Compile Include="BUStep4.cs" />
     <Compile Include="BUStep5.cs" />
     <Compile Include="BUStep6.cs" />
+    <Compile Include="BUStep7.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
