@@ -16,6 +16,8 @@ namespace ATMPart1
         /// <returns></returns>
         public ITrack RecieveTrack(string data)
         {
+            IFormatProvider format = new NumberFormatInfo();
+
             string[] tokens;
             char[] separators = { ';' };
             string[] formats = {"yyyyMMddHHmmssfff"};
@@ -26,11 +28,9 @@ namespace ATMPart1
                 throw new ArgumentOutOfRangeException(nameof(data), tokens.Length, "data contains more or less than 5 strings");
             }
 
-
             var time = DateTime.ParseExact(tokens[4], formats[0], CultureInfo.CurrentCulture); //maybe this isn't the right way of parsing it
-          
 
-            var track = new Track(tokens[0], float.Parse(tokens[1]), float.Parse(tokens[2]), float.Parse(tokens[3]), time);
+            var track = new Track(tokens[0], float.Parse(tokens[1], CultureInfo.InvariantCulture), float.Parse(tokens[2], CultureInfo.InvariantCulture), float.Parse(tokens[3], CultureInfo.InvariantCulture), time);
             return track;
         }
     }
