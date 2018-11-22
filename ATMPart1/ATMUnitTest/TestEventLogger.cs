@@ -16,8 +16,6 @@ namespace ATMUnitTest
 {
     public class TestEventLogger
     {
-        private TextWriter _writer;
-
         [SetUp]
         public void Setup()
         {
