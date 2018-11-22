@@ -23,6 +23,7 @@ namespace ATMPart1
         public static void LogEventToFile(string eventToLog)
         {
             Writer.WriteLine(eventToLog);
+            Writer.Flush();
         }
     }
 }
