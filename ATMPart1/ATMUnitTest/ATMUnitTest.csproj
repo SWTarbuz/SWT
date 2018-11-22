@@ -69,6 +69,7 @@
     <Compile Include="TestAirspace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEntryEvent.cs" />
+    <Compile Include="TestEventLogger.cs" />
     <Compile Include="TestExitEvent.cs" />
     <Compile Include="TestEventTimer.cs" />
     <Compile Include="TestSeperationEvent.cs" />
