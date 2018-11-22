@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BUStep1.cs" />
     <Compile Include="BUStep4.cs" />
     <Compile Include="BUStep5.cs" />
     <Compile Include="BUStep6.cs" />
