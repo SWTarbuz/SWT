@@ -15,36 +15,40 @@ namespace ATMUnitTest
     class TestSeperationEvent
     {
 
+        private ITrack _newTrack;
+        private ITrack _oldTrack;
+
+
         [SetUp]
         public void Setup()
         {
+            _newTrack = Substitute.For<ITrack>();
+            _newTrack.Timestamp = new DateTime(2013, 6, 1, 12, 32, 40);
+
+            _oldTrack = Substitute.For<ITrack>();
+            _oldTrack.Timestamp = new DateTime(2013, 6, 1, 12, 32, 30);
 
         }
 
         [Test]
         public void TestSeperationEvent_SeperationEventOccurs_SetsToExpectedTime()
         {
-            var time = DateTime.Now;
-            DateTime date1 = new DateTime(2013, 6, 1, 12, 32, 30);
-            var nTrack = Substitute.For<Track>("B342", 20000, 20000, 550f, date1);
-            var oTrack = Substitute.For<Track>("J443", 20000, 20000, 550f, time);
+            _oldTrack.Tag = "J443";
+            _newTrack.Tag = "B431";
 
-            var se = new SeperationEvent(nTrack, oTrack);
+            var se = new SeperationEvent(_newTrack, _oldTrack);
 
-            Assert.That(se.TimeOfOccurence, Is.EqualTo(date1));
+            Assert.That(se.TimeOfOccurence, Is.EqualTo(_newTrack.Timestamp));
         }
 
         [Test]
         public void TestSeperationEvent_SeperationEventDoesNotOccur_DoesNotSetTime()
         {
-            //Just make the tags the same
-            var time = DateTime.Now;
             var defaultTime = new DateTime();
-            DateTime date1 = new DateTime(2013, 6, 1, 12, 32, 30);
-            var nTrack = Substitute.For<Track>("J443", 20000, 20000, 550f, date1);
-            var oTrack = Substitute.For<Track>("J443", 20000, 20000, 550f, time);
+            _newTrack.Tag = "J443";
+            _oldTrack.Tag = "J443";
 
-            var se = new SeperationEvent(nTrack, oTrack);
+            var se = new SeperationEvent(_newTrack, _oldTrack);
 
             Assert.That(se.TimeOfOccurence, Is.EqualTo(defaultTime));
         }
