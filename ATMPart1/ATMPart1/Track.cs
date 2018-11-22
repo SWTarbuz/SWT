@@ -95,6 +95,7 @@ namespace ATMPart1
             _velocity = (float)((double)distance / (double)deltaT.TotalSeconds);
         }
 
+
         // Calc course 0 = north, 90 = east, 180 = south 270 = west, and so forth
         void CalcCourse(float dX, float dY)
         {

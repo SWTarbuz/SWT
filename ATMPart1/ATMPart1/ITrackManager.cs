@@ -15,6 +15,7 @@ namespace ATMPart1
         void HandleTrack(ITrack track,IAirspace airspace);
     }
 
+
     public class TracksUpdatedEventArgs : EventArgs
     {
         public TracksUpdatedEventArgs(List<ITrack> tracks, ITrack updatedTrack)
@@ -22,6 +23,7 @@ namespace ATMPart1
             Tracks = tracks;
             UpdatedTrack = updatedTrack;
         }
+
         public List<ITrack> Tracks { get; set; }
         public ITrack UpdatedTrack { get; set; }
     }
