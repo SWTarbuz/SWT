@@ -21,6 +21,7 @@ namespace ATMPart1
             }
             set { }
         }
+
         public DateTime TimeOfOccurence
         {
             get { return _timeOfOccurence;} set {}

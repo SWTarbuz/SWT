@@ -13,7 +13,6 @@ namespace ATMIntegrationTest
     [TestFixture]
     public class BUStep4
     {
-
         private Track track;
         private Airspace airspace;
 
@@ -52,6 +51,7 @@ namespace ATMIntegrationTest
             tm.HandleTrack(track, airspace);
             Assert.That(tm.Tracks.Count, Is.EqualTo(1));
         }
+
 
         [Test]
         public void TrackManager_HandleTrack_ExitsAirSpace()

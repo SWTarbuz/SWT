@@ -68,6 +68,7 @@ namespace ATMPart1
             OnRaiseTrackUpdatedEvent(new TracksUpdatedEventArgs(tracks.ToList(), track));
         }
 
+
         #region Helpers
 
         //https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/events/how-to-publish-events-that-conform-to-net-framework-guidelines

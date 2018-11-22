@@ -14,8 +14,8 @@ namespace ATMIntegrationTest
     {
         private DateTime time;
         private Track track;
-
         private EntryEvent entryEvent;
+
 
         [SetUp]
         public void Setup()
@@ -33,6 +33,7 @@ namespace ATMIntegrationTest
             Assert.That(entryEvent.TimeOfOccurence, Is.EqualTo(track.Timestamp));
         }
 
+
         [Test]
         public void testEntryEvent_CreateEntryEvent_InvolvedTracksGetsSet()
         {
@@ -41,6 +42,7 @@ namespace ATMIntegrationTest
             Assert.That(entryEvent.InvolvedTracks.Count, Is.EqualTo(1));
             Assert.That(entryEvent.InvolvedTracks[0].Tag, Is.EqualTo(track.Tag));
         }
+
 
         [Test]
         public void testEntryEvent_Print_CorrectStringReturned()

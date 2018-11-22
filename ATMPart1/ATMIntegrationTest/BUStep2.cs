@@ -17,6 +17,8 @@ namespace ATMIntegrationTest
         private DateTime time;
 
         private SeperationEvent seperationEvent;
+
+
         [SetUp]
         public void Setup()
         {
