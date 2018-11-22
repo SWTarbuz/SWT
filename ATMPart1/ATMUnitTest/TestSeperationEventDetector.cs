@@ -24,7 +24,14 @@ namespace ATMUnitTest
         {
             _tracks = Substitute.For<List<ITrack>>();
 
-            _tracks.Add(Substitute.For<Track>("0", 0, 0, 0, DateTime.Now));
+            var track = Substitute.For<ITrack>();
+            track.Tag = "0";
+            track.XPos = 0;
+            track.YPos = 0;
+            track.Altitude = 0;
+
+
+            _tracks.Add(track);
 
             _el = Substitute.For<IEventList>();
             _tm = Substitute.For<ITrackManager>();
@@ -35,18 +42,20 @@ namespace ATMUnitTest
 
 
         /// <summary>
-        /// Due to not changing position between tracks every one should according to specification detect an event with the updated track. Thus devolving to a test that detects if the function calls down to the list as expected
+        /// Checks that every track is checked for an event with the newly added.
         /// </summary>
-        [TestCase(2)] //2 tracks = 1 check
-        [TestCase(3)] //2 tracks = 2 check
-        [TestCase(1)] //1 track = 0 checks
+        [TestCase(1)] //2 tracks = 1 check
+        [TestCase(2)] //2 tracks = 2 check
+        [TestCase(3)] //3 tracks = 3 checks
         public void TestUpdateEvents_EventDetectionWithXTracks_ChecksCorrectAmountOfTimes(int trackCount)
         {
             var checkCnt = 0;
 
-            for (int i = 0; i < trackCount; i++)
+            for (int i = 0; i < trackCount - 1; i++)
             {
-                _tracks.Add(new Track(i.ToString(), 0, 0, 0, DateTime.Now)); //keeps same values to ensure that even occurs
+                var track = Substitute.For<ITrack>();
+
+                _tracks.Add(track); //keeps same values to ensure that even occurs
             }
 
             //sets up fake to count up variable, thus eliminating dependency
@@ -60,7 +69,7 @@ namespace ATMUnitTest
         }
 
         /// <summary>
-        /// Test of the logic that decides if an event should occur, if "TestUpdateEvents_EventDetectionWithXTracks_ChecksCorrectAmountOfTimes" has errors this will give invalid results
+        /// Test of the logic in CompareTracks.
         /// </summary>
         [TestCase(3000, 3999, 299, true)] //just withing bounds both horizontally and vertically
         [TestCase(3000, 3999, 300, false)] //just outside bounds vertical, withing horizontally
@@ -72,16 +81,20 @@ namespace ATMUnitTest
         {
             var DidEventOccur = false;
 
-            _tracks.Add(Substitute.For<Track>("1", xDist, yDist, zDist, DateTime.Now));
+            var track = Substitute.For<ITrack>();
+            track.XPos = xDist;
+            track.YPos = yDist;
+            track.Altitude = zDist;
+            track.Tag = "1";
 
-            //sets up fake to count up variable, thus eliminating dependency
+            _tracks.Add(track);
+
             _el.When(x => x.UpdateCurrEvent(Arg.Any<IEvent>()))
                 .Do(x => DidEventOccur = true);
 
             _uut.UpdateEvents(_tracks[0], _tracks);
 
             Assert.AreEqual(expectedResult, DidEventOccur);
-            //Assert that eList was called correct amount of times
         }
 
         [TestCase(3000, 3999, 299, true)] //just within bounds 
@@ -92,7 +105,13 @@ namespace ATMUnitTest
             var DidEventOccur = false; //technically this will give the correct result, if the above tests work, but uses expected to make independent from this.
             var updatedList = false;
 
-            _tracks.Add(Substitute.For<Track>("1", xDist, yDist, zDist, DateTime.Now));
+            var track = Substitute.For<ITrack>();
+            track.XPos = xDist;
+            track.YPos = yDist;
+            track.Altitude = zDist;
+            track.Tag = "1";
+
+            _tracks.Add(track);
 
             //sets up fake to count up variable, thus eliminating dependency
             _el.When(e => e.UpdateCurrEvent(Arg.Any<IEvent>())).Do(e => updatedList = true);
