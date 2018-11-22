@@ -20,24 +20,35 @@ namespace ATMUnitTest
             _uut = new Airspace(10000, 90000, 10000, 90000, 500, 2000);
         }
 
-        [Test]
-        public void TestWithinBounds_TrackWithinBounds_ReturnsTrue()
+        [TestCase(10000, 20000, 1000)] //x low
+        [TestCase(90000, 20000, 1000)] //x high
+        [TestCase(20000, 10000, 1000)] //y low
+        [TestCase(20000, 90000, 1000)] //y high
+        [TestCase(20000, 20000, 500)] //z low
+        [TestCase(20000, 10000, 1000)] //z high
+        public void TestWithinBounds_TrackWithinBounds_ReturnsTrue(int x, int y, int z)
         {         
             var track = Substitute.For<ITrack>();
-            track.xPos = 20000;
-            track.yPos = 20000;
-            track.altitude = 550;
+            track.xPos = x;
+            track.yPos = y;
+            track.altitude = z;
 
             Assert.That(_uut.IsWithinBounds(track), Is.EqualTo(true));
         }
 
-        [Test]
-        public void TestWithinBounds_TrackOutsideBounds_ReturnsFalse()
+
+        [TestCase(9999 , 20000, 1000)] //x low
+        [TestCase(90001, 20000, 1000)] //x high
+        [TestCase(20000, 9999 , 1000)] //y low
+        [TestCase(20000, 90001, 1000)] //y high
+        [TestCase(20000, 20000, 499 )] //z low
+        [TestCase(20000, 10000, 2001)] //z high
+        public void TestWithinBounds_TrackOutsideBounds_ReturnsFalse(int x, int y, int z)
         {
             var track = Substitute.For<ITrack>();
-            track.xPos = 20000;
-            track.yPos = 20000;
-            track.altitude = 400;
+            track.xPos = x;
+            track.yPos = y;
+            track.altitude = z;
 
             Assert.That(_uut.IsWithinBounds(track), Is.EqualTo(false));
         }
