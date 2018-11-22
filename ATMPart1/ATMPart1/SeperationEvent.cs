@@ -8,9 +8,24 @@ namespace ATMPart1
 {
     public class SeperationEvent : IEvent
     {
-        //TODO make privates that these get/set to protect from tampering
-        public ITrack[] InvolvedTracks { get; set; }
-        public DateTime TimeOfOccurence { get; set; }
+        private ITrack[] _involvedTracks;
+        private DateTime _timeOfOccurence;
+
+        #region Properties
+
+        public ITrack[] InvolvedTracks
+        {
+            get
+            {
+                return _involvedTracks;
+            }
+            set { }
+        }
+        public DateTime TimeOfOccurence
+        {
+            get { return _timeOfOccurence;} set {} }
+
+        #endregion
 
         // Method for setting time of occurence - Redundant to be deleted?
 
@@ -22,15 +37,15 @@ namespace ATMPart1
 
         public void SetTimeOfOccurence(DateTime time)
         {
-            TimeOfOccurence = time;
+            _timeOfOccurence = time;
         }
 
         public SeperationEvent(ITrack newTrack, ITrack oldTrack)
         {
             if(newTrack.Tag != oldTrack.Tag)
             {
-                InvolvedTracks = new ITrack[2]{newTrack, oldTrack};
-                TimeOfOccurence = newTrack.Timestamp;
+                _involvedTracks = new ITrack[2]{newTrack, oldTrack};
+                _timeOfOccurence = newTrack.Timestamp;
             }
         }
     }
