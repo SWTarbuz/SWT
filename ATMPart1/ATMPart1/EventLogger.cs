@@ -11,17 +11,17 @@ using NUnit.Framework.Internal;
 
 namespace ATMPart1
 {
-    public class EventLogger : ILogger
+    static class EventLogger
     {
         //TODO: Maybe an issue to expose this, but somehow the Writer needs to be exposed for us to fake it.
-        public TextWriter Writer;
+        internal static TextWriter Writer;
 
-        public EventLogger()
+        static EventLogger()
         {
             Writer = new StreamWriter(@"Eventlog.txt", true);
         }
 
-        public void LogMessage(string eventToLog)
+        public static void LogEventToFile(string eventToLog)
         {
             Writer.WriteLine(eventToLog);
             Writer.Flush();

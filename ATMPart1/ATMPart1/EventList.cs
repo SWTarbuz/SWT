@@ -10,13 +10,12 @@ namespace ATMPart1
     {
         private List<IEvent> _currEvents { get; set; }
         private List<IEvent> _prevEvents { get; set; }
-        private ILogger _logger;
+
 
         public event EventHandler<RaiseEventsUpdatedEventArgs> RaiseEventsUpdatedEvent;
 
         public EventList(ITrackManager tm)
         {
-            _logger = new EventLogger();
             _currEvents = new List<IEvent>();
             _prevEvents = new List<IEvent>();
 
@@ -33,8 +32,8 @@ namespace ATMPart1
 
             _currEvents.Add(evnt);
             OnRaiseEventUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
-            //EventLogger.LogEventToFile(evnt.Print());
-            _logger.LogMessage(evnt.Print());
+            EventLogger.LogEventToFile(evnt.Print());
+
         }
 
         private void HandleRaiseExitDetectedEvent(object sender, TracksUpdatedEventArgs e)
@@ -44,8 +43,8 @@ namespace ATMPart1
 
             _currEvents.Add(evnt);
             OnRaiseEventUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
-            //EventLogger.LogEventToFile(evnt.Print());
-            _logger.LogMessage(evnt.Print());
+            EventLogger.LogEventToFile(evnt.Print());
+        
         }
 
         private void HandleRaiseTimerOccuredEvent(object source, TimerForEventOccuredEventArgs e)
@@ -84,8 +83,8 @@ namespace ATMPart1
             {
                 _currEvents.Add(sepEvent);
                 OnRaiseEventUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
-                //EventLogger.LogEventToFile(sepEvent.Print());
-                _logger.LogMessage(sepEvent.Print());
+                EventLogger.LogEventToFile(sepEvent.Print());
+                
             }
         }
 

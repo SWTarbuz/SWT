@@ -16,26 +16,26 @@ namespace ATMUnitTest
 {
     public class TestEventLogger
     {
-        private EventLogger _logger;
+
 
         [SetUp]
         public void Setup()
         {
 
-            //EventLogger.Writer = Substitute.For<TextWriter>();
-            _logger = new EventLogger();
-            _logger.Writer = Substitute.For<TextWriter>();
+            EventLogger.Writer = Substitute.For<TextWriter>();
+  
+
         }
 
         [TestCase("Any string")]
         [TestCase("EntryEvent track: xyz, at the time of 21:11:23")]
         public void LogEventToFile_WithEventText_StreamWriterCalledWithArgEventText(string eventText)
         {
-            //EventLogger.LogEventToFile(eventText);
-            _logger.LogMessage(eventText);
+            EventLogger.LogEventToFile(eventText);
+            
 
-            _logger.Writer.Received().WriteLine(Arg.Is(eventText));
-            //_logger;
+            EventLogger.Writer.Received().WriteLine(Arg.Is(eventText));
+            
         }
     }
 }
