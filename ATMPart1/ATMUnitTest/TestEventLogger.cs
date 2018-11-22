@@ -16,10 +16,15 @@ namespace ATMUnitTest
 {
     public class TestEventLogger
     {
+
+
         [SetUp]
         public void Setup()
         {
+
             EventLogger.Writer = Substitute.For<TextWriter>();
+  
+
         }
 
         [TestCase("Any string")]
@@ -27,8 +32,10 @@ namespace ATMUnitTest
         public void LogEventToFile_WithEventText_StreamWriterCalledWithArgEventText(string eventText)
         {
             EventLogger.LogEventToFile(eventText);
+            
 
             EventLogger.Writer.Received().WriteLine(Arg.Is(eventText));
+            
         }
     }
 }

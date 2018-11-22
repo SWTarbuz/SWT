@@ -62,6 +62,7 @@
     <Compile Include="ExitEvent.cs" />
     <Compile Include="IAirspace.cs" />
     <Compile Include="IEvent.cs" />
+    <Compile Include="ILogger.cs" />
     <Compile Include="IObjectTimer.cs" />
     <Compile Include="ISeperationEventDetector.cs" />
     <Compile Include="IEventList.cs" />

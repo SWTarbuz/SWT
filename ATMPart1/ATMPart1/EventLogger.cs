@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Framework.Internal;
 
 [assembly: InternalsVisibleTo("ATMUnitTest")] //Makes this visible/public to ATMUnitTest
 
@@ -23,6 +24,20 @@ namespace ATMPart1
         public static void LogEventToFile(string eventToLog)
         {
             Writer.WriteLine(eventToLog);
+            Writer.Flush();
         }
     }
+
+    //public class EventLogger : ILogger
+    //{
+    //    private StreamWriter streamWriter;
+    //    public EventLogger()
+    //    {
+    //        streamWriter = new StreamWriter(@"Eventlog.txt", true);
+    //    }
+    //    public void LogMessage(string message)
+    //    {
+    //        streamWriter.WriteLine(message);
+    //    }
+    //}
 }
