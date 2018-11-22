@@ -15,7 +15,7 @@ namespace ATMPart1
         float Velocity { get; }
         int CompassCourse { get; }
 
-        DateTime Timestamp { get; }
+        DateTime Timestamp { get; set; }
 
 
         void ChangePosition(float x, float y, float alt, DateTime time);

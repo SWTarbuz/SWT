@@ -11,46 +11,42 @@ namespace ATMUnitTest
 {
     class TestEntryEvent
     {
+        private ITrack _track;
+        private DateTime _time;
+        private IEvent _uut;
 
         [SetUp]
         public void Setup()
         {
+            _time = DateTime.MaxValue;
+            _track = Substitute.For<ITrack>();
+            _track.XPos = 20000;
+            _track.YPos = 20000;
+            _track.Altitude = 550;
+            _track.Timestamp = DateTime.MaxValue;
+            
 
+            _uut = new EntryEvent(_track);
         }
 
 
         [Test]
         public void testEntryEvent_CreateEntryEvent_TimeGetsSet()
         {
-            var time = DateTime.Now;
-            var trak = Substitute.For<Track>("tag", 20000, 20000, 550f, time);
-
-            IEvent entryEvent = new EntryEvent(trak);
-
-            Assert.That(entryEvent.TimeOfOccurence, Is.EqualTo(trak.Timestamp));
+            Assert.That(_uut.TimeOfOccurence, Is.EqualTo(_track.Timestamp));
         }
 
         [Test]
         public void testEntryEvent_CreateEntryEvent_InvolvedTracksGetsSet()
         {
-            var time = DateTime.Now;
-            var trak = Substitute.For<Track>("tag", 20000, 20000, 550f, time);
-
-            IEvent entryEvent = new EntryEvent(trak);
-
-            Assert.That(entryEvent.InvolvedTracks.Count, Is.EqualTo(1));
-            Assert.That(entryEvent.InvolvedTracks[0].Tag, Is.EqualTo(trak.Tag));
+            Assert.That(_uut.InvolvedTracks.Count, Is.EqualTo(1));
+            Assert.That(_uut.InvolvedTracks[0].Tag, Is.EqualTo(_track.Tag));
         }
 
         [Test]
         public void testEntryEvent_Print_CorrectStringReturned()
         {
-            var time = DateTime.Now;
-            var trak = Substitute.For<Track>("tag", 20000, 20000, 550f, time);
-
-            IEvent entryEvent = new EntryEvent(trak);
-
-            Assert.That(entryEvent.Print, Is.EqualTo($"at the time of: {entryEvent.TimeOfOccurence}, the track: {entryEvent.InvolvedTracks[0].Tag}, Entered the Airspace"));
+            Assert.That(_uut.Print, Is.EqualTo($"at the time of: {_uut.TimeOfOccurence}, the track: {_uut.InvolvedTracks[0].Tag}, Entered the Airspace"));
 
         }
     }
