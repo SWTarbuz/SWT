@@ -10,35 +10,36 @@ namespace ATMUnitTest
 {
     class TestAirspace
     {
+        private IAirspace _uut;
+        private DateTime _time;
 
         [SetUp]
         public void Setup()
         {
-
+            _time = DateTime.MaxValue;
+            _uut = new Airspace(10000, 90000, 10000, 90000, 500, 2000);
         }
 
         [Test]
         public void TestWithinBounds_TrackWithinBounds_ReturnsTrue()
-        {
-          
-            var time = DateTime.Now;
-            var airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 2000);
-           
-            var returnVal = Substitute.For<Track>("tag", 20000, 20000, 550, time);
+        {         
+            var track = Substitute.For<ITrack>();
+            track.xPos = 20000;
+            track.yPos = 20000;
+            track.altitude = 550;
 
-            Assert.That(airspace.IsWithinBounds(returnVal), Is.EqualTo(true));
+            Assert.That(_uut.IsWithinBounds(track), Is.EqualTo(true));
         }
 
         [Test]
-        public void TestWithinBounds_TrackWithinBounds_ReturnsFalse()
+        public void TestWithinBounds_TrackOutsideBounds_ReturnsFalse()
         {
+            var track = Substitute.For<ITrack>();
+            track.xPos = 20000;
+            track.yPos = 20000;
+            track.altitude = 400;
 
-            var time = DateTime.Now;
-            var airspace = Substitute.For<Airspace>(10000, 90000, 10000, 90000, 500, 2000);
-
-            var returnVal = Substitute.For<Track>("tag", 20000, 20000, 400, time);
-
-            Assert.That(airspace.IsWithinBounds(returnVal), Is.EqualTo(false));
+            Assert.That(_uut.IsWithinBounds(track), Is.EqualTo(false));
         }
     }
 }

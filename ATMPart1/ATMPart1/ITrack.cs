@@ -9,9 +9,9 @@ namespace ATMPart1
     public interface ITrack
     {
         string tag { get; }
-        float xPos { get; }
-        float yPos { get; }
-        float altitude { get; }
+        float xPos { get; set; }
+        float yPos { get; set; }
+        float altitude { get; set; }
         float velocity { get; }
         int compassCourse { get; }
 

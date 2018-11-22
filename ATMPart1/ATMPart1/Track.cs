@@ -4,10 +4,11 @@ namespace ATMPart1
 {
     public class Track : ITrack
     {
+        //TODO: update so that we have privates that these access.
         public string tag { get; private set; }
-        public float xPos { get; private set; }
-        public float yPos { get; private set; }
-        public float altitude { get; private set; }
+        public float xPos { get; set; }
+        public float yPos { get; set; }
+        public float altitude { get; set; }
         public float velocity { get; private set; }
         public int compassCourse { get; private set; }
         public DateTime timestamp { get; private set; }
