@@ -14,7 +14,7 @@ namespace ATMUnitTest
     public class TestEventTimer
     {
         private int _margin;
-        private FakeSubscriber _sub;
+        private FakeSubscriber _sub; //TODO: could use a interface instead and have NSubstitute do the rest
         private IEvent _evnt;
         private EventTimer _uut;
         private IEvent _outEvent;
