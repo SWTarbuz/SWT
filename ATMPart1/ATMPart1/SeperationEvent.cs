@@ -23,7 +23,8 @@ namespace ATMPart1
         }
         public DateTime TimeOfOccurence
         {
-            get { return _timeOfOccurence;} set {} }
+            get { return _timeOfOccurence;} set {}
+        }
 
         #endregion
 
