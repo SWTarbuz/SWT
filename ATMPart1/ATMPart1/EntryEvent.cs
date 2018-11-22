@@ -8,17 +8,38 @@ namespace ATMPart1
 {
     public class EntryEvent : IEvent, ITimedObject
     {
-        //TODO make privates that these get/set to protect from tampering
-        public IObjectTimer ObjectTimer { get; }
-        public ITrack[] InvolvedTracks { get; set; }
-        public DateTime TimeOfOccurence { get; set; }
+        private ITrack[] _involvedTracks;
+        private DateTime _timeOfOccurence;
+        private IObjectTimer _objectTimer;
+
+        #region Properties
+        public ITrack[] InvolvedTracks
+        {
+            get
+            {
+                return _involvedTracks;
+            }
+            set { }
+        }
+        public DateTime TimeOfOccurence
+        {
+            get { return _timeOfOccurence; }
+            set { }
+        }
+
+        public IObjectTimer ObjectTimer
+        {
+            get { return _objectTimer;} set { }
+        }
+
+        #endregion
 
         public EntryEvent(ITrack track)
         {
-            InvolvedTracks = new ITrack[1]{track};
-            TimeOfOccurence = track.Timestamp;
+            _involvedTracks = new ITrack[1]{track};
+            _timeOfOccurence = track.Timestamp;
 
-            ObjectTimer = new EventTimer(this, 5000);
+            _objectTimer = new EventTimer(this, 5000);
         }
 
         public string Print()
