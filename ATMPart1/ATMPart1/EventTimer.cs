@@ -3,11 +3,11 @@ using System.Timers;
 
 namespace ATMPart1
 {
-    //TODO: use this in event list to remove EntryEvents and ExitEvents once they have been active for 5 seconds.
+    //TODO: find a way of making a fake of the timer, either finding an abstract class of it in System, or make a Interface to wrap it.
     public class EventTimer : IObjectTimer
     {
         private System.Timers.Timer _eTimer;
-
+        
         private IEvent _controlledEvent;
 
         public event EventHandler<TimerForEventOccuredEventArgs> RaiseTimerOccuredEvent;
