@@ -11,46 +11,43 @@ namespace ATMUnitTest
 {
     class TestExitEvent
     {
+        private ITrack _track;
+        private DateTime _time;
+        private IEvent _uut;
 
         [SetUp]
         public void Setup()
         {
+            _time = DateTime.MaxValue;
+            _track = Substitute.For<ITrack>();
+            _track.XPos = 20000;
+            _track.YPos = 20000;
+            _track.Altitude = 550;
+            _track.Timestamp = DateTime.MaxValue;
 
+            _uut = new ExitEvent(_track);
         }
 
 
         [Test]
         public void testExitEvent_CreateExitEvent_TimeGetsSet()
         {
-            var time = DateTime.Now;
-            var trak = Substitute.For<Track>("tag", 100000, 20000, 550f, time);
 
-            IEvent exitEvent = new ExitEvent(trak);
-
-            Assert.That(exitEvent.TimeOfOccurence, Is.EqualTo(trak.Timestamp));
+            Assert.That(_uut.TimeOfOccurence, Is.EqualTo(_track.Timestamp));
         }
 
         [Test]
         public void testExitEvent_CreateExitEvent_InvolvedTracksGetsSet()
         {
-            var time = DateTime.Now;
-            var trak = Substitute.For<Track>("tag", 100000, 20000, 550f, time);
-
-            IEvent exitEvent = new ExitEvent(trak);
-
-            Assert.That(exitEvent.InvolvedTracks.Count, Is.EqualTo(1));
-            Assert.That(exitEvent.InvolvedTracks[0].Tag, Is.EqualTo(trak.Tag));
+            Assert.That(_uut.InvolvedTracks.Count, Is.EqualTo(1));
+            Assert.That(_uut.InvolvedTracks[0].Tag, Is.EqualTo(_track.Tag));
         }
 
         [Test]
         public void testExitEvent_Print_CorrectStringReturned()
         {
-            var time = DateTime.Now;
-            var trak = Substitute.For<Track>("tag", 90001, 20000, 550f, time);
 
-            IEvent exitEvent = new ExitEvent(trak);
-
-            Assert.That(exitEvent.Print, Is.EqualTo($"at the time of: {exitEvent.TimeOfOccurence}, the track: {exitEvent.InvolvedTracks[0].Tag}, Left the Airspace"));
+            Assert.That(_uut.Print, Is.EqualTo($"at the time of: {_uut.TimeOfOccurence}, the track: {_uut.InvolvedTracks[0].Tag}, Left the Airspace"));
 
         }
     }

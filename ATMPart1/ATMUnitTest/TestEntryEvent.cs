@@ -25,7 +25,6 @@ namespace ATMUnitTest
             _track.Altitude = 550;
             _track.Timestamp = DateTime.MaxValue;
             
-
             _uut = new EntryEvent(_track);
         }
 
