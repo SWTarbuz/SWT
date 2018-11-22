@@ -14,13 +14,12 @@ namespace ATMIntegrationTest
     class BUStep6
     {
         private int _margin;
-        //private FakeSubscriber _sub;
+        private FakeSubscriber _sub;
         private Track track;
         private EntryEvent _evnt;
         //private ExitEvent _outEvent;
         //private int _eventsReceived;
         private DateTime time;
-        private bool called;
 
         private EventTimer _uut;
 
@@ -32,7 +31,8 @@ namespace ATMIntegrationTest
             //_eventsReceived = 0;
             track = new Track("tag", 20000, 20000, 550f, time);
             _evnt = new EntryEvent(track);
-            called = false;
+            _sub = new FakeSubscriber();
+            
 
         }
 
@@ -40,27 +40,40 @@ namespace ATMIntegrationTest
         [TestCase(5000)]
         public void EventTimer_xTime_RaiseTimerOccuredEventAfterxTime(int testTime)
         {
+
             _uut = new EventTimer(_evnt, testTime);
 
-            _uut.RaiseTimerOccuredEvent += (sender, args) => called = true;
+            _uut.RaiseTimerOccuredEvent += _sub.EventSub;
 
             System.Threading.Thread.Sleep(testTime + _margin); //Adds a little bit to ensure that the timer has time to call the event
 
-            Assert.IsTrue(called);
+            Assert.That(_sub.Cnt, Is.EqualTo(1));
         }
 
         //TODO: These run perfectly fine when ran alone, but when together they fail.
         [TestCase(2000)]
         [TestCase(5000)]
         public void EventTimer_xTime_RaiseTimerOccuredEventNotOccuredBeforexTime(int testTime)
-        {
+        {         
+
             _uut = new EventTimer(_evnt, testTime);
 
-            _uut.RaiseTimerOccuredEvent += (sender, args) => called = true;
+            _uut.RaiseTimerOccuredEvent += _sub.EventSub;
 
             System.Threading.Thread.Sleep(testTime - _margin);
+            Assert.That(_sub.Cnt, Is.EqualTo(0));
 
-            Assert.IsFalse(called);
+        }
+
+        public class FakeSubscriber
+        {
+            public int Cnt = 0;
+
+            //testing of event by a subscriber that we can call .Recieved on
+            public void EventSub(object source, TimerForEventOccuredEventArgs e)
+            {
+                Cnt++;
+            }
         }
     }
 }
