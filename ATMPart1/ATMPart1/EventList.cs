@@ -36,6 +36,7 @@ namespace ATMPart1
 
         }
 
+
         private void HandleRaiseExitDetectedEvent(object sender, TracksUpdatedEventArgs e)
         {
             var evnt = new ExitEvent(e.UpdatedTrack);
@@ -47,6 +48,7 @@ namespace ATMPart1
         
         }
 
+
         private void HandleRaiseTimerOccuredEvent(object source, TimerForEventOccuredEventArgs e)
         {
             _currEvents.Remove(e.Evnt);
@@ -54,6 +56,7 @@ namespace ATMPart1
         }
 
         #endregion
+
 
 
         public IList<IEvent> CurrEvents
@@ -105,7 +108,7 @@ namespace ATMPart1
             if (event1.GetType() != typeof(SeperationEvent)) return false;
   
 
-
+            // Checks if the seperation event exists
             if (event1.InvolvedTracks[0].Tag == event2.InvolvedTracks[0].Tag ||
                 event1.InvolvedTracks[0].Tag == event2.InvolvedTracks[1].Tag) tagsMatch[0] = true;
 
