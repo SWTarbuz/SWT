@@ -30,7 +30,7 @@ namespace ATMIntegrationTest
         {
             entryEvent = new EntryEvent(track);
 
-            Assert.That(entryEvent.TimeOfOccurence, Is.EqualTo(track.timestamp));
+            Assert.That(entryEvent.TimeOfOccurence, Is.EqualTo(track.Timestamp));
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace ATMIntegrationTest
             entryEvent = new EntryEvent(track);
 
             Assert.That(entryEvent.InvolvedTracks.Count, Is.EqualTo(1));
-            Assert.That(entryEvent.InvolvedTracks[0].tag, Is.EqualTo(track.tag));
+            Assert.That(entryEvent.InvolvedTracks[0].Tag, Is.EqualTo(track.Tag));
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace ATMIntegrationTest
         {
             entryEvent = new EntryEvent(track);
 
-            Assert.That(entryEvent.Print, Is.EqualTo($"at the time of: {entryEvent.TimeOfOccurence}, the track: {entryEvent.InvolvedTracks[0].tag}, Entered the Airspace"));
+            Assert.That(entryEvent.Print, Is.EqualTo($"at the time of: {entryEvent.TimeOfOccurence}, the track: {entryEvent.InvolvedTracks[0].Tag}, Entered the Airspace"));
 
         }
     }
