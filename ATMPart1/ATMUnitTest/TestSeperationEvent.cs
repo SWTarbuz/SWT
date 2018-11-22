@@ -28,14 +28,13 @@ namespace ATMUnitTest
             _oldTrack = Substitute.For<ITrack>();
             _oldTrack.Timestamp = new DateTime(2013, 6, 1, 12, 32, 30);
 
+            _oldTrack.Tag = "J443";
+            _newTrack.Tag = "B431";
         }
 
         [Test]
         public void TestSeperationEvent_SeperationEventOccurs_SetsToExpectedTime()
         {
-            _oldTrack.Tag = "J443";
-            _newTrack.Tag = "B431";
-
             var se = new SeperationEvent(_newTrack, _oldTrack);
 
             Assert.That(se.TimeOfOccurence, Is.EqualTo(_newTrack.Timestamp));
@@ -46,11 +45,21 @@ namespace ATMUnitTest
         {
             var defaultTime = new DateTime();
             _newTrack.Tag = "J443";
-            _oldTrack.Tag = "J443";
 
             var se = new SeperationEvent(_newTrack, _oldTrack);
 
             Assert.That(se.TimeOfOccurence, Is.EqualTo(defaultTime));
         }
+
+        [Test]
+        public void Print_PrintsTheEvent()
+        {
+            var se = new SeperationEvent(_newTrack, _oldTrack);
+
+            var printed = se.Print();
+
+            Assert.That(printed, Is.EqualTo($"at the time of: {_newTrack.Timestamp}, the following tracks had a seperation event occur: B431, and J443"));
+        }
+
     }
 }
