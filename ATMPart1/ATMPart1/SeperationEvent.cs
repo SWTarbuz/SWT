@@ -27,8 +27,6 @@ namespace ATMPart1
 
         public SeperationEvent(ITrack newTrack, ITrack oldTrack)
         {
-            //TODO: add something to ensure that the tracks can't be the same / have the same tag.
-            //Think it is fixed by encapsulating with an If statement
             if(newTrack.Tag != oldTrack.Tag)
             {
                 InvolvedTracks = new ITrack[2]{newTrack, oldTrack};
