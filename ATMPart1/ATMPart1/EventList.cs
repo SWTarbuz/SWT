@@ -30,7 +30,7 @@ namespace ATMPart1
             evnt.ObjectTimer.RaiseTimerOccuredEvent += HandleRaiseTimerOccuredEvent;
 
             _currEvents.Add(evnt);
-            OnRaiseTrackUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
+            OnRaiseEventUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
             EventLogger.LogEventToFile(evnt.Print());
         }
 
@@ -40,7 +40,7 @@ namespace ATMPart1
             evnt.ObjectTimer.RaiseTimerOccuredEvent += HandleRaiseTimerOccuredEvent;
 
             _currEvents.Add(evnt);
-            OnRaiseTrackUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
+            OnRaiseEventUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
             EventLogger.LogEventToFile(evnt.Print());
         }
 
@@ -79,7 +79,7 @@ namespace ATMPart1
             if (eventExists == false)
             {
                 _currEvents.Add(sepEvent);
-                OnRaiseTrackUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
+                OnRaiseEventUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
                 EventLogger.LogEventToFile(sepEvent.Print());
             }
         }
@@ -88,7 +88,7 @@ namespace ATMPart1
         {
             _currEvents.Remove(sepEvent);
             _prevEvents.Add(sepEvent);
-            OnRaiseTrackUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
+            OnRaiseEventUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
         }
 
         #region Helpers
@@ -111,7 +111,7 @@ namespace ATMPart1
             return tagsMatch[0] & tagsMatch[1];
         }
 
-        protected virtual void OnRaiseTrackUpdatedEvent(RaiseEventsUpdatedEventArgs e)
+        protected virtual void OnRaiseEventUpdatedEvent(RaiseEventsUpdatedEventArgs e)
         {
             EventHandler<RaiseEventsUpdatedEventArgs> handler = RaiseEventsUpdatedEvent;
 

@@ -37,6 +37,8 @@ namespace ATMPart1
                         t.ChangePosition(track.XPos,track.YPos,track.Altitude,track.Timestamp); //known tag, change position
 
                         check = false;
+                        OnRaiseTrackUpdatedEvent(new TracksUpdatedEventArgs(tracks.ToList(), track));
+                        break;
                     }
                     
                 }
@@ -63,9 +65,6 @@ namespace ATMPart1
                     }
                 }
             }
-
-            //TODO: Move so we only call when a change has been made to the list. -- This has been done
-
         }
 
         #region Helpers
