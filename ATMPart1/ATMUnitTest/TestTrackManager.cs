@@ -34,7 +34,6 @@ namespace ATMUnitTest
             _airspace.IsWithinBounds(Arg.Is(_trackOutside)).Returns(false);
         }
 
-        //TODO: not really sure this is the correct way of testing this, I think we should make airspace.IsWithingBounds return true/false, and use that to get coverage.
         [Test]
         public void testHandleTrack_TrackOutsideAirspace_NothingChanged()
         {
