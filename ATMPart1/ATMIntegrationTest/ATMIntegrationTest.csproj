@@ -65,9 +65,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\TransponderReceiver.dll</HintPath>
     </Reference>
+    <Reference Include="WrapThat.System, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BUStep1.cs" />
+    <Compile Include="BUStep10.cs" />
+    <Compile Include="BUStep11.cs" />
     <Compile Include="BUStep2.cs" />
     <Compile Include="BUStep3.cs" />
     <Compile Include="BUStep4.cs" />
@@ -75,6 +78,7 @@
     <Compile Include="BUStep6.cs" />
     <Compile Include="BUStep7.cs" />
     <Compile Include="BUStep8.cs" />
+    <Compile Include="BUStep9.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -87,7 +91,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DTWithSteps.png" />
+    <Content Include="DependencyTreeWithSteps.png" />
     <Content Include="IntegrationScheme.PNG" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

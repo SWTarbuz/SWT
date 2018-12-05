@@ -12,8 +12,6 @@ namespace ATMIntegrationTest
 {
     class BUStep1
     {
-
-
         private Track track;
         private DateTime time;
 
@@ -21,7 +19,6 @@ namespace ATMIntegrationTest
 
 
         [SetUp]
-
         public void SetUp()
         {
             track = new Track("tag", 100000, 20000, 550f, time);
@@ -30,6 +27,7 @@ namespace ATMIntegrationTest
             
         }
        
+
         [Test]
         public void testExitEvent_CreateExitEvent_TimeGetsSet()
         {
@@ -37,6 +35,7 @@ namespace ATMIntegrationTest
 
             Assert.That(exitEvent.TimeOfOccurence, Is.EqualTo(track.Timestamp));
         }
+
 
         [Test]
         public void testExitEvent_CreateExitEvent_InvolvedTracksGetsSet()
@@ -46,6 +45,7 @@ namespace ATMIntegrationTest
             Assert.That(exitEvent.InvolvedTracks.Count, Is.EqualTo(1));
             Assert.That(exitEvent.InvolvedTracks[0].Tag, Is.EqualTo(track.Tag));
         }
+
 
         [Test]
         public void testExitEvent_Print_CorrectStringReturned()

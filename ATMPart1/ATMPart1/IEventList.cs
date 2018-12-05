@@ -26,3 +26,10 @@ namespace ATMPart1
         public List<IEvent> Events { get; set; }
     }
 }
+
+
+
+
+
+
+

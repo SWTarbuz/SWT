@@ -14,11 +14,9 @@ namespace ATMIntegrationTest
     class BUStep5
     {
         private Track track;
-        
         private TrackFormatter tf;
 
         [SetUp]
-
         public void SetUp()
         {
             tf = new TrackFormatter();
@@ -26,7 +24,6 @@ namespace ATMIntegrationTest
         }
 
         [Test]
-
         public void TestRecieveTrack_validData_ReturnsExpectedTime() //format test to match the way  TestRecieveTrack_IllegalTimeString_ThrowsFormatException is set up.
         {
             //Arrange

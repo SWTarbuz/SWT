@@ -23,6 +23,7 @@ namespace ATMIntegrationTest
 
         private EventTimer _uut;
 
+
         [SetUp]
         public void SetUp()
         {

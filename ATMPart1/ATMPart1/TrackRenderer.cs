@@ -15,6 +15,7 @@ namespace ATMPart1
 
         private readonly IConsole _console;
 
+
         public TrackRenderer(ITrackManager trackManager, IEventList eventList, IConsole console=null)
         {
             _currTracks = new List<ITrack>();
@@ -41,6 +42,7 @@ namespace ATMPart1
         }
 
         #endregion
+
 
         #region Helpers
 
@@ -69,3 +71,9 @@ namespace ATMPart1
         #endregion
     }
 }
+
+
+
+
+
+

@@ -21,6 +21,7 @@ namespace ATMPart1
             }
             set { }
         }
+
         public DateTime TimeOfOccurence
         {
             get { return _timeOfOccurence;} set {}
@@ -28,7 +29,7 @@ namespace ATMPart1
 
         #endregion
 
-        // Method for setting time of occurence - Redundant to be deleted?
+        
 
         // setTime Function is not necessary
         public string Print()
@@ -36,6 +37,7 @@ namespace ATMPart1
             return $"at the time of: {TimeOfOccurence}, the following tracks had a seperation event occur: {InvolvedTracks[0].Tag}, and {InvolvedTracks[1].Tag}";
         }
 
+        // Method for setting time of occurence - Redundant to be deleted?
         public void SetTimeOfOccurence(DateTime time)
         {
             _timeOfOccurence = time;

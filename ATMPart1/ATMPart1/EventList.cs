@@ -11,6 +11,7 @@ namespace ATMPart1
         private List<IEvent> _currEvents { get; set; }
         private List<IEvent> _prevEvents { get; set; }
 
+
         public event EventHandler<RaiseEventsUpdatedEventArgs> RaiseEventsUpdatedEvent;
 
         public EventList(ITrackManager tm)
@@ -32,7 +33,9 @@ namespace ATMPart1
             _currEvents.Add(evnt);
             OnRaiseEventUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
             EventLogger.LogEventToFile(evnt.Print());
+
         }
+
 
         private void HandleRaiseExitDetectedEvent(object sender, TracksUpdatedEventArgs e)
         {
@@ -42,7 +45,9 @@ namespace ATMPart1
             _currEvents.Add(evnt);
             OnRaiseEventUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
             EventLogger.LogEventToFile(evnt.Print());
+        
         }
+
 
         private void HandleRaiseTimerOccuredEvent(object source, TimerForEventOccuredEventArgs e)
         {
@@ -51,6 +56,7 @@ namespace ATMPart1
         }
 
         #endregion
+
 
 
         public IList<IEvent> CurrEvents
@@ -81,6 +87,7 @@ namespace ATMPart1
                 _currEvents.Add(sepEvent);
                 OnRaiseEventUpdatedEvent(new RaiseEventsUpdatedEventArgs(_currEvents));
                 EventLogger.LogEventToFile(sepEvent.Print());
+                
             }
         }
 
@@ -101,7 +108,7 @@ namespace ATMPart1
             if (event1.GetType() != typeof(SeperationEvent)) return false;
   
 
-
+            // Checks if the seperation event exists
             if (event1.InvolvedTracks[0].Tag == event2.InvolvedTracks[0].Tag ||
                 event1.InvolvedTracks[0].Tag == event2.InvolvedTracks[1].Tag) tagsMatch[0] = true;
 
@@ -123,3 +130,6 @@ namespace ATMPart1
         #endregion
     }
 }
+
+
+
