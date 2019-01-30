@@ -25,9 +25,23 @@ namespace Calculator.Test.Unit
         }
 
         [Test]
+        public void Add_Integers_Test2()
+        {
+            Assert.AreEqual(110, uut.Add(105, 5));
+
+        }
+
+        [Test]
         public void Add_Decimal_Test()
         {
             Assert.AreEqual(10, uut.Add(5.5, 4.5));
+
+        }
+
+        [Test]
+        public void Add_Decimal_Test2()
+        {
+            Assert.AreEqual(20, uut.Add(10.5, 9.5));
 
         }
 
