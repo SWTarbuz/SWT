@@ -72,6 +72,12 @@ namespace Calculator.Test.Unit
             Assert.AreEqual(4, uut.Multiply(-2, -2));
 
         }
+        [Test]
+        public void Multiply_Negative_Test2()
+        {
+            Assert.AreEqual(16, uut.Multiply(-4, -4));
+
+        }
 
         [Test]
         public void Subtract_Integers_Test()
